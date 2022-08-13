@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
       navigate('/campanhas')
       toast.success('Logado com sucesso')
     } catch (e) {
+      console.log(e)
       toast.error('Deu erro')
     }
   }
@@ -40,6 +41,7 @@ const AuthProvider = ({ children }) => {
       navigate('/')
       toast.success('Cadastrado com sucesso')
     } catch (e) {
+      console.log(e)
       toast.error('Deu erro')
     }
   }
