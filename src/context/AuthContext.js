@@ -26,9 +26,15 @@ const AuthProvider = ({ children }) => {
       const { data } = await apiColabore.post('/autenticacao/login', user);
       localStorage.setItem('token', data)
       apiColabore.defaults.headers.common['Authorization'] = data
-      setAuth(true)
-      navigate('/campanhas')
-      toast.success('Logado com sucesso')
+      try{
+        const { data } = await apiColabore.get('/usuario/listar')
+        setAuth(true)
+        navigate(`/campanhas/${data[0].idUsuario}`)
+        toast.success('Logado com sucesso')
+      } catch(e) {
+        console.log(e)
+        toast.error('Deu erro')
+      }
     } catch (e) {
       console.log(e)
       toast.error('Deu erro')

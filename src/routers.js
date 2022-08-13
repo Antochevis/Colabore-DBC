@@ -22,7 +22,7 @@ const Routers = () => {
           <Route exact path='/' element={<Login />} />
           <Route path='criar-usuario' element={<Register />} />
           <Route element={<PrivateRoute />}>
-            <Route path='campanhas' element={<Campaigns />} />
+            <Route path='campanhas/:idUsuario' element={<Campaigns />} />
           </Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
