@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem('token', data)
       apiColabore.defaults.headers.common['Authorization'] = data
       setAuth(true)
-      navigate('/pessoa')
+      navigate('/campanhas')
       toast.success('Logado com sucesso')
     } catch (e) {
       toast.error('Deu erro')

@@ -49,7 +49,7 @@ const Login = () => {
               <div>
                 <label htmlFor="email">*E-mail: </label>
                 <Field name='email' placeholder='Digite seu e-mail' />
-                {errors.login && touched.login ? (<Errors>{errors.login}</Errors>) : null}
+                {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
               </div>
               <div>
                 <label htmlFor="senha">*Senha: </label>
