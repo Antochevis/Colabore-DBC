@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 import { AuthContext, AuthProvider } from "./context/AuthContext"
 import Campaigns from "./pages/campaigns/Campaigns"
 import Login from "./pages/login/Login"
+import NotFound from "./pages/NotFound/NotFound"
 import Register from "./pages/register/Register"
 
 const PrivateRoute = () => {
@@ -23,6 +24,7 @@ const Routers = () => {
           <Route element={<PrivateRoute />}>
             <Route path='campanhas' element={<Campaigns />} />
           </Route>
+          <Route path='*' element={<NotFound />}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
