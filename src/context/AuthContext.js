@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
     try {
       await apiColabore.post('/autenticacao/registrar', values)
       navigate('/')
-      toast.success('Cadastrado com sucesso')
+      toast.success('Cadastrado realizado com sucesso!')
     } catch (e) {
       console.log(e)
       toast.error('Deu erro')
