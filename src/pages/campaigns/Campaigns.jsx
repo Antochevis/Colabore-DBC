@@ -4,6 +4,8 @@ import Loading from '../../components/loading/Loading'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import { Section } from '../../components/section/Section'
+import CardCampaign from '../../components/card/CardCampaign'
+import { ContainerCards } from '../../components/card/Card'
 
 function Campaigns() {
   const [user, setUser] = useState()
@@ -29,8 +31,13 @@ function Campaigns() {
     return (
       <>
         <Header userName={user.nome}/>
-        <Section>
-        </Section>
+          <Section>
+            <ContainerCards>
+              <CardCampaign campaignTitle="Doação de roupas" />
+              <CardCampaign campaignTitle="Doação de roupas" />
+              <CardCampaign campaignTitle="Doação de roupas" />
+            </ContainerCards>  
+          </Section>
         <Footer />
       </>
       
