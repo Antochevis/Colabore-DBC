@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colorPrimary, colorWhite } from '../../consts'
 
-export const Button = styled.button(({width, background, border, padding, marginLeft}) => ({
+export const Button = styled.button(({width, background, border, padding, marginLeft, color}) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -9,7 +9,7 @@ export const Button = styled.button(({width, background, border, padding, margin
   width: width ? width : 130,
   padding: padding ? padding : 13,
   marginLeft: marginLeft ? marginLeft : '',
-  color: colorWhite,
+  color: color ? color : colorWhite,
   background: background ? background : colorPrimary,
   borderRadius: 8,
   border: border ? border : `1px solid ${colorPrimary}`

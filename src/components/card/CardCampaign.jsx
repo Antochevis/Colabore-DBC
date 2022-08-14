@@ -1,6 +1,7 @@
 import { Card } from './Card'
 import capa from '../../imgs/testecard.jpg'
 import { CardContent } from './CardCampaign.styled'
+import { Button } from '../button/Button'
 
 const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, meta}) => {
   return (
@@ -8,7 +9,11 @@ const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, 
       <CardContent>
         <img src={capa} />
         <div>
-          <h1>{campaignTitle}</h1>
+          <div>
+            <h3>{campaignTitle}</h3>
+            <span>Há 5 minutos</span>
+          </div>
+          <button>Ver detalhes</button>
         </div>
         <div>
           <p>Por: {criador}</p>
