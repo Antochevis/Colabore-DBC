@@ -5,7 +5,7 @@ import { Button } from '../button/Button'
 
 const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, meta}) => {
   return (
-    <Card maxWidth="420px" height="350px">
+    <Card maxWidth="100%" height="350px">
       <CardContent>
         <img src={capa} />
         <div>

@@ -19,5 +19,13 @@ export const ContainerCards = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 2rem 1rem;
+
+  @media (max-width:1300px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width:768px) {
+    grid-template-columns: 1fr;
+  }
 `;
