@@ -28,4 +28,8 @@ export const HeaderContainer = styled.header`
     width: 44px;
     clip-path: circle();
   }
+  && button:hover {
+    background: #0000001a;
+    cursor: pointer;
+  }
 `; 
