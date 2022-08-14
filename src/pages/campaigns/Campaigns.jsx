@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { apiColabore } from '../../services/api'
-import Loading from '../../components/Loading/Loading'
+import Loading from '../../components/loading/Loading'
+import Header from '../../components/header/Header'
+import Footer from '../../components/footer/Footer'
+import { Section } from '../../components/section/Section'
 
 function Campaigns() {
   const [user, setUser] = useState()
@@ -24,7 +27,13 @@ function Campaigns() {
     return (<Loading />)
   } 
     return (
-      <h1>Seja bem vindo {user.nome}</h1>
+      <>
+        <Header userName={user.nome}/>
+        <Section>
+        </Section>
+        <Footer />
+      </>
+      
     )
 }
 
