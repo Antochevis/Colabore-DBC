@@ -33,9 +33,42 @@ function Campaigns() {
         <Header userName={user.nome}/>
           <Section>
             <ContainerCards>
-              <CardCampaign campaignTitle="Doação de roupas" />
-              <CardCampaign campaignTitle="Doação de roupas" />
-              <CardCampaign campaignTitle="Doação de roupas" />
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="Vitor Scheffer"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="João Andrey"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="Vitor Scheffer"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="João Andrey"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="Vitor Scheffer"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
+              <CardCampaign campaignTitle="Doação de roupas"
+              criador="João Andrey"
+              tag="Alimentos"
+              dataFinal="25/08/2022"
+              arrecadado="1500"
+              meta="2000"/>
             </ContainerCards>  
           </Section>
         <Footer />
