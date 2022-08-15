@@ -6,7 +6,7 @@ import Loading from '../../components/loading/Loading'
 import { Section } from '../../components/section/Section'
 import FormComponent from '../../components/formComponent/FormComponent'
 
-function CampaingnsForm() {
+function CampaignsForm() {
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
 
@@ -38,4 +38,4 @@ function CampaingnsForm() {
   )
 }
 
-export default CampaingnsForm
+export default CampaignsForm

@@ -16,10 +16,10 @@ const SignupSchema = yup.object().shape({
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
     .required('Campo obrigatório!'),
-  confirmarSenha: yup.string()
+  /*confirmarSenha: yup.string()
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
-    .required('Campo obrigatório!')
+    .required('Campo obrigatório!')*/
 })
 
 function Register() {
@@ -36,10 +36,6 @@ function Register() {
  
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  function BackLogin() {
-    navigate('/')
-  }
 
   return (
     <BackgroundRegister>

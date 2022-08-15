@@ -1,6 +1,9 @@
 import { Formik, Field, Form } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { Errors } from "../../pages/register/Register.Styled";
 import { Button } from "../button/Button";
+import { ContainerAddCampaign, RegisterCampaign } from "./FormComponent.Styled";
 
 const SignupSchema = yup.object().shape({
   titulo: yup.string()
@@ -19,77 +22,78 @@ const SignupSchema = yup.object().shape({
   .required('Campo obrigatório!'),
   tag: yup.string()
   .required('Campo obrigatório!'),
-  foto: yup.string()
+  /*foto: yup.string()
   .required('Campo obrigatório!'),
+  */
   concluirAutomaticamenteACampanha: yup.string()
   .required('Escolha uma opção válida!')
 })
 
-const FormComponent = () => {  
+const FormComponent = () => {
+  const navigate = useNavigate()
 
   return (
-    <>
-    <Formik
-          initialValues={{
-            titulo:'',
-            meta: '',
-            descricao: '',
-            tag: '',
-            foto: ''
-          }}
-          validationSchema={SignupSchema}
-          onSubmit={values => {
-            ;
-          }}
-        >
-        {({errors, touched}) => (
-          <Form>
-              <div>
-                <label htmlFor="titulo">Título da campanha*</label>
-                <Field name='titulo' placeholder='Digite o título da campanha' />
-                {errors.titulo && touched.titulo ? (<errors>{errors.titulo}</errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="meta">Quantidade a ser arrecadada*</label>
-                <Field type='meta' name='meta' placeholder='text'/>
-                {errors.meta && touched.meta ? (<errors>{errors.meta}</errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="concluirAutomaticamenteACampanha">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
-                <Field component='select' name='concluirAutomaticamenteACampanha' >
-                  <option value={null}>Escolha uma opção</option>
-                  <option value='sim'>Sim</option>
-                  <option value='nao'>Não</option>  
-                </Field>
-                {errors.concluirAutomaticamenteACampanha && touched.concluirAutomaticamenteACampanha ? (<errors>{errors.concluirAutomaticamenteACampanha}</errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="descricao">Descrição</label>
-                <Field type='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
-                {errors.descricao && touched.descricao ? (<errors>{errors.descricao}</errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="tag">Escolha a tag que mais se encaixa no projeto?*</label>
-                <Field component='select' name='tag' >
-                  <option value={null}>Escolha uma opção</option>
-                  <option value='sim'>Sim</option>
-                  <option value='nao'>Não</option>  
-                </Field>
-                {errors.tag && touched.tag ? (<errors>{errors.tag}</errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="concluirAutomaticamenteACampanha">Quantidade a ser arrecadada*</label>
-                <Field type='concluirAutomaticamenteACampanha' name='concluirAutomaticamenteACampanha' placeholder='text'/>
-                {errors.concluirAutomaticamenteACampanha && touched.concluirAutomaticamenteACampanha ? (<errors>{errors.concluirAutomaticamenteACampanha}</errors>) : null}
-              </div>
-              <Button type="submit">Cadastrar campanha</Button>
-          </Form>
-        )}
-        </Formik>
-        <div>
-          <Button >Não possuo cadastro</Button>
-        </div>
-        </>
+    <ContainerAddCampaign>
+      <h2>Cadastrar nova campanha</h2>
+      <Formik
+            initialValues={{
+              titulo:'',
+              meta: '',
+              descricao: '',
+              tag: '',
+              foto: ''
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={values => {
+              ;
+            }}
+          >
+          {({errors, touched}) => (
+            <Form>
+              <RegisterCampaign>
+                <div>
+                  <label htmlFor="titulo">Título da campanha*</label>
+                  <Field name='titulo' placeholder='Digite o título da campanha' />
+                  {errors.titulo && touched.titulo ? (<Errors>{errors.titulo}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="meta">Quantidade a ser arrecadada*</label>
+                  <Field type='meta' name='meta' placeholder='Digite a quantidade a ser arrecada'/>
+                  {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="concluirAutomaticamenteACampanha">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
+                  <Field component='select' name='concluirAutomaticamenteACampanha' >
+                    <option value={null}>Escolha uma opção</option>
+                    <option value='sim'>Sim</option>
+                    <option value='nao'>Não</option>  
+                  </Field>
+                  {errors.concluirAutomaticamenteACampanha && touched.concluirAutomaticamenteACampanha ? (<Errors>{errors.concluirAutomaticamenteACampanha}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="descricao">Descrição</label>
+                  <Field type='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
+                  {errors.descricao && touched.descricao ? (<Errors>{errors.descricao}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="tag">Digite as tags que mais se encaixam no projeto?*</label>
+                  <Field type='tag' name='tag' placeholder='Digite as tags da campanha'/>
+                  {errors.tag && touched.tag ? (<Errors>{errors.tag}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="foto">Foto da campanha*</label>
+                  <Field type='foto' name='foto' placeholder='text'/>
+                  {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
+                </div>
+                <Button type="submit" width="883px">Cadastrar campanha</Button>
+              </RegisterCampaign>
+            </Form>
+          )}
+          </Formik>
+          <div>
+            <Button onClick={() => navigate('/campanhas/idUsuario')}>Volar</Button>
+          </div>
+        </ContainerAddCampaign>
   )
 }
 
