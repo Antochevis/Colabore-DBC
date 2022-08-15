@@ -97,7 +97,7 @@ function Register() {
                 <Field type='password' name='senha' placeholder='Password'/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
-              <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha} type='submit'>Register</RegisterButtonFormStyle>
+              <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha} type='submit'>Cadastrar</RegisterButtonFormStyle>
               <Signup onClick={() => navigate('/')}>Já possuo cadastro</Signup>
             </RegisterFormStyle>
           </Form>
