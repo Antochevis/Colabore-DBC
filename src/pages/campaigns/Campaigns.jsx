@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { apiColabore } from '../../services/api'
-import Loading from '../../components/loading/Loading'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import { Section } from '../../components/section/Section'
@@ -8,10 +7,13 @@ import CardCampaign from '../../components/card/CardCampaign'
 import { ContainerCards } from '../../components/card/Card'
 import { Button } from '../../components/button/Button'
 import { Tittle } from '../../consts'
+import Loading from '../../components/loading/Loading'
+import { useNavigate } from 'react-router-dom'
 
 function Campaigns() {
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   const setup = async () => {
     try {
@@ -26,6 +28,10 @@ function Campaigns() {
   useEffect(()=>{
     setup()
   },[])
+
+  function goToCampaignForm() {
+    navigate('/criar-campanha')
+  }
   
   if(loading) {
     return (<Loading />)
@@ -38,6 +44,7 @@ function Campaigns() {
             <Button>Meta Atingida</Button>
             <Button>Meta Não Atingida</Button>
             <Tittle>Todas campanhas</Tittle>
+            <Button onClick={goToCampaignForm}>Criar campanha</Button>
             <ContainerCards>
               <CardCampaign campaignTitle="Doação de roupas para sav..."
               criador="Vitor Scheffer"

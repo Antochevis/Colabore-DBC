@@ -16,7 +16,7 @@ const SignupSchema = yup.object().shape({
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
     .required('Campo obrigatório!'),
-  senha: yup.string()
+  confirmarSenha: yup.string()
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
     .required('Campo obrigatório!')
@@ -89,13 +89,18 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="email">E-mail*</label>
-                <Field name='email' placeholder='Username'/>
+                <Field name='email' placeholder='Digite seu e-mail'/>
                 {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
-                <Field type='password' name='senha' placeholder='Password'/>
+                <Field type='password' name='senha' placeholder='Digite sua senha'/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+              </div>
+              <div>
+                <label htmlFor="confirmarSenha">Confirmar senha*</label>
+                <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
+                {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
               </div>
               <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha} type='submit'>Cadastrar</RegisterButtonFormStyle>
               <Signup onClick={() => navigate('/')}>Já possuo cadastro</Signup>

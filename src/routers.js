@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 import { AuthContext, AuthProvider } from "./context/AuthContext"
 import Campaigns from "./pages/campaigns/Campaigns"
+import CampaingnsForm from "./pages/campaignsForm/CampaingnsForm"
 import Login from "./pages/login/Login"
 import NotFound from "./pages/NotFound/NotFound"
 import Register from "./pages/register/Register"
@@ -23,6 +24,7 @@ const Routers = () => {
           <Route path='criar-usuario' element={<Register />} />
           <Route element={<PrivateRoute />}>
             <Route path='campanhas/:idUsuario' element={<Campaigns />} />
+            <Route path='criar-campanha/' element={<CampaingnsForm />} />
           </Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
