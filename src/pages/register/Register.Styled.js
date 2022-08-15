@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const BackgroundRegister = styled.div`
-  background-color: #363740;
+  background: linear-gradient(to bottom right, #2A69BB, #B43E94);
   height: 100vh;
   display: flex;
   align-items: center;

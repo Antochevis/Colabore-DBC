@@ -9,7 +9,7 @@ export const Card = styled.div(({maxWidth, height, padding}) => ({
   maxWidth: maxWidth ? maxWidth : 1420,
   height: height ? height : 500,
   padding: padding ? padding : 0,
-  backgroundColor: colorWhite,
+  background: colorWhite,
   borderRadius: 8,
   border: `1px solid ${colorBorder}`,
   overflow: 'hidden',

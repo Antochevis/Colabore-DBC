@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colorWhite } from '../../consts'
 
 export const FooterContainer = styled.header`
-  background: linear-gradient(to top left, #2A69BB, #B43E94);;
+  background: linear-gradient(to top left, #2A69BB, #B43E94);
   color: ${colorWhite};
   height: 5rem;
   && > div {
