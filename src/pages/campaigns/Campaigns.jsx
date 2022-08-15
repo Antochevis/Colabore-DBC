@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { apiColabore } from '../../services/api'
-import Loading from '../../components/loading/Loading'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import { Section } from '../../components/section/Section'
@@ -8,6 +7,7 @@ import CardCampaign from '../../components/card/CardCampaign'
 import { ContainerCards } from '../../components/card/Card'
 import { Button } from '../../components/button/Button'
 import { Tittle } from '../../consts'
+import Loading from '../../components/loading/Loading'
 
 function Campaigns() {
   const [user, setUser] = useState()
