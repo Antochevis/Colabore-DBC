@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 export const fontXl = 24;
 export const fontLg = 19;
 export const fontMd = 16;
@@ -16,3 +18,27 @@ export const colorTittlePage = '#252733';
 export const colorBgSection = '#F7F8FC';
 export const colorWhite = '#FFFFFF';
 export const colorBorder = '#DFE0EB'
+
+export const Tittle = styled.h1(({color, paddingBottom}) => ({
+  fontSize: fontXl,
+  color: color ? color : colorTittlePage,
+  paddingBottom: paddingBottom ? paddingBottom : ''
+}));
+
+export const Subtitle = styled.h2(({color, paddingBottom}) => ({
+  fontSize: fontLg,
+  color: color ? color : colorTittle,
+  paddingBottom: paddingBottom ? paddingBottom : ''
+}));
+
+export const Text = styled.p(({color, fontWeight}) => ({
+  fontSize: fontMd,
+  color: color ? color : colorTittlePage,
+  fontWeight: fontWeight ? fontWeight : 500
+}));
+
+export const TextSm = styled.span(({color, fontSize, fontWeight}) => ({
+  fontSize: fontSize ? fontSize : fontSm,
+  color: color ? color : colorInput,
+  fontWeight: fontWeight ? fontWeight : 500,
+}));

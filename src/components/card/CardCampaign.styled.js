@@ -18,15 +18,21 @@ export const CardContent = styled.div`
     align-items: baseline;
     gap: 0.5rem;
   }
+  && > div:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
   && button {
     border: none;
     background: none;
-    font-weight: 600;
+    font-weight: 500;
     color: ${colorPrimary};
   }
   button:hover {
     color: ${colorPrimaryDark};
     cursor: pointer;
+    text-decoration: underline;
   }
   && > div {
     padding: 0.625rem;
@@ -42,6 +48,6 @@ export const CardContent = styled.div`
     padding: 0.625rem 0.5rem;
   }
   && footer div:nth-child(1) {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #9FA2B4;
   }
 `;

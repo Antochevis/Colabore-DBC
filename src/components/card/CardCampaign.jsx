@@ -1,7 +1,7 @@
 import { Card } from './Card'
 import capa from '../../imgs/testecard.jpg'
 import { CardContent } from './CardCampaign.styled'
-import { Button } from '../button/Button'
+import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
 
 const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, meta}) => {
   return (
@@ -10,24 +10,30 @@ const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, 
         <img src={capa} />
         <div>
           <div>
-            <h3>{campaignTitle}</h3>
-            <span>Há 5 minutos</span>
+            <Subtitle color={colorTittlePage}>{campaignTitle}</Subtitle>
+            <TextSm color={colorHoverMenu} fontWeight="400">Há 5 minutos</TextSm>
           </div>
           <button>Ver detalhes</button>
         </div>
         <div>
-          <p>Por: {criador}</p>
-          <p>Categoria: {tag}</p>
-          <p>Colabore até {dataFinal}</p>
+          <TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  {criador}
+            </TextSm>
+          <TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {tag}
+            </TextSm>
+          <TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {dataFinal}
+            </TextSm>
         </div>
         <footer>
           <div>
-            <p>Arrecadado</p>
-            <span>{arrecadado}</span>
+            <Text>Arrecadado</Text>
+            <Text>{arrecadado}</Text>
           </div>
           <div>
-            <p>Meta</p>
-            <span>{meta}</span>
+            <Text>Meta</Text>
+            <Text>{meta}</Text>
           </div>
         </footer>
       </CardContent>

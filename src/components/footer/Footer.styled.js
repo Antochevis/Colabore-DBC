@@ -11,7 +11,7 @@ export const FooterContainer = styled.header`
     padding: 1rem 1rem;
     margin: 0 auto;
     justify-content: space-between;
-    max-width: 1300px;
+    max-width: 1400px;
   } && div:nth-child(1) {
     display: flex;
     align-items: center;
