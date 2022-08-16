@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Field, Form, Formik } from 'formik';
 import * as yup from "yup";
@@ -23,23 +23,16 @@ const SignupSchema = yup.object().shape({
 })
 
 function Register() {
-  //const navigate = useNavigate();
-  
-  /*
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(!token) {
-      navigate('/')
-    }
-  }, [])
-  */
- 
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [image, setImage] = useState()
 
-  function BackLogin() {
-    navigate('/')
-  }
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if(!token) {
+  //     navigate('/')
+  //   }
+  // }, [])
 
   return (
     <BackgroundRegister>
@@ -62,9 +55,12 @@ function Register() {
           }}
           validationSchema={SignupSchema}
           onSubmit={values => {
+            console.log(image)
+            const newImg = new FormData();
+            newImg.append('image', image)
             const newValues = {
               nome: values.nome,
-              foto: values.foto,
+              foto: newImg,
               autenticacaoDto: {
                 email: values.email,
                 senha: values.senha
@@ -84,7 +80,7 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
-                <Field name='foto' placeholder='Foto'/>
+                <Field type="file" name='foto' placeholder='Foto' onChange={(e)=>{setImage(e.target.files[0])}}/>
                 {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
               </div>
               <div>
