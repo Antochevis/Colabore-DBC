@@ -3,20 +3,28 @@ import styled from "styled-components";
 
 export const BackgroundRegister = styled.div`
   background: linear-gradient(to bottom right, #2A69BB, #B43E94);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+
+  > div:last-child {
+    width: 50vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `
 
 export const RegisterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 380px;
+  width: 50vw;
+  min-height: 100vh;
   background: #FFFFFF;
   border: 1px solid #DFE0EB;
-  border-radius: 8px;
   align-items: center;
+  justify-content: center;
 `
 
 export const LogoAndTextRegister = styled.div`
@@ -24,10 +32,9 @@ export const LogoAndTextRegister = styled.div`
   flex-direction: column;
   gap: 12px;
   align-items: center;
-  margin-top: 40px;
 
   img {
-    width: 48px
+    width: 70px
   }
 
   h2 {
@@ -44,12 +51,12 @@ export const RegisterFormStyle = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  gap: 24px;
+  gap: 26px;
 
   div:nth-child(-n + 6) {
     display: flex;
     flex-direction: column;
-    width: 316px;
+    width: 45vw;
     gap: 6px;
     height: 70px;
 
@@ -82,7 +89,7 @@ export const RegisterFormStyle = styled.div`
 
 export const RegisterButtonFormStyle = styled.button`
   height: 48px;
-  width: 316px;
+  width: 45vw;
   background: #3751FF;
   border: none;
   border-radius: 8px;
@@ -125,9 +132,8 @@ export const RegisterTitle = styled.h1`
   font-size: 24px;
   line-height: 30px;
   letter-spacing: 0.3px;
-  color: #252733;
-  margin-top: 32px;
-  margin-bottom: 12px;
+  color: #3751FF;
+  margin: 12px 0;
 `
 
 export const Errors = styled.p`

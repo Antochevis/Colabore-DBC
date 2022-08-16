@@ -7,6 +7,7 @@ import { BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, Registe
 import { useNavigate } from 'react-router-dom';
 import { Signup } from "../login/Login.Styled";
 import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
+import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 
 
 
@@ -156,6 +157,9 @@ function Register() {
         )}
         </Formik>
       </RegisterContainer>
+      <div>
+        <ImgLogin />
+      </div>
     </BackgroundRegister>
   )
 }
