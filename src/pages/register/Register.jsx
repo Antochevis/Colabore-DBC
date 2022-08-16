@@ -35,8 +35,8 @@ function Register() {
       .max(50, 'Máximo de 50 caractéres')
       .required('Campo obrigatório!'),
     email: yup.string()
-      .min(2, 'Mínimo de 2 caractéres')
-      .max(50, 'Máximo de 50 caractéres')
+      .email('Insira um email válido')
+      .matches(/^[a-z0-9.]+@dbccompany.com.br/, 'O email deve conter: @dbccompany.com.br')
       .required('Campo obrigatório!'),
     senha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')

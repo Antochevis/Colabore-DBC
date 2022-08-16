@@ -50,8 +50,7 @@ const AuthProvider = ({ children }) => {
       apiColabore.defaults.headers.common['Authorization'] = data
       
       try {
-        apiColabore.defaults.headers.common['Content-Type'] = 'multipart/form-data'
-        await apiColabore.put('/autenticacao/cadastrarFoto', userImage)
+        await apiColabore.put('/autenticacao/cadastrarFoto', userImage, {headers: {'Content-Type': 'multipart/form-data'}})
         const { data } = await apiColabore.get('/usuario/listar')
         setAuth(true)
         navigate(`/campanhas/${data[0].idUsuario}`)
