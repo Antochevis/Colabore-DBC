@@ -9,6 +9,7 @@ import { Button } from '../../components/button/Button'
 import { Tittle } from '../../consts'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from 'react-router-dom'
+import { FilterMeta } from './Campaigns.styled'
 
 function Campaigns() {
   const [user, setUser] = useState()
@@ -40,9 +41,11 @@ function Campaigns() {
       <>
         <Header userName={user.nome}/>
           <Section>
-            <Button>Todas campanhas</Button>
-            <Button>Meta Atingida</Button>
-            <Button>Meta Não Atingida</Button>
+            <FilterMeta>
+              <Button width="310px" padding="22px">Todas campanhas</Button>
+              <Button width="310px" padding="22px">Meta Atingida</Button>
+              <Button width="310px" padding="22px">Meta Não Atingida</Button>
+            </FilterMeta>
             <Tittle>Todas campanhas</Tittle>
             <Button onClick={goToCampaignForm}>Criar campanha</Button>
             <ContainerCards>
