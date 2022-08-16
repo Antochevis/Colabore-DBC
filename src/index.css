@@ -36,3 +36,55 @@ button:disabled:hover {
   background:#3751FF;
   color: #FFFFFF;
 }
+
+.password-strength-meter {
+  height: 2rem !important;
+  text-align: left;
+}
+.password-strength-meter-progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+}
+.password-strength-meter-progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 3px;
+}
+.password-strength-meter-label {
+  margin-top: -1.8rem;
+  font-size:  1rem;
+}
+.password-strength-meter-progress::-webkit-progress-value {
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+.password__label{}
+.strength-Fraca::-webkit-progress-value {
+  background-color: #ff0400;
+}
+.strength-Razoável::-webkit-progress-value {
+  background-color: #ffcc00;
+}
+.strength-Boa::-webkit-progress-value {
+  background-color: #00b3ff;
+}
+.strength-Forte::-webkit-progress-value {
+  background-color: #03b11a;
+}
+.strength-Fraca span {
+  font-weight: bold;
+  color: #ff0400;
+}
+.strength-Razoável span {
+  font-weight: bold;
+  color: #ffcc00;
+}
+.strength-Boa span {
+  font-weight: bold;
+  color: #00b3ff;
+}
+.strength-Forte span {
+  font-weight: bold;
+  color: #03b11a;
+}
