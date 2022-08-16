@@ -31,8 +31,8 @@ export const Subtitle = styled.h2(({color, paddingBottom}) => ({
   paddingBottom: paddingBottom ? paddingBottom : ''
 }));
 
-export const Text = styled.p(({color, fontWeight}) => ({
-  fontSize: fontMd,
+export const Text = styled.p(({color, fontSize, fontWeight}) => ({
+  fontSize: fontSize ? fontSize : fontMd,
   color: color ? color : colorTittlePage,
   fontWeight: fontWeight ? fontWeight : 500
 }));
