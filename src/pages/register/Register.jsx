@@ -6,6 +6,7 @@ import { Logo } from "../../components/logo/Logo";
 import { BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
 import { useNavigate } from 'react-router-dom';
 import { Signup } from "../login/Login.Styled";
+import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
 
 
 
@@ -23,7 +24,8 @@ function Register() {
  
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [image, setImage] = useState()
+  const [image, setImage] = useState();
+  const [password, setPassword] = useState();
 
   const SignupSchema = yup.object().shape({
     nome: yup.string()
@@ -44,6 +46,54 @@ function Register() {
       .oneOf([yup.ref('senha'), null], 'As senhas precisam ser iguais.')
       .required('Campo obrigatório!')
   })
+
+  const [userInfo, setuserInfo] = useState({
+    password: '',
+  });
+
+  const [isError, setError] = useState(null);
+  const handleChangePassword = (e) => {
+    let password  = e.target.value;
+    setuserInfo({
+      ...userInfo,
+      password:e.target.value
+    });
+    setError(null);
+    let capsCount, smallCount, numberCount, symbolCount
+    if (password.length < 4) {
+      setError("Password must be minimum 4 characters include one UPPERCASE, lowercase, number and special character: @$! % * ? &");
+      return;
+    }
+    else {
+      capsCount = (password.match(/[A-Z]/g) || []).length
+      smallCount = (password.match(/[a-z]/g) || []).length
+      numberCount = (password.match(/[0-9]/g) || []).length
+      symbolCount = (password.match(/\W/g) || []).length
+      if (capsCount < 1) {
+        setError("Must contain one UPPERCASE letter");
+        return;
+      }
+      else if (smallCount < 1) {
+        setError("Must contain one lowercase letter");
+        return;
+      }
+      else if (numberCount < 1) {
+        setError("Must contain one number");
+        return;
+      }
+      else if (symbolCount < 1) {
+        setError("Must contain one special character: @$! % * ? &");
+        return;
+      }
+    }
+  }
+  
+  const [isStrength, setStrength] = useState(null);
+  const dataHandler = async (childData) => {
+    setStrength(childData);
+  }
+
+
 
   return (
     <BackgroundRegister>
@@ -92,9 +142,10 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
-                <Field type='password' name='senha' placeholder='Digite sua senha'/>
+                <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={(e)=>{setPassword(e.target.value)}}/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
+              <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
               <div>
                 <label htmlFor="confirmarSenha">Confirmar senha*</label>
                 <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
