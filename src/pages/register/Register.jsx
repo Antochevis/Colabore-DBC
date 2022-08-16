@@ -25,7 +25,10 @@ function Register() {
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
   const [image, setImage] = useState();
-  const [password, setPassword] = useState();
+  const [userInfo, setuserInfo] = useState({
+    password: '',
+  });
+  const [isError, setError] = useState(null);
 
   const SignupSchema = yup.object().shape({
     nome: yup.string()
@@ -46,12 +49,7 @@ function Register() {
       .oneOf([yup.ref('senha'), null], 'As senhas precisam ser iguais.')
       .required('Campo obrigatório!')
   })
-
-  const [userInfo, setuserInfo] = useState({
-    password: '',
-  });
-
-  const [isError, setError] = useState(null);
+  
   const handleChangePassword = (e) => {
     let password  = e.target.value;
     setuserInfo({
@@ -142,7 +140,7 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
-                <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={(e)=>{setPassword(e.target.value)}}/>
+                <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
               <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>

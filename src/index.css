@@ -58,27 +58,27 @@ button:disabled:hover {
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 .password__label{margin-top:10px;margin-bottom: 0px;}
-.strength-Weak::-webkit-progress-value {
+.strength-Fraca::-webkit-progress-value {
   background-color: #ff0400;
 }
-.strength-Fair::-webkit-progress-value {
+.strength-Razoável::-webkit-progress-value {
   background-color: #ffcc00;
 }
-.strength-Good::-webkit-progress-value {
+.strength-Boa::-webkit-progress-value {
   background-color: #00b3ff;
 }
-.strength-Strong::-webkit-progress-value {
+.strength-Forte::-webkit-progress-value {
   background-color: #03b11a;
 }
-.strength-Weak span {
+.strength-Fraca span {
   color: #ff0400;
 }
-.strength-Fair span {
+.strength-Razoável span {
   color: #ffcc00;
 }
-.strength-Good span {
+.strength-Boa span {
   color: #00b3ff;
 }
-.strength-Strong span {
+.strength-Forte span {
   color: #03b11a;
 }

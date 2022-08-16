@@ -46,7 +46,7 @@ export const RegisterFormStyle = styled.div`
   margin-top: 20px;
   gap: 24px;
 
-  div:nth-child(-n + 5) {
+  div:nth-child(-n + 6) {
     display: flex;
     flex-direction: column;
     width: 316px;

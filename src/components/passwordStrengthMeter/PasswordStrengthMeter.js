@@ -18,22 +18,22 @@ const PasswordStrengthMeter = (props) => {
       case 1:
         return ({
           value: 1,
-          info: "Weak",
+          info: "Fraca",
         });
       case 2:
         return ({
           value: 2,
-          info: "Fair",
+          info: "Razoável",
         });
       case 3:
         return ({
           value: 3,
-          info: "Good",
+          info: "Boa",
         });
       case 4:
         return ({
           value: 4,
-          info: "Strong",
+          info: "Forte",
         });
       default:
         return null
@@ -47,7 +47,7 @@ const PasswordStrengthMeter = (props) => {
       <br />
       <p className="password-strength-meter-label">
         {props.password && ( <>
-          <p className={`password__label strength-${createPasswordLabel().info}`}>Password strength: <span>{createPasswordLabel().info} </span></p> 
+          <p className={`password__label strength-${createPasswordLabel().info}`}>Força da senha: <span>{createPasswordLabel().info} </span></p> 
         </>)}
       </p>
     </div>
