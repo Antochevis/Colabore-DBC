@@ -41,10 +41,27 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  const handleSignUp = async (values) => {
+  const handleSignUp = async (values, image) => {
+    const userImage = new FormData()
+    userImage.append('imagem', image)
     try {
-      await apiColabore.post('/autenticacao/registrar', values)
-      navigate('/')
+      const {data} =  await apiColabore.post('/autenticacao/cadastrar', values)
+      localStorage.setItem('token', data)
+      apiColabore.defaults.headers.common['Authorization'] = data
+      
+      try {
+        apiColabore.defaults.headers.common['Content-Type'] = 'multipart/form-data'
+        await apiColabore.put('/autenticacao/cadastrarFoto', userImage)
+        const { data } = await apiColabore.get('/usuario/listar')
+        setAuth(true)
+        navigate(`/campanhas/${data[0].idUsuario}`)
+        toast.success('Logado com sucesso')
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
+      console.log(data)
+      console.log(image)
       toast.success('Cadastrado realizado com sucesso!')
     } catch (e) {
       console.log(e)

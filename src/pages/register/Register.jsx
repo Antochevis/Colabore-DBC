@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Field, Form, Formik } from 'formik';
 import * as yup from "yup";
@@ -16,10 +16,14 @@ const SignupSchema = yup.object().shape({
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
     .required('Campo obrigatório!'),
-  /*confirmarSenha: yup.string()
+  senha: yup.string()
     .min(2, 'Mínimo de 2 caractéres')
     .max(50, 'Máximo de 50 caractéres')
-    .required('Campo obrigatório!')*/
+    .required('Campo obrigatório!'),
+  confirmarSenha: yup.string()
+    .min(2, 'Mínimo de 2 caractéres')
+    .max(50, 'Máximo de 50 caractéres')
+    .required('Campo obrigatório!')
 })
 
 function Register() {
@@ -36,6 +40,7 @@ function Register() {
  
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [image, setImage] = useState()
 
   return (
     <BackgroundRegister>
@@ -49,25 +54,19 @@ function Register() {
           initialValues={{
             nome:'',
             foto:'',
-            autenticacaoDto: {
-              email:'',
-              senha:''
-            },
             email: '',
-            senha: ''
+            senha: '',
+            confirmarSenha: ''
           }}
           validationSchema={SignupSchema}
-          onSubmit={values => {
+          onSubmit={(values, {resetForm}) => {
             const newValues = {
               nome: values.nome,
-              foto: values.foto,
-              autenticacaoDto: {
-                email: values.email,
-                senha: values.senha
+              email: values.email,
+              senha: values.senha
               }
-            }
-            console.log(newValues)
-            handleSignUp(newValues)
+            handleSignUp(newValues, image)
+            resetForm()
           }}
         >
         {({errors, touched}) => (
@@ -80,7 +79,7 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
-                <Field name='foto' placeholder='Foto'/>
+                <Field name='foto' type="file" placeholder='Foto' onChange={(e)=>{setImage(e.target.files[0])}}/>
                 {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
               </div>
               <div>
@@ -98,7 +97,7 @@ function Register() {
                 <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
                 {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
               </div>
-              <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha} type='submit'>Cadastrar</RegisterButtonFormStyle>
+              <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
               <Signup onClick={() => navigate('/')}>Já possuo cadastro</Signup>
             </RegisterFormStyle>
           </Form>
