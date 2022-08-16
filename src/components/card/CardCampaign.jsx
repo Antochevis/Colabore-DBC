@@ -2,8 +2,12 @@ import { Card } from './Card'
 import capa from '../../imgs/testecard.jpg'
 import { CardContent } from './CardCampaign.styled'
 import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
+import { useNavigate } from 'react-router-dom'
 
 const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, meta}) => {
+
+  const navigate = useNavigate();
+
   return (
     <Card maxWidth="100%" height="350px">
       <CardContent>
@@ -13,7 +17,7 @@ const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, 
             <Subtitle color={colorTittlePage}>{campaignTitle}</Subtitle>
             <TextSm color={colorHoverMenu} fontWeight="400">Há 5 minutos</TextSm>
           </div>
-          <button>Ver detalhes</button>
+          <button onClick={() => navigate('/detalhe-campanha')}>Ver detalhes</button>
         </div>
         <div>
           <TextSm>
