@@ -24,10 +24,6 @@ function Register() {
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
   const [image, setImage] = useState()
-  const [valueSenha, setSenha] = useState()
-  const [valueConfirmaSenha, setConfirmaSenha] = useState()
-
-  console.log(valueSenha, valueConfirmaSenha )
 
   const SignupSchema = yup.object().shape({
     nome: yup.string()
@@ -96,12 +92,12 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
-                <Field type='password' name='senha' placeholder='Digite sua senha' onBlur={(e) => {setSenha(e.target.value)}}/>
+                <Field type='password' name='senha' placeholder='Digite sua senha'/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
               <div>
                 <label htmlFor="confirmarSenha">Confirmar senha*</label>
-                <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha' onBlur={(e) => {setConfirmaSenha(e.target.value)}}/>
+                <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
                 {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
               </div>
               <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
