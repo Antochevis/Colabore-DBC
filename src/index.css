@@ -38,6 +38,7 @@ button:disabled:hover {
 }
 
 .password-strength-meter {
+  height: 2rem !important;
   text-align: left;
 }
 .password-strength-meter-progress {
@@ -51,13 +52,14 @@ button:disabled:hover {
   border-radius: 3px;
 }
 .password-strength-meter-label {
-  font-size:  16px;
+  margin-top: -1.8rem;
+  font-size:  1rem;
 }
 .password-strength-meter-progress::-webkit-progress-value {
   border-radius: 2px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-.password__label{margin-top:10px;margin-bottom: 0px;}
+.password__label{}
 .strength-Fraca::-webkit-progress-value {
   background-color: #ff0400;
 }
@@ -71,14 +73,18 @@ button:disabled:hover {
   background-color: #03b11a;
 }
 .strength-Fraca span {
+  font-weight: bold;
   color: #ff0400;
 }
 .strength-Razoável span {
+  font-weight: bold;
   color: #ffcc00;
 }
 .strength-Boa span {
+  font-weight: bold;
   color: #00b3ff;
 }
 .strength-Forte span {
+  font-weight: bold;
   color: #03b11a;
 }
