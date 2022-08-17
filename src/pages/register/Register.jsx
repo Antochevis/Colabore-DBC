@@ -11,17 +11,6 @@ import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 
 
 function Register() {
-  //const navigate = useNavigate();
-  
-  /*
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(!token) {
-      navigate('/')
-    }
-  }, [])
-  */
- 
   const { handleSignUp } = useContext(AuthContext);
   const navigate = useNavigate();
   const [image, setImage] = useState();
@@ -29,6 +18,8 @@ function Register() {
     password: '',
   });
   const [isError, setError] = useState(null);
+  const [isStrength, setStrength] = useState(null);
+
 
   const SignupSchema = yup.object().shape({
     nome: yup.string()
@@ -90,11 +81,14 @@ function Register() {
     }
   }
   
-  const [isStrength, setStrength] = useState(null);
   const dataHandler = async (childData) => {
     setStrength(childData);
   }
 
+  const setImageUser = (e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }
 
 
   return (
@@ -134,7 +128,7 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
-                <Field name='foto' type="file" placeholder='Foto' onChange={(e)=>{setImage(e.target.files[0])}}/>
+                <Field name='foto' type="file" placeholder='Foto' onBlur={setImageUser}/>
                 {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
               </div>
               <div>

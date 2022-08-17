@@ -26,6 +26,8 @@ function Campaigns() {
     }
   }
 
+  console.log(user)
+
   useEffect(()=>{
     setup()
   },[])
@@ -39,7 +41,7 @@ function Campaigns() {
   } 
     return (
       <>
-        <Header userName={user.nome}/>
+        <Header userName={user.nome} userImg={user.foto}/>
           <Section>
             <FilterMeta>
               <Button width="310px" padding="22px">Todas campanhas</Button>
