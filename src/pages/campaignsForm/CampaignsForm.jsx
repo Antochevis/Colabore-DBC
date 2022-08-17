@@ -29,7 +29,7 @@ function CampaignsForm() {
   } 
   return (
     <>
-      <Header userName={user.nome}/>
+      <Header userName={user.nome} userImg={user.foto}/>
         <Section>
           <FormComponent />
         </Section>
