@@ -5,7 +5,7 @@ export const CardContent = styled.div`
   width: 100%;
   && img {
     width: 100%;
-    height: 16rem;
+    height: 18rem;
     object-fit: cover;
   }
   && > div:nth-child(2) {

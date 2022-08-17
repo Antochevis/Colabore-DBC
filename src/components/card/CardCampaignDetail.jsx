@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const CardCampaignDetail = ({img, campaignTitle, criador, tag, dataFinal, descricao}) => {
 
   return (
-    <Card maxWidth="100%" minHeight="700px">
+    <Card maxWidth="100%" minHeight="100%">
       <CardContent>
         <img src={capa} />
         <div>

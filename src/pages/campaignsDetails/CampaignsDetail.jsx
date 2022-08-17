@@ -41,7 +41,7 @@ function CampaignsDetail() {
             criador="Vitor Scheffer"
             tag="Alimentos"
             dataFinal="25/08/2022"
-            descricao="lorem"
+            descricao="descrição"
             />
             <CardDetail />
           </ContainerDetail>
