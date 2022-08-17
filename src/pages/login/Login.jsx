@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
-import { BackgroundPage, ButtonFormStyle, Errors, FormStyle, LoginContainer, LogoAndText, Signup } from "./Login.Styled";
+import { BackgroundPage, Errors, FormStyle, LoginContainer, LogoAndText, Signup } from "./Login.Styled";
 import { Logo } from "../../components/logo/Logo";
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
+import { Button } from "../../components/button/Button";
 
 
 const SignupSchema = yup.object().shape({
@@ -60,7 +61,7 @@ const Login = () => {
                 <Field type='password' name='senha' placeholder='Password'/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
-              <ButtonFormStyle type="submit">Entrar</ButtonFormStyle>
+              <Button width="45vw" type="submit">Entrar</Button>
             </FormStyle>
           </Form>
         )}

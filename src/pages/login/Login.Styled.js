@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colorPrimary } from '../../consts'
 
 export const BackgroundPage = styled.div`
   background: linear-gradient(to bottom right, #2A69BB, #B43E94);
@@ -71,7 +72,7 @@ export const LoginContainer = styled.div`
 `
 
 export const Signup = styled.small`
-  color: #3751FF;
+  color: ${colorPrimary};
   font-weight: 600;
   margin-bottom: 10px;
   &:hover {
@@ -127,27 +128,6 @@ export const FormStyle = styled.div`
     }
   }
 
-`
-
-export const ButtonFormStyle = styled.button`
-  height: 48px;
-  width: 45vw;
-  background: #3751FF;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.2px;
-  color: #FFFFFF;
-  margin-top: 18px;
-
-  &:hover {
-    background: #FFFFFF;
-    color: #3751FF;
-    border: 1px solid #3751FF;
-    cursor: pointer;
-  }
 `
 
 export const Errors = styled.p`

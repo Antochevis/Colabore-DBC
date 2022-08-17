@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colorPrimary } from "../../consts";
 
 
 export const BackgroundRegister = styled.div`
@@ -130,47 +131,6 @@ export const RegisterFormStyle = styled.div`
   }
 `;
 
-export const RegisterButtonFormStyle = styled.button`
-  height: 48px;
-  width: 45vw;
-  background: #3751FF;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.2px;
-  color: #FFFFFF;
-
-  &:hover {
-    background: #FFFFFF;
-    color: #3751FF;
-    border: 1px solid #3751FF;
-    cursor: pointer;
-  }
-`;
-
-export const RegisterButtonVoltar = styled.button`
-  height: 34px;
-  width: 150px;
-  background: #3751FF;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.2px;
-  color: #FFFFFF;
-  margin-bottom: 30px;
-
-  &:hover {
-    background: #FFFFFF;
-    color: #3751FF;
-    border: 1px solid #3751FF;
-    cursor: pointer;
-  }
-`;
-
 export const RegisterTitle = styled.h1`
   font-size: 24px;
   line-height: 30px;
@@ -186,17 +146,8 @@ export const Errors = styled.p`
   margin-top: 0;
 `;
 
-export const RequiredFields = styled.p`
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  color: #9FA2B4;
-  margin: 0;
-`;
-
 export const BackToLogin = styled.small`
-  color: #3751FF;
+  color: ${colorPrimary};
   font-weight: 600;
   margin-bottom: 10px;
 

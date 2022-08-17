@@ -3,11 +3,12 @@ import { AuthContext } from '../../context/AuthContext';
 import { Field, Form, Formik } from 'formik';
 import * as yup from "yup";
 import { Logo } from "../../components/logo/Logo";
-import { BackToLogin, BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
+import { BackToLogin, BackgroundRegister, RegisterContainer, RegisterFormStyle, LogoAndTextRegister, RegisterTitle, Errors} from './Register.Styled';
 import { useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 import Dropzone from 'react-dropzone'
+import { Button } from '../../components/button/Button';
 
 
 
@@ -164,9 +165,7 @@ function Register() {
                   )}
                 </Dropzone>
               </div>
-              
-              
-              <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
+              <Button width="45vw" disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</Button>
               <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
             </RegisterFormStyle>
           </Form>
