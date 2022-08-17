@@ -3,10 +3,10 @@ import { AuthContext } from '../../context/AuthContext';
 import { Field, Form, Formik } from 'formik';
 import * as yup from "yup";
 import { Logo } from "../../components/logo/Logo";
-import { BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
+import { BackToLogin, BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
 import { useNavigate } from 'react-router-dom';
-import { Signup } from "../login/Login.Styled";
 import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
+import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 
 
 
@@ -32,6 +32,10 @@ function Register() {
     senha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
       .max(16, 'Máximo de 16 caractéres')
+      .matches(/[a-z]/, 'A senha deve conter ao menos uma letra minúscula')
+      .matches(/[A-Z]/, 'A senha deve conter ao menos uma letra maiúscula')
+      .matches(/\d/, 'A senha deve conter ao menos um número')
+      .matches(/[^a-zA-Z0-9]+/g, 'A senha deve conter ao menos um caractre especial')
       .required('Campo obrigatório!'),
     confirmarSenha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
@@ -80,6 +84,11 @@ function Register() {
     setStrength(childData);
   }
 
+  const setImageUser = (e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }
+
   return (
     <BackgroundRegister>
       <RegisterContainer>
@@ -118,8 +127,7 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
-
-                <Field name='foto' type="file" placeholder='Foto' onChange={(e)=>{setImage(e.target.files[0])}}/>
+                <Field name='foto' type="file" placeholder='Foto' onBlur={setImageUser}/>
                 {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
               </div>
               <div>
@@ -139,12 +147,15 @@ function Register() {
                 {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
               </div>
               <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
-              <Signup onClick={() => navigate('/')}>Já possuo cadastro</Signup>
+              <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
             </RegisterFormStyle>
           </Form>
         )}
         </Formik>
       </RegisterContainer>
+      <div>
+        <ImgLogin />
+      </div>
     </BackgroundRegister>
   )
 }

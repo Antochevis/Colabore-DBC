@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
 import { BackgroundPage, ButtonFormStyle, Errors, FormStyle, LoginContainer, LogoAndText, Signup } from "./Login.Styled";
 import { Logo } from "../../components/logo/Logo";
+import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 
 
 const SignupSchema = yup.object().shape({
@@ -28,6 +29,9 @@ const Login = () => {
 
   return (
     <BackgroundPage>
+      <div>
+        <ImgLogin />
+      </div>
       <LoginContainer>
         <LogoAndText>
           <Logo />

@@ -91,7 +91,7 @@ const FormComponent = () => {
           )}
           </Formik>
           <div>
-            <Button onClick={() => navigate('/campanhas/idUsuario')}>Volar</Button>
+            <Button onClick={() => navigate('/campanhas/idUsuario')}>Voltar</Button>
           </div>
         </ContainerAddCampaign>
   )

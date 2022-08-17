@@ -19,13 +19,15 @@ function Campaigns() {
 
   const setup = async () => {
     try {
-      const { data } = await apiColabore.get('usuario/listar')
-      setUser(data[0])
+      const { data } = await apiColabore.get('usuario/dadosUsuario')
+      setUser(data)
       setLoading(false)
     } catch (error) {
       console.log(error)
     }
   }
+
+  console.log(user)
 
   useEffect(()=>{
     setup()
@@ -40,7 +42,7 @@ function Campaigns() {
   } 
     return (
       <>
-        <Header userName={user.nome}/>
+        <Header userName={user.nome} userImg={user.foto}/>
           <Section>
             <FilterMeta>
               <Button width="310px" padding="22px">Todas campanhas</Button>
