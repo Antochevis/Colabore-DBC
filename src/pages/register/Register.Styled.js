@@ -82,7 +82,7 @@ export const RegisterFormStyle = styled.div`
   div:nth-child(5){
     display: flex;
     flex-direction: column;
-    width: 316px;
+    width: 45vw;
     align-items: flex-start;
   }
 `

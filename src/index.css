@@ -39,7 +39,6 @@ button:disabled:hover {
 
 .password-strength-meter {
   height: 2rem !important;
-  text-align: left;
 }
 .password-strength-meter-progress {
   -webkit-appearance: none;
@@ -59,7 +58,14 @@ button:disabled:hover {
   border-radius: 2px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-.password__label{}
+.password__label{
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #9FA2B4;
+  margin-top: 3px;
+}
 .strength-Fraca::-webkit-progress-value {
   background-color: #ff0400;
 }
