@@ -20,6 +20,7 @@ export const LogoAndText = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  margin-top: 10px;
 
   img {
     width: 150px;
@@ -72,8 +73,7 @@ export const LoginContainer = styled.div`
 export const Signup = styled.small`
   color: #3751FF;
   font-weight: 600;
-  margin-bottom: 30px;
-
+  margin-bottom: 10px;
   &:hover {
     text-decoration: underline;
     cursor: pointer;

@@ -3,9 +3,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { Field, Form, Formik } from 'formik';
 import * as yup from "yup";
 import { Logo } from "../../components/logo/Logo";
-import { BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
+import { BackToLogin, BackgroundRegister, RegisterButtonFormStyle, RegisterContainer, RegisterFormStyle, RegisterButtonVoltar, LogoAndTextRegister, RegisterTitle, Errors, RequiredFields } from './Register.Styled';
 import { useNavigate } from 'react-router-dom';
-import { Signup } from "../login/Login.Styled";
 import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 
@@ -151,7 +150,7 @@ function Register() {
                 {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
               </div>
               <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
-              <Signup onClick={() => navigate('/')}>Já possuo cadastro</Signup>
+              <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
             </RegisterFormStyle>
           </Form>
         )}

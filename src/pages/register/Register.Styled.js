@@ -32,6 +32,7 @@ export const LogoAndTextRegister = styled.div`
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  margin-top: 10px;
 
   img {
     width: 70px
@@ -150,4 +151,15 @@ export const RequiredFields = styled.p`
   text-transform: uppercase;
   color: #9FA2B4;
   margin: 0;
+`
+
+export const BackToLogin = styled.small`
+  color: #3751FF;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `
