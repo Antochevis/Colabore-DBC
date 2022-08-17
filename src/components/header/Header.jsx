@@ -1,4 +1,4 @@
-import { Logo } from "../logo/Logo"
+import { LogoHeader } from '../logo/Logo'
 import noUserImg from '../../imgs/no-user.jpeg'
 import { HeaderContainer } from './Header.styled.js'
 import { BiLogOut } from 'react-icons/bi'
@@ -13,7 +13,7 @@ const Header = ({userName, userImg}) => {
     <HeaderContainer>
       <div>
         <div>
-          <Logo />
+          <LogoHeader />
           <h2>Colabore</h2>
         </div>
         <div>

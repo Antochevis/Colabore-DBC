@@ -7,6 +7,7 @@ import { BackToLogin, BackgroundRegister, RegisterButtonFormStyle, RegisterConta
 import { useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '../../components/passwordStrengthMeter/PasswordStrengthMeter';
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
+import Dropzone from 'react-dropzone'
 
 
 
@@ -127,8 +128,18 @@ function Register() {
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
-                <Field name='foto' type="file" placeholder='Foto' onBlur={setImageUser}/>
-                {errors.foto && touched.foto ? (<Errors>{errors.foto}</Errors>) : null}
+                <Dropzone onDrop={acceptedFiles => setImage(acceptedFiles)}>
+                  {({getRootProps, getInputProps}) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        { image ? <img src={URL.createObjectURL(image[0])} alt="" /> : <p>Arraste arquivos até aqui, ou clique para buscar.</p>}
+                        
+                      </div>
+                      
+                    </section>
+                  )}
+                </Dropzone>
               </div>
               <div>
                 <label htmlFor="email">E-mail*</label>

@@ -17,4 +17,8 @@ export const FooterContainer = styled.header`
     align-items: center;
     gap: 1rem;
   }
+  && img {
+    width: 44px;
+    clip-path: circle();
+  }
   `;

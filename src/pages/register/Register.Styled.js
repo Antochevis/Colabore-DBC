@@ -14,7 +14,7 @@ export const BackgroundRegister = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 export const RegisterContainer = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const RegisterContainer = styled.div`
   border: 1px solid #DFE0EB;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const LogoAndTextRegister = styled.div`
   display: flex;
@@ -46,7 +46,8 @@ export const LogoAndTextRegister = styled.div`
     line-height: 24px;
     margin: 0;
   }
-`
+`;
+
 export const RegisterFormStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,7 +87,31 @@ export const RegisterFormStyle = styled.div`
     width: 45vw;
     align-items: flex-start;
   }
-`
+
+  section {
+    background: #FCFDFE;
+    border: 1px dashed black;
+    height: 5rem;
+    border-radius: 8px;
+  }
+
+  section:hover {
+    cursor: pointer;
+    background: #f5f5f5fb;
+  }
+
+  section > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100% !important;
+  }
+
+  section img {
+    width: 4rem;
+    clip-path: circle();
+  }
+`;
 
 export const RegisterButtonFormStyle = styled.button`
   height: 48px;
@@ -106,7 +131,7 @@ export const RegisterButtonFormStyle = styled.button`
     border: 1px solid #3751FF;
     cursor: pointer;
   }
-`
+`;
 
 export const RegisterButtonVoltar = styled.button`
   height: 34px;
@@ -127,7 +152,7 @@ export const RegisterButtonVoltar = styled.button`
     border: 1px solid #3751FF;
     cursor: pointer;
   }
-`
+`;
 
 export const RegisterTitle = styled.h1`
   font-size: 24px;
@@ -135,14 +160,14 @@ export const RegisterTitle = styled.h1`
   letter-spacing: 0.3px;
   color: #3751FF;
   margin: 12px 0;
-`
+`;
 
 export const Errors = styled.p`
   color: red;
   font-size: 12px;
   font-weight: bold;
   margin-top: 0;
-`
+`;
 
 export const RequiredFields = styled.p`
   font-size: 12px;
@@ -151,7 +176,7 @@ export const RequiredFields = styled.p`
   text-transform: uppercase;
   color: #9FA2B4;
   margin: 0;
-`
+`;
 
 export const BackToLogin = styled.small`
   color: #3751FF;
@@ -162,4 +187,4 @@ export const BackToLogin = styled.small`
     text-decoration: underline;
     cursor: pointer;
   }
-`
+`;

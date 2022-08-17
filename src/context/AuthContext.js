@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
   const handleSignUp = async (values, image) => {
     const userImage = new FormData()
-    userImage.append('multipartFile', image)
+    userImage.append('multipartFile', image[0])
     try {
       const {data} =  await apiColabore.post('/autenticacao/cadastrar', values)
       localStorage.setItem('token', data)
@@ -59,8 +59,6 @@ const AuthProvider = ({ children }) => {
         toast.error('Não foi possível adicionar a imagem.')
         console.log(error)
       }
-      console.log(data)
-      console.log(image)
       toast.success('Cadastrado realizado com sucesso!')
     } catch (e) {
       console.log(e)

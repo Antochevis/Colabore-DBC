@@ -1,4 +1,4 @@
-import { Logo } from "../logo/Logo"
+import { LogoHeader } from '../logo/Logo'
 import { FooterContainer } from './Footer.styled.js'
 
 const Footer = () => {
@@ -6,7 +6,7 @@ const Footer = () => {
     <FooterContainer>
       <div>
         <div>
-          <Logo />
+          <LogoHeader />
           <h2>Colabore</h2>
         </div>
         <div>
