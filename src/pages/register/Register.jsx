@@ -45,7 +45,7 @@ function Register() {
       .matches(/[a-z]/, 'A senha deve conter ao menos uma letra minúscula')
       .matches(/[A-Z]/, 'A senha deve conter ao menos uma letra maiúscula')
       .matches(/\d/, 'A senha deve conter ao menos um número')
-      .matches(/[$*&@#!_-]/, 'A senha deve conter ao menos um caractre especial')
+      .matches(/[^a-zA-Z0-9]+/g, 'A senha deve conter ao menos um caractre especial')
       .required('Campo obrigatório!'),
     confirmarSenha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
