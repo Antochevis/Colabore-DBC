@@ -16,6 +16,7 @@ const CardDetail = () => {
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Apoiadores</TextSm>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>15</TextSm>
         </div>
+        <Button width="100%">Ver Contribuidores</Button>
         <Button width="100%">Contribuir</Button>
       </CardContentSm>
   </Card>

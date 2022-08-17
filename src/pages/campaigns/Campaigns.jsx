@@ -9,7 +9,7 @@ import { Button } from '../../components/button/Button'
 import { Tittle } from '../../consts'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from 'react-router-dom'
-import { FilterMeta } from './Campaigns.styled'
+import { FilterMeta, UserCampaignFilter, ActiveTittle } from './Campaigns.styled'
 
 
 function Campaigns() {
@@ -49,8 +49,15 @@ function Campaigns() {
               <Button width="310px" padding="22px">Meta Atingida</Button>
               <Button width="310px" padding="22px">Meta Não Atingida</Button>
             </FilterMeta>
-            <Tittle>Todas campanhas</Tittle>
-            <Button onClick={goToCampaignForm}>Criar campanha</Button>
+            <UserCampaignFilter>
+              <button>Minhas Campanhas</button>
+              <button>Minhas contribuições</button>
+            </UserCampaignFilter>
+            <ActiveTittle>
+              <Tittle>Todas campanhas</Tittle>
+              <Button onClick={goToCampaignForm}>Criar campanha</Button>
+            </ActiveTittle>
+
             <ContainerCards>
               <CardCampaign campaignTitle="Doação de roupas para sav..."
               criador="Vitor Scheffer"

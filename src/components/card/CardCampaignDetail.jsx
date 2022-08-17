@@ -1,5 +1,5 @@
 import { Card } from './Card'
-import capa from '../../imgs/testecard.jpg'
+import capa from '../../imgs/capa.png'
 import { CardContent } from './CardCampaignDetail.styled'
 import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
 import { useNavigate } from 'react-router-dom'

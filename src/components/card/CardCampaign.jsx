@@ -1,5 +1,5 @@
 import { Card } from './Card'
-import capa from '../../imgs/testecard.jpg'
+import capa from '../../imgs/capa.png'
 import { CardContent } from './CardCampaign.styled'
 import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
 import { useNavigate } from 'react-router-dom'
@@ -35,6 +35,7 @@ const CardCampaign = ({img, campaignTitle, criador, tag, dataFinal, arrecadado, 
             <Text>Arrecadado</Text>
             <Text>{arrecadado}</Text>
           </div>
+          <div></div>
           <div>
             <Text>Meta</Text>
             <Text>{meta}</Text>

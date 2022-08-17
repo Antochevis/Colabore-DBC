@@ -10,9 +10,10 @@ export const Card = styled.div(({maxWidth, padding, height, minHeight}) => ({
   height: height ? height : '',
   minHeight: minHeight ? minHeight : 350,
   padding: padding ? padding : 0,
-  background: colorWhite,
+  background: 'white',
   borderRadius: 8,
   border: `1px solid ${colorBorder}`,
+  boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
   overflow: 'hidden',
 }));
 
@@ -55,7 +56,7 @@ export const CardContentSm = styled.div`
     font-weight: 500;
     line-height: 62.75px;
     color: #17BF14;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
   }
   && div:nth-child(3) {
     display: flex;
@@ -65,5 +66,14 @@ export const CardContentSm = styled.div`
   && div:nth-child(4) {
     display: flex;
     flex-direction: column;
+  }
+  && button {
+    margin-top: 1rem
+  }
+  && button:hover {
+    cursor: pointer;
+  }
+  && button + button {
+    margin-top: 0.5rem !important;
   }
 `;

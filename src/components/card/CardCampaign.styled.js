@@ -26,7 +26,7 @@ export const CardContent = styled.div`
   && button {
     border: none;
     background: none;
-    font-weight: 500;
+    font-weight: 700;
     color: ${colorPrimary};
   }
   button:hover {
@@ -41,13 +41,16 @@ export const CardContent = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 0rem 0.5rem;
   }
   && footer div {
     display: flex;
     justify-content: space-between;
-    padding: 0.625rem 0.5rem;
+    padding: 0.625rem 0rem;
   }
-  && footer div:nth-child(1) {
-    border-bottom: 1px solid #9FA2B4;
+  && footer div:nth-child(2) {
+    padding: 0;
+    height: 2px;
+    background: linear-gradient(to bottom right, #2A69BB 0%, #B43E94 100%);
   }
 `;
