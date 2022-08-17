@@ -122,9 +122,32 @@ function Register() {
           <Form>
             <RegisterFormStyle>
               <div>
-                <label htmlFor="nome">Nome completo*</label>
-                <Field name='nome' placeholder='Digite seu nome completo'/>
-                {errors.nome && touched.nome ? (<Errors>{errors.nome}</Errors>) : null}
+                <div>
+                  <label htmlFor="nome">Nome completo*</label>
+                  <Field name='nome' placeholder='Digite seu nome completo'/>
+                  {errors.nome && touched.nome ? (<Errors>{errors.nome}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="email">E-mail*</label>
+                  <Field name='email' placeholder='Digite seu e-mail'/>
+                  {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
+                </div>
+              </div>
+              <div>
+                <div>
+                  <label htmlFor="senha">Senha*</label>
+                  <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
+                  {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+                </div>
+                <div>
+                  <label htmlFor="confirmarSenha">Confirmar senha*</label>
+                  <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
+                  {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
+                </div>
+              </div>
+              <div>
+                <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
+                <div></div>
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
@@ -141,22 +164,8 @@ function Register() {
                   )}
                 </Dropzone>
               </div>
-              <div>
-                <label htmlFor="email">E-mail*</label>
-                <Field name='email' placeholder='Digite seu e-mail'/>
-                {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
-              </div>
-              <div>
-                <label htmlFor="senha">Senha*</label>
-                <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
-                {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
-              </div>
-              <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
-              <div>
-                <label htmlFor="confirmarSenha">Confirmar senha*</label>
-                <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
-                {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
-              </div>
+              
+              
               <RegisterButtonFormStyle disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</RegisterButtonFormStyle>
               <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
             </RegisterFormStyle>

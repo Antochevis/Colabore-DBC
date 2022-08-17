@@ -55,37 +55,54 @@ export const RegisterFormStyle = styled.div`
   margin-top: 20px;
   gap: 26px;
 
-  div:nth-child(-n + 6) {
+  div:nth-child(-n + 3) {
     display: flex;
-    flex-direction: column;
     width: 45vw;
     gap: 6px;
     height: 70px;
 
-    label {
+    > div:nth-child(-n + 2) {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        color: #9FA2B4;
+      }
+
+      input {
+        background: #FCFDFE;
+        border: 1px solid #F0F1F7;
+        border-radius: 8px;
+        height: 42px;
+        padding: 11px 16px;
+        color: #4B506D;
+        width: 100%;
+      }
+    }
+  }
+
+  div:nth-child(3) {
+    height: 30px
+  }
+
+  div:nth-child(4) {
+    display: flex;
+    flex-direction: column;
+    width: 45vw;
+    align-items: flex-start;
+    gap: 6px;
+
+    label, p {
       font-size: 12px;
       line-height: 15px;
       letter-spacing: 0.3px;
       text-transform: uppercase;
       color: #9FA2B4;
     }
-
-    input {
-      background: #FCFDFE;
-      border: 1px solid #F0F1F7;
-      border-radius: 8px;
-      height: 42px;
-      padding: 11px 16px;
-      color: #4B506D;
-      width: 100%;
-    };
-  }
-
-  div:nth-child(5){
-    display: flex;
-    flex-direction: column;
-    width: 45vw;
-    align-items: flex-start;
   }
 
   section {
@@ -158,7 +175,7 @@ export const RegisterTitle = styled.h1`
   font-size: 24px;
   line-height: 30px;
   letter-spacing: 0.3px;
-  color: #3751FF;
+  color: black;
   margin: 12px 0;
 `;
 
