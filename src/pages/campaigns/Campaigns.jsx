@@ -18,8 +18,8 @@ function Campaigns() {
 
   const setup = async () => {
     try {
-      const { data } = await apiColabore.get('usuario/listar')
-      setUser(data[0])
+      const { data } = await apiColabore.get('usuario/dadosUsuario')
+      setUser(data)
       setLoading(false)
     } catch (error) {
       console.log(error)
