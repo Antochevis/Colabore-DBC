@@ -1,8 +1,12 @@
 import { CardContentSm, Card } from './Card'
 import { Text, TextSm, colorHoverMenu } from '../../consts'
 import { Button } from '../button/Button'
+import { useNavigate } from 'react-router-dom'
 
 const CardDetail = () => {
+
+  const navigate = useNavigate()
+
   return (
     <Card maxWidth="100%" height="400px">
       <CardContentSm>
@@ -16,7 +20,7 @@ const CardDetail = () => {
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Apoiadores</TextSm>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>15</TextSm>
         </div>
-        <Button width="100%">Ver Contribuidores</Button>
+        <Button width="100%" onClick={() => navigate('/doadores-campanha/')} >Ver Contribuidores</Button>
         <Button width="100%">Contribuir</Button>
       </CardContentSm>
   </Card>
