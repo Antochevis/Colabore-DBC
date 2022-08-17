@@ -5,8 +5,8 @@ export const fontLg = 19;
 export const fontMd = 16;
 export const fontSm = 14;
 
-export const colorPrimary = '#3751FF';
-export const colorPrimaryDark = '#243cdb';
+export const colorPrimary = '#2A69BB';
+export const colorPrimaryDark = '#1d5399';
 export const colorSecondary = '#363740';
 export const colorHoverMenu = '#9FA2B4';
 export const redColor = '#F12B2C';

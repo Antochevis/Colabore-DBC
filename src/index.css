@@ -31,6 +31,11 @@ a {
   text-decoration: none;
 }
 
+button:hover {
+  cursor: pointer;
+  background: #215ba7;
+}
+
 button:disabled:hover {
   cursor: not-allowed;
   background:#3751FF;
