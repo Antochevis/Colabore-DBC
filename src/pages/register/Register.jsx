@@ -42,6 +42,10 @@ function Register() {
     senha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
       .max(16, 'Máximo de 16 caractéres')
+      .matches(/[a-z]/, 'A senha deve conter ao menos uma letra minúscula')
+      .matches(/[A-Z]/, 'A senha deve conter ao menos uma letra maiúscula')
+      .matches(/\d/, 'A senha deve conter ao menos um número')
+      .matches(/[$*&@#!_-]/, 'A senha deve conter ao menos um caractre especial')
       .required('Campo obrigatório!'),
     confirmarSenha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
