@@ -97,16 +97,15 @@ const FormComponent = () => {
               titulo:'',
               meta: '',
               descricao: '',
-              encerrarAutomaticamente: true,
+              encerrarAutomaticamente: false,
               dataLimite: '',
               foto: '',
               tags: '' 
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values, {resetForm}) => {
-              console.log('testando submit')
-              addCampaign(values, image)
-              resetForm()
+
+            onSubmit={() => {
+              console.log('testando')
             }}
           >
             {({errors, touched}) => (
@@ -119,7 +118,7 @@ const FormComponent = () => {
                   </div>
                   <div>
                     <label htmlFor="meta">Quantidade a ser arrecadada*</label>
-                    <Field type='meta' name='meta' placeholder='Digite a quantidade a ser arrecada'/>
+                    <Field name='meta' placeholder='Digite a quantidade a ser arrecada'/>
                     {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
                   </div>
                   <div>
@@ -138,12 +137,12 @@ const FormComponent = () => {
                   </div>
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
-                    <Field type='text' name='tags' placeholder='Digite as tags da campanha'/>
+                    <Field name='tags' placeholder='Digite as tags da campanha'/>
                     {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
-                    <Field type='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
+                    <Field name='descricao' placeholder='Digite a descrição da campanha'/>
                     {errors.descricao && touched.descricao ? (<Errors>{errors.descricao}</Errors>) : null}
                   </div>
                   <div>
