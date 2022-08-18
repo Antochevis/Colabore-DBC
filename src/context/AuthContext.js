@@ -12,18 +12,33 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userDatas, setUserDatas] = useState()
   const navigate = useNavigate();
+
+  const getUserDatas = async () => {
+    try {
+      const { data } = await apiColabore.get('usuario/dadosUsuario')
+      setUserDatas(data)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
       apiColabore.defaults.headers.common['Authorization'] = token
       setAuth(true)
+      getUserDatas()
     }
     setLoading(false)
-  }, []);
+  }, [auth]);
 
   const handleLogin = async (user) => {
+    console.log(user)
     try {
       const { data } = await apiColabore.post('/autenticacao/login', user);
       localStorage.setItem('token', data)
@@ -81,7 +96,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('token')
     apiColabore.defaults.headers.common['Authorization'] = undefined
     setAuth(false)
-    navigate('/')
+    window('/')
     toast.success('Tchau!')
   }
 
@@ -90,7 +105,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, auth }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, auth, userDatas }}>
       {children}
       <ToastContainer />
     </AuthContext.Provider>

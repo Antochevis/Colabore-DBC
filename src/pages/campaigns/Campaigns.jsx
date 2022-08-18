@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { apiColabore } from '../../services/api'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
@@ -10,37 +10,37 @@ import { Tittle } from '../../consts'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from 'react-router-dom'
 import { FilterMeta, UserCampaignFilter, ActiveTittle } from './Campaigns.styled'
+import { AuthContext } from '../../context/AuthContext'
 
 
 function Campaigns() {
-  const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [campanhas, setCampanhas] = useState()
   const navigate = useNavigate()
+  const {userDatas} = useContext(AuthContext)
 
   const setup = async () => {
     try {
-      const { data } = await apiColabore.get('usuario/dadosUsuario')
-      setUser(data)
+      const {data} = await apiColabore.get('/campanha/listarCampanhas?tipoFiltro=TODAS&minhasContribuicoes=false&minhasCampanhas=false')
+      setCampanhas(data)
       setLoading(false)
     } catch (error) {
-      console.log(error)
+      
     }
+    if(userDatas)
+      setLoading(false)
   }
 
   useEffect(()=>{
     setup()
-  },[])
-
-  function goToCampaignForm() {
-    navigate('/criar-campanha')
-  }
+  },[userDatas])
   
   if(loading) {
     return (<Loading />)
   } 
     return (
       <>
-        <Header userName={user.nome} userImg={user.foto}/>
+        <Header userName={userDatas.nome} userImg={userDatas.foto}/>
           <Section>
             <FilterMeta>
               <Button width="310px" padding="22px">Todas campanhas</Button>
@@ -53,46 +53,22 @@ function Campaigns() {
             </UserCampaignFilter>
             <ActiveTittle>
               <Tittle>Todas campanhas</Tittle>
-              <Button onClick={goToCampaignForm}>Criar campanha</Button>
+              <Button onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
 
             <ContainerCards>
-              <CardCampaign campaignTitle="Doação de roupas para sav..."
-              criador="Vitor Scheffer"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
-              <CardCampaign campaignTitle="Dinheiro pro Neymar Jr"
-              criador="João Andrey"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
-              <CardCampaign campaignTitle="Doação de roupas"
-              criador="Vitor Scheffer"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
-              <CardCampaign campaignTitle="Doação de roupas"
-              criador="João Andrey"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
-              <CardCampaign campaignTitle="Doação de roupas"
-              criador="Vitor Scheffer"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
-              <CardCampaign campaignTitle="Doação de roupas"
-              criador="João Andrey"
-              tag="Alimentos"
-              dataFinal="25/08/2022"
-              arrecadado="1500"
-              meta="2000"/>
+              {campanhas.map(campanha =>(
+                <CardCampaign campaignTitle={campanha.titulo}
+                criador="Vitor Scheffer"
+                tag={campanha.tags.map(tag => tag.nomeTag)}
+                dataFinal={campanha.dataLimite}
+                dataModificacao={campanha.ultimaAlteracao}
+                arrecadado={campanha.arrecadacao}
+                meta={campanha.meta}
+                statusMeta={campanha.statusMeta}
+                img={campanha.fotoCampanha}/>
+              )
+                )}
             </ContainerCards>  
           </Section>
         <Footer />
