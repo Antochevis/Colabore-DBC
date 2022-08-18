@@ -12,10 +12,7 @@ const Header = ({userName, userImg}) => {
   return (
     <HeaderContainer>
       <div>
-        <div>
-          <LogoHeader />
-          <h2>Colabore</h2>
-        </div>
+        <LogoHeader />
         <div>
           <span>{userName}</span>
           <img src={userImg ? userImg : noUserImg} alt="Foto de perfil do usuário." />

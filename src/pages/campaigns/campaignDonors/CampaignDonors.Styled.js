@@ -42,7 +42,7 @@ export const DonorsInfos = styled.div`
 
   > img {
     width: 70px;
-    border-radius: 100%;
+    clip-path: circle();
   }
 
   > div {

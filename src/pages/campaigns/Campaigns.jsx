@@ -27,8 +27,6 @@ function Campaigns() {
     }
   }
 
-  console.log(user)
-
   useEffect(()=>{
     setup()
   },[])

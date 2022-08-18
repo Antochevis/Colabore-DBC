@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { Card } from "../../components/card/Card"
-import CardCampaignDetail from "../../components/card/CardCampaignDetail"
-import Footer from "../../components/footer/Footer"
-import Header from "../../components/header/Header"
-import Loading from "../../components/loading/Loading"
-import { Section } from "../../components/section/Section"
-import { apiColabore } from "../../services/api"
-import { ContainerDetail } from '../../components/card/Card'
-import CardDetail from "../../components/card/CardDetail"
+import { Card } from "../../../components/card/Card"
+import CardCampaignDetail from "../../../components/card/CardCampaignDetail"
+import Footer from "../../../components/footer/Footer"
+import Header from "../../../components/header/Header"
+import Loading from "../../../components/loading/Loading"
+import { Section } from "../../../components/section/Section"
+import { apiColabore } from "../../../services/api"
+import { ContainerDetail } from '../../../components/card/Card'
+import CardDetail from "../../../components/card/CardDetail"
 
 
 function CampaignsDetail() {

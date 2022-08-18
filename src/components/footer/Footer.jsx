@@ -5,10 +5,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <div>
-        <div>
           <LogoHeader />
-          <h2>Colabore</h2>
-        </div>
         <div>
           <p>©2022 Colabore.</p>
           <p>Todos os direitos reservados.</p>

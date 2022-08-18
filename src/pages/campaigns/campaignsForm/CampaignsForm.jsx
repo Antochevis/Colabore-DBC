@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import Header from '../../components/header/Header'
-import Footer from '../../components/footer/Footer'
-import { apiColabore } from '../../services/api'
-import Loading from '../../components/loading/Loading'
-import { Section } from '../../components/section/Section'
-import FormComponent from '../../components/formComponent/FormComponent'
+import Header from '../../../components/header/Header'
+import Footer from '../../../components/footer/Footer'
+import { apiColabore } from '../../../services/api'
+import Loading from '../../../components/loading/Loading'
+import { Section } from '../../../components/section/Section'
+import FormComponent from '../../../components/formComponent/FormComponent'
 
 function CampaignsForm() {
   const [user, setUser] = useState()

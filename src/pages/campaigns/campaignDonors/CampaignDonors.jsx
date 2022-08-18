@@ -1,11 +1,11 @@
-import Footer from "../../components/footer/Footer"
-import Header from "../../components/header/Header"
-import Loading from "../../components/loading/Loading"
+import Footer from "../../../components/footer/Footer"
+import Header from "../../../components/header/Header"
+import Loading from "../../../components/loading/Loading"
 import { useEffect, useState } from "react"
-import { apiColabore } from "../../services/api"
-import { Section } from "../../components/section/Section"
+import { apiColabore } from "../../../services/api"
+import { Section } from "../../../components/section/Section"
 import { DonorsContainer, DonorsInfos, DonorsList, DonorsListTitle } from "./CampaignDonors.Styled"
-import { Button } from "../../components/button/Button"
+import { Button } from "../../../components/button/Button"
 import { useNavigate } from "react-router-dom"
 
 function CampaignDonors() {

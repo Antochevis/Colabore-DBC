@@ -17,6 +17,10 @@ export const FooterContainer = styled.header`
     align-items: center;
     gap: 1rem;
   }
+  && div:nth-child(1):hover {
+    cursor: pointer;
+    opacity: 0.95;
+  }
   && img {
     width: 44px;
     clip-path: circle();
