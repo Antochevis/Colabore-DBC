@@ -29,12 +29,12 @@ const Login = () => {
   }
 
   return (
-    <BackgroundPage>
-      <div>
+    <LoginContainer>
+      <BackgroundPage>
         <ImgLogin />
-      </div>
-      <LoginContainer>
-        <LogoAndText>
+      </BackgroundPage>
+      <div>
+      <LogoAndText>
           <Logo />
           <h2>Colabore</h2>
         </LogoAndText>
@@ -61,20 +61,15 @@ const Login = () => {
                 <Field type='password' name='senha' placeholder='Password'/>
                 {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
               </div>
-              <Button width="45vw" type="submit">Entrar</Button>
+              <Button width="35rem" type="submit">Entrar</Button>
             </FormStyle>
           </Form>
         )}
         </Formik>
-        <div>
           <Signup onClick={GoToRegister}>Não possuo cadastro</Signup>
-        </div>
-      </LoginContainer>
-    </BackgroundPage>
+      </div>
+    </LoginContainer>
   )
-
-
-
 }
 
 

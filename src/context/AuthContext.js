@@ -3,6 +3,7 @@ import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiColabore } from "../services/api";
 import { Toaster, toast } from "react-hot-toast"
+import Loading from "../components/loading/Loading";
 
 
 const AuthContext = createContext();
@@ -42,6 +43,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleSignUp = async (values, image) => {
+    setLoading(true)
     const userImage = new FormData()
     userImage.append('multipartFile', image[0])
     try {
@@ -52,9 +54,10 @@ const AuthProvider = ({ children }) => {
       try {
         await apiColabore.post('/autenticacao/cadastrarFoto', userImage, {headers: {'Content-Type': 'multipart/form-data'}})
         const { data } = await apiColabore.get('/usuario/dadosUsuario')
+        setLoading(false)
         setAuth(true)
         navigate(`/campanhas/${data.idUsuario}`)
-        toast.success('Logado com sucesso')
+        toast.success('Seja bem vindo!')
       } catch (error) {
         toast.error('Não foi possível adicionar a imagem.')
         console.log(error)
@@ -75,9 +78,7 @@ const AuthProvider = ({ children }) => {
   }
 
   if (loading) {
-    return (
-      <h1>Loading</h1>
-    )
+      return (<Loading />)
   }
 
   return (
