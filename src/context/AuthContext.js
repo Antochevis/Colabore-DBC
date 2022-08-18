@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiColabore } from "../services/api";
-import { Toaster, toast } from "react-hot-toast"
 import Loading from "../components/loading/Loading";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AuthContext = createContext();
@@ -31,7 +32,7 @@ const AuthProvider = ({ children }) => {
         const { data } = await apiColabore.get('/usuario/dadosUsuario')
         setAuth(true)
         navigate(`/campanhas/${data.idUsuario}`)
-        toast.success('Logado com sucesso')
+        toast.success('Seja bem vindo!')
       } catch(e) {
         console.log(e)
         toast.error('Deu erro')
@@ -54,7 +55,6 @@ const AuthProvider = ({ children }) => {
       if(image) {
         try {
           await apiColabore.post('/autenticacao/cadastrarFoto', userImage, {headers: {'Content-Type': 'multipart/form-data'}})
-          toast.success('Cadastrado realizado com sucesso!')
         } catch (error) {
           toast.error('Não foi possível adicionar a imagem.')
           console.log(error)
@@ -65,8 +65,8 @@ const AuthProvider = ({ children }) => {
         console.log(userData)
         setLoading(false)
         setAuth(true)
-        navigate(`/campanhas/${userData.idUsuario}`)
         toast.success('Seja bem vindo!')
+        navigate(`/campanhas/${userData.idUsuario}`)
       } catch (error) {
         toast.error('Ocooreu algum erro.')
         console.log(error)
@@ -92,7 +92,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, auth }}>
       {children}
-      <Toaster />
+      <ToastContainer />
     </AuthContext.Provider>
   )
 
