@@ -43,6 +43,7 @@ button:disabled:hover {
 }
 
 .password-strength-meter {
+  margin-top: 0.5rem;
   height: 2rem !important;
 }
 .password-strength-meter-progress {

@@ -1,31 +1,47 @@
 import styled from "styled-components";
 import { colorPrimary } from "../../consts";
 
-
-export const BackgroundRegister = styled.div`
-  background: linear-gradient(to bottom right, #2A69BB, #B43E94);
-  min-height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-
-  > div:last-child {
-    width: 50vw;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
 export const RegisterContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 50vw;
-  min-height: 100vh;
-  background: #FFFFFF;
-  border: 1px solid #DFE0EB;
+  height: 100vh;
+  @media (max-width: 1200px) {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
+  > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    padding: 0 1rem;
+    background: #ffffff;
+    @media(max-width: 1200px) {
+      width: 100vw;
+      padding: 0 1rem;
+    }
+  }
+    @media(max-width: 1200px) {
+      && form {
+        width: 100%;
+      }
+      && button {
+        width: 100%;
+      }
+    }
+`;
+
+export const BackgroundRegister = styled.div`
+  display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 50vw;
+  background: linear-gradient(to bottom right, #2A69BB, #B43E94);
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 export const LogoAndTextRegister = styled.div`
@@ -35,11 +51,11 @@ export const LogoAndTextRegister = styled.div`
   align-items: center;
   margin-top: 10px;
 
-  img {
+  && img {
     width: 70px
   }
 
-  h2 {
+  && h2 {
     color: #A4A6B3;
     opacity: 0.7;
     letter-spacing: 0.4px;
@@ -54,18 +70,43 @@ export const RegisterFormStyle = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  gap: 26px;
+  gap: 1.625rem;
 
-  div:nth-child(-n + 3) {
+  && > div:nth-child(1) {
     display: flex;
-    width: 45vw;
-    gap: 6px;
-    height: 70px;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    height: 5rem;
+    @media (max-width: 1200px) {
+    flex-direction: column;
+  }
+  }
+  && > div:nth-child(1) > div {
+    width: 100%;
+    height: 5rem;
+  }
+  && > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    height: 5rem;
+    @media (max-width: 1200px) {
+    flex-direction: column;
+    margin-top: 5rem;
+  }
+  }
+  && > div:nth-child(2) > div {
+    width: 100%;
+    height: 5rem;
+  }
+  && > div:nth-child(2) > div > div {
+    width: 100%;
+    height: 5rem;
+  }
 
     > div:nth-child(-n + 2) {
-      display: flex;
-      flex-direction: column;
-
       label {
         font-size: 12px;
         line-height: 15px;
@@ -84,18 +125,17 @@ export const RegisterFormStyle = styled.div`
         width: 100%;
       }
     }
-  }
 
   div:nth-child(3) {
-    height: 30px
-  }
-
-  div:nth-child(4) {
     display: flex;
     flex-direction: column;
-    width: 45vw;
-    align-items: flex-start;
+    width: 100%;
+    height: 6rem;
     gap: 6px;
+    margin-top: 2rem;
+    @media (max-width: 1200px) {
+    margin-top: 6rem;
+  }
 
     label, p {
       font-size: 12px;
@@ -106,26 +146,27 @@ export const RegisterFormStyle = styled.div`
     }
   }
 
-  section {
+  && section {
     background: #FCFDFE;
     border: 1px dashed black;
     height: 5rem;
     border-radius: 8px;
+    width: 100%;
   }
 
-  section:hover {
+  && section:hover {
     cursor: pointer;
     background: #f5f5f5fb;
   }
 
-  section > div {
+  && section > div {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100% !important;
   }
 
-  section img {
+  && section img {
     width: 4rem;
     clip-path: circle();
   }
@@ -149,7 +190,7 @@ export const Errors = styled.p`
 export const BackToLogin = styled.small`
   color: ${colorPrimary};
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-top: 1.625rem;
 
   &:hover {
     text-decoration: underline;

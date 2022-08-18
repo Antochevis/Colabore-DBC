@@ -8,7 +8,6 @@ export const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     width: 100vw;
-    padding: 0 1rem;
   }
 
   > h3 {
@@ -26,6 +25,7 @@ export const LoginContainer = styled.div`
     justify-content: center;
     width: 50vw;
     padding: 0 1rem;
+    background: #ffffff;
     @media(max-width: 1200px) {
       width: 100vw;
       padding: 0 1rem;
@@ -77,7 +77,7 @@ export const LogoAndText = styled.div`
 export const Signup = styled.small`
   color: ${colorPrimary};
   font-weight: 600;
-  margin-top: 0.625rem;
+  margin-top: 1.625rem;
   &:hover {
     text-decoration: underline;
     cursor: pointer;

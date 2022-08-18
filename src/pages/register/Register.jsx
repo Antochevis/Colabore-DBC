@@ -92,9 +92,9 @@ function Register() {
   }
 
   return (
-    <BackgroundRegister>
-      <RegisterContainer>
-        <LogoAndTextRegister>
+    <RegisterContainer>
+      <div>
+      <LogoAndTextRegister>
           <Logo />
           <h2>Colabore</h2>
           <RegisterTitle>Cadastrar um novo  Usuário</RegisterTitle>
@@ -136,19 +136,18 @@ function Register() {
               </div>
               <div>
                 <div>
-                  <label htmlFor="senha">Senha*</label>
-                  <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
-                  {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+                  <div>
+                    <label htmlFor="senha">Senha*</label>
+                    <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
+                    {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+                  </div>
+                  <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
                 </div>
                 <div>
                   <label htmlFor="confirmarSenha">Confirmar senha*</label>
                   <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
                   {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
                 </div>
-              </div>
-              <div>
-                <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
-                <div></div>
               </div>
               <div>
                 <label htmlFor="foto">Foto</label>
@@ -158,24 +157,22 @@ function Register() {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         { image ? <img src={URL.createObjectURL(image[0])} alt="" /> : <p>Arraste arquivos até aqui, ou clique para buscar.</p>}
-                        
                       </div>
-                      
                     </section>
                   )}
                 </Dropzone>
               </div>
               <Button width="45vw" disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</Button>
-              <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
             </RegisterFormStyle>
           </Form>
         )}
         </Formik>
-      </RegisterContainer>
-      <div>
-        <ImgLogin />
+        <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
       </div>
-    </BackgroundRegister>
+      <BackgroundRegister>
+          <ImgLogin />
+      </BackgroundRegister>
+    </RegisterContainer>
   )
 }
 
