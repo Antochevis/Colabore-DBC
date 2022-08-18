@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
+export const ContainerForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
 export const ContainerAddCampaign = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 947px;
-  background: #FFFFFF;
-  border: 1px solid #DFE0EB;
-  border-radius: 8px;
 
   > h2 {
     font-weight: 700;
@@ -18,11 +21,11 @@ export const ContainerAddCampaign = styled.div`
     letter-spacing: 0.4px;
     color: #000000;
     opacity: 0.7;
-    margin: 34px;
+    margin-bottom: 20px;
   }
 
   > div:last-child {
-    margin: 20px 0;
+    margin-top: 20px;
   }
 `
 
