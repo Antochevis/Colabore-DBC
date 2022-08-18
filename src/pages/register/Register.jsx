@@ -29,7 +29,8 @@ function Register() {
       .required('Campo obrigatório!'),
     email: yup.string()
       .email('Insira um email válido')
-      .matches(/^[a-z0-9.]+@dbccompany.com.br/, 'O email deve conter: @dbccompany.com.br')
+      .matches(/^[a-z0-9._-]+/, 'O email não pode conter letra maiúscula.')
+      .matches(/@dbccompany.com.br/, 'O email deve conter: @dbccompany.com.br')
       .required('Campo obrigatório!'),
     senha: yup.string()
       .min(8, 'Mínimo de 8 caractéres')
