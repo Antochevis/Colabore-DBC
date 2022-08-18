@@ -11,8 +11,6 @@ export const DonorsContainer = styled.div`
 export const DonorsList = styled.div`
   min-width: 420px;
   background: #FFFFFF;
-  border: 1px solid #DFE0EB;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
