@@ -45,27 +45,35 @@ const AuthProvider = ({ children }) => {
   const handleSignUp = async (values, image) => {
     setLoading(true)
     const userImage = new FormData()
-    userImage.append('multipartFile', image[0])
+    image && userImage.append('multipartFile', image[0])
     try {
       const {data} =  await apiColabore.post('/autenticacao/cadastrar', values)
       localStorage.setItem('token', data)
       apiColabore.defaults.headers.common['Authorization'] = data
-      
+
+      if(image) {
+        try {
+          await apiColabore.post('/autenticacao/cadastrarFoto', userImage, {headers: {'Content-Type': 'multipart/form-data'}})
+          toast.success('Cadastrado realizado com sucesso!')
+        } catch (error) {
+          toast.error('Não foi possível adicionar a imagem.')
+          console.log(error)
+        }
+      }
       try {
-        await apiColabore.post('/autenticacao/cadastrarFoto', userImage, {headers: {'Content-Type': 'multipart/form-data'}})
-        const { data } = await apiColabore.get('/usuario/dadosUsuario')
+        const { data: userData } = await apiColabore.get('/usuario/dadosUsuario')
+        console.log(userData)
         setLoading(false)
         setAuth(true)
-        navigate(`/campanhas/${data.idUsuario}`)
+        navigate(`/campanhas/${userData.idUsuario}`)
         toast.success('Seja bem vindo!')
       } catch (error) {
-        toast.error('Não foi possível adicionar a imagem.')
+        toast.error('Ocooreu algum erro.')
         console.log(error)
       }
-      toast.success('Cadastrado realizado com sucesso!')
     } catch (e) {
       console.log(e)
-      toast.error('Deu erro')
+      toast.error('Ocooreu algum erro.')
     }
   }
 
