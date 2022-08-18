@@ -27,13 +27,14 @@ const SignupSchema = yup.object().shape({
   .min(2, 'Mínimo de 2 caractéres')
   .max(200, 'Máximo de 200 caractéres')
   .required('Campo obrigatório!'),
-  tag: yup.string()
+  tags: yup.string()
   .required('Campo obrigatório!'),
-  /*foto: yup.string()
+  foto: yup.string()
   .required('Campo obrigatório!'),
-  */
-  concluirAutomaticamenteACampanha: yup.string()
-  .required('Escolha uma opção válida!')
+  encerrarAutomaticamente: yup.string()
+  .required('Escolha uma opção válida!'),
+  dataLimite: yup.string()
+  .required('Escolha uma data válida!')
 })
 
 const FormComponent = () => {
@@ -45,10 +46,23 @@ const FormComponent = () => {
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
 
-    try {
-      await apiColabore.post('/campanha/cadastrar', values)
 
-      if(image) {
+    try {
+      const {data: tagValues} = await apiColabore.post('/tag', values.tags)
+
+      const newValues = {
+        titulo: values.titulo,
+        meta: OnlyNumbers(values.meta),
+        descricao: values.descricao,
+        encerrarAutomaticamente: values.encerrarAutomaticamente,
+        dataLimite: values.dataLimite.toISOString(),
+        tags: [ {
+          nomeTag: tagValues.nomeTag,
+          idTag: tagValues.idTag
+        } ]
+
+        }
+
         try {
           await apiColabore.post('/campanha/cadastrarFoto', campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
         } catch (error) {
@@ -56,10 +70,16 @@ const FormComponent = () => {
           console.log(error)
         }
 
-        redirectCampaign()
+        try {
+          await apiColabore.post('/campanha/cadastrar', newValues)
+        } catch (error) {
+          toast.error('Não foi possível adicionar a imagem.')
+          console.log(error)
+        }
 
-        toast('Campanha cadastrada com sucesso')
-      }
+      redirectCampaign()
+      toast('Campanha cadastrada com sucesso')
+
     } catch (e) {
       console.log(e)
       toast.error('Não foi possível cadastrar a campanha.')
@@ -83,19 +103,9 @@ const FormComponent = () => {
               tags: '' 
             }}
             validationSchema={SignupSchema}
-
             onSubmit={(values, {resetForm}) => {
-              const newValues = {
-                titulo: values.titulo,
-                meta: OnlyNumbers(values.meta),
-                descricao: values.descricao,
-                encerrarAutomaticamente: values.encerrarAutomaticamente,
-                dataLimite: values.dataLimite,
-                tags: [ {
-                  nomeTag: values.tags
-                } ]
-              }
-              addCampaign(newValues, image)
+              console.log('testando submit')
+              addCampaign(values, image)
               resetForm()
             }}
           >
@@ -113,23 +123,23 @@ const FormComponent = () => {
                     {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
                   </div>
                   <div>
-                    <label htmlFor="concluirAutomaticamenteACampanha">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
-                    <Field component='select' name='concluirAutomaticamenteACampanha' >
+                    <label htmlFor="encerrarAutomaticamente">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
+                    <Field component='select' name='encerrarAutomaticamente' >
                       <option value={null}>Escolha uma opção</option>
-                      <option value='sim'>Sim</option>
-                      <option value='nao'>Não</option>  
+                      <option value={true}>Sim</option>
+                      <option value={false}>Não</option>  
                     </Field>
-                    {errors.concluirAutomaticamenteACampanha && touched.concluirAutomaticamenteACampanha ? (<Errors>{errors.concluirAutomaticamenteACampanha}</Errors>) : null}
+                    {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
                   </div>
                   <div>
-                    <label htmlFor="dataLimite">Digite as tags que mais se encaixam no projeto?*</label>
+                    <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
                     <Field type='date' name='dataLimite' placeholder='Selecione a data limite para o encerramento da campanha'/>
                     {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
                   </div>
                   <div>
-                    <label htmlFor="tag">Digite as tags que mais se encaixam no projeto?*</label>
-                    <Field type='tag' name='tag' placeholder='Digite as tags da campanha'/>
-                    {errors.tag && touched.tag ? (<Errors>{errors.tag}</Errors>) : null}
+                    <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
+                    <Field type='text' name='tags' placeholder='Digite as tags da campanha'/>
+                    {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
@@ -149,7 +159,7 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type="submit" width="883px">Cadastrar campanha</Button>
+                  <Button type='submit' width="883px" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>Cadastrar campanha</Button>
                 </RegisterCampaign>
               </Form>
             )}
