@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
-import { Card } from "../../../components/card/Card"
+import { useEffect, useState, useContext } from "react"
+import { useParams } from 'react-router-dom'
+import { AuthContext } from "../../../context/AuthContext"
 import CardCampaignDetail from "../../../components/card/CardCampaignDetail"
 import Footer from "../../../components/footer/Footer"
 import Header from "../../../components/header/Header"
@@ -11,18 +12,23 @@ import CardDetail from "../../../components/card/CardDetail"
 
 
 function CampaignsDetail() {
-  const [user, setUser] = useState()
+  const [campanha, setCampanha] = useState()
   const [loading, setLoading] = useState(true)
+  const {idCampanha} = useParams()
+  const {userDatas} = useContext(AuthContext)
 
   const setup = async () => {
     try {
-      const { data } = await apiColabore.get('usuario/dadosUsuario')
-      setUser(data)
+      const {data} = await apiColabore.get(`campanha/campanhaPeloId?idCampanha=${idCampanha}`)
+      setCampanha(data)
       setLoading(false)
     } catch (error) {
-      console.log(error)
     }
+    if(userDatas)
+      setLoading(false)
   }
+
+  console.log(campanha)
 
   useEffect(()=>{
     setup()
@@ -33,17 +39,13 @@ function CampaignsDetail() {
   } 
   return (
     <>
-      <Header userName={user.nome} userImg={user.foto}/>
+      <Header userName={userDatas.nome} userImg={userDatas.foto}/>
         <Section>
           <ContainerDetail>
             <CardCampaignDetail
-            campaignTitle="Doação de roupas"
-            criador="Vitor Scheffer"
-            tag="Alimentos"
-            dataFinal="25/08/2022"
-            descricao="descrição"
+            campanha={campanha}
             />
-            <CardDetail />
+            <CardDetail campanha={campanha}/>
           </ContainerDetail>
         </Section>
       <Footer />

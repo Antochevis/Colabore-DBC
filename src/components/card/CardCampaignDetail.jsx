@@ -3,33 +3,34 @@ import capa from '../../imgs/capa.png'
 import { CardContent } from './CardCampaignDetail.styled'
 import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
-const CardCampaignDetail = ({img, campaignTitle, criador, tag, dataFinal, descricao}) => {
+const CardCampaignDetail = ({campanha}) => {
 
   return (
     <Card maxWidth="100%" minHeight="100%">
       <CardContent>
-        <img src={capa} />
+        <img src={campanha.fotoCampanha} />
         <div>
           <div>
-            <Subtitle color={colorTittlePage}>{campaignTitle}</Subtitle>
-            <TextSm color={colorHoverMenu} fontWeight="400">Há 5 minutos</TextSm>
+            <Subtitle color={colorTittlePage}>{campanha.titulo}</Subtitle>
+            <TextSm color={colorHoverMenu} fontWeight="400">{moment(campanha.ultimaAlteracao).startOf('hour').fromNow()}</TextSm>
           </div>
         </div>
         <div>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  {criador}
+            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  Vitor Scheffer
             </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {tag}
+            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  Olá
             </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {dataFinal}
+            <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {moment(campanha.dataLimite).format('LL')}
             </TextSm>
         </div>
         <div>
           <p>
-            {descricao} 
+            {campanha.descricao} 
           </p>
         </div>
       </CardContent>

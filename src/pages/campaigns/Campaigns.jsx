@@ -55,20 +55,12 @@ function Campaigns() {
               <Tittle>Todas campanhas</Tittle>
               <Button onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
-
             <ContainerCards>
               {campanhas.map(campanha =>(
-                <CardCampaign campaignTitle={campanha.titulo}
-                criador="Vitor Scheffer"
-                tag={campanha.tags.map(tag => tag.nomeTag)}
-                dataFinal={campanha.dataLimite}
-                dataModificacao={campanha.ultimaAlteracao}
-                arrecadado={campanha.arrecadacao}
-                meta={campanha.meta}
-                statusMeta={campanha.statusMeta}
-                img={campanha.fotoCampanha}/>
+                <CardCampaign key={campanha.idCampanha}
+                campanha={campanha}/>
               )
-                )}
+              )}
             </ContainerCards>  
           </Section>
         <Footer />

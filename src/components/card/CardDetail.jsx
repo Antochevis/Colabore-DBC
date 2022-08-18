@@ -3,7 +3,8 @@ import { Text, TextSm, colorHoverMenu } from '../../consts'
 import { Button } from '../button/Button'
 import { useNavigate } from 'react-router-dom'
 
-const CardDetail = () => {
+const CardDetail = ({campanha}) => {
+  console.log(campanha)
 
   const navigate = useNavigate()
 
@@ -11,14 +12,14 @@ const CardDetail = () => {
     <Card maxWidth="100%" height="400px">
       <CardContentSm>
         <Text fontSize="1.25rem">Arrecadado</Text>
-        <h3>R$ 1500</h3>
+        <h3>R$ {campanha.arrecadacao}</h3>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Meta</TextSm>
-          <TextSm fontSize="1.25rem" color={colorHoverMenu}>R$ 1500</TextSm>
+          <TextSm fontSize="1.25rem" color={colorHoverMenu}>R$ {campanha.meta}</TextSm>
         </div>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Apoiadores</TextSm>
-          <TextSm fontSize="1.25rem" color={colorHoverMenu}>15</TextSm>
+          <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.doacoes !== null ? campanha.doacoes.length : 0}</TextSm>
         </div>
         <Button width="100%" onClick={() => navigate('/doadores-campanha/')} >Ver Contribuidores</Button>
         <Button width="100%">Contribuir</Button>

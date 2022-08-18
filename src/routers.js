@@ -29,7 +29,7 @@ const Routers = () => {
             <Route element={<PrivateRoute />}>
               <Route path='campanhas/:idUsuario' element={<Campaigns />} />
               <Route path='criar-campanha/' element={<CampaignsForm />} />
-              <Route path='detalhe-campanha/' element={<CampaignsDetail />} />
+              <Route path='detalhe-campanha/:idCampanha' element={<CampaignsDetail />} />
               <Route path='doadores-campanha/' element={<CampaignDonors />} />
             </Route>
             <Route path='*' element={<NotFound />}></Route>
