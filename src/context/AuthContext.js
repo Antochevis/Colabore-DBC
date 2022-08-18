@@ -36,7 +36,6 @@ const AuthProvider = ({ children }) => {
   }, [auth]);
 
   const handleLogin = async (user) => {
-    console.log(user)
     try {
       const { data } = await apiColabore.post('/autenticacao/login', user);
       localStorage.setItem('token', data)
@@ -75,7 +74,6 @@ const AuthProvider = ({ children }) => {
       }
       try {
         const { data: userData } = await apiColabore.get('/usuario/dadosUsuario')
-        console.log(userData)
         setLoading(false)
         setAuth(true)
         toast.success('Seja bem vindo!')

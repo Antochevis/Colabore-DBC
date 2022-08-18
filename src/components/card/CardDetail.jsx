@@ -4,7 +4,6 @@ import { Button } from '../button/Button'
 import { useNavigate } from 'react-router-dom'
 
 const CardDetail = ({campanha}) => {
-  console.log(campanha)
 
   const navigate = useNavigate()
 
@@ -19,9 +18,9 @@ const CardDetail = ({campanha}) => {
         </div>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Apoiadores</TextSm>
-          <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.doacoes !== null ? campanha.doacoes.length : 0}</TextSm>
+          <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.doacoes ? campanha.doacoes.length : 0}</TextSm>
         </div>
-        <Button width="100%" onClick={() => navigate('/doadores-campanha/')} >Ver Contribuidores</Button>
+        <Button width="100%" onClick={() => navigate('/doadores-campanha')} >Ver Contribuidores</Button>
         <Button width="100%">Contribuir</Button>
       </CardContentSm>
   </Card>

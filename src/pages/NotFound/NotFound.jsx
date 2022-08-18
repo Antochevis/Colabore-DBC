@@ -7,7 +7,8 @@ const NotFound = () => {
     <PageNotFound>
       <TitleNotFound>Página não encontrada</TitleNotFound>
       <img src={astronaut} alt="" />
-      <Link to="/"><TitleNotFound>Back to home</TitleNotFound></Link>
+      <button><TitleNotFound onClick={() => window.history.go(-1)}>Back to home</TitleNotFound></button>
+      
     </PageNotFound>
   )
 }

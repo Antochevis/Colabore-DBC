@@ -23,7 +23,6 @@ function Campaigns() {
     try {
       const {data} = await apiColabore.get('/campanha/listarCampanhas?tipoFiltro=TODAS&minhasContribuicoes=false&minhasCampanhas=false')
       setCampanhas(data)
-      setLoading(false)
     } catch (error) {
       
     }
@@ -34,7 +33,7 @@ function Campaigns() {
   useEffect(()=>{
     setup()
   },[userDatas])
-  
+
   if(loading) {
     return (<Loading />)
   } 

@@ -22,7 +22,7 @@ const CardCampaignDetail = ({campanha}) => {
             <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  Vitor Scheffer
             </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  Olá
+            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {campanha.tags.map(tag => tag.nomeTag)}
             </TextSm>
           <TextSm>
             <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {moment(campanha.dataLimite).format('LL')}
