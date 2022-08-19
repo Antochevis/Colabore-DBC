@@ -103,7 +103,7 @@ const FormComponent = () => {
 
   return (
     <ContainerForm>
-      <Card padding="2rem">
+      <Card padding="2rem" >
         <ContainerAddCampaign>
           <h2>Cadastrar nova campanha</h2>
           <Formik
@@ -125,37 +125,41 @@ const FormComponent = () => {
               <Form>
                 <RegisterCampaign>
                   <div>
-                    <label htmlFor="titulo">Título da campanha*</label>
-                    <Field name='titulo' placeholder='Digite o título da campanha' />
-                    {errors.titulo && touched.titulo ? (<Errors>{errors.titulo}</Errors>) : null}
+                    <div>
+                      <label htmlFor="titulo">Título da campanha*</label>
+                      <Field id='titulo' name='titulo' placeholder='Digite o título da campanha' />
+                      {errors.titulo && touched.titulo ? (<Errors>{errors.titulo}</Errors>) : null}
+                    </div>
+                    <div>
+                      <label htmlFor="meta">Quantidade a ser arrecadada*</label>
+                      <Field id='meta' name='meta' placeholder='Digite a quantidade a ser arrecada'/>
+                      {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
+                    </div>
                   </div>
                   <div>
-                    <label htmlFor="meta">Quantidade a ser arrecadada*</label>
-                    <Field name='meta' placeholder='Digite a quantidade a ser arrecada'/>
-                    {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
-                  </div>
-                  <div>
-                    <label htmlFor="encerrarAutomaticamente">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
-                    <Field component='select' name='encerrarAutomaticamente' >
-                      <option value={null}>Escolha uma opção</option>
-                      <option value={true}>Sim</option>
-                      <option value={false}>Não</option>  
-                    </Field>
-                    {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
-                  </div>
-                  <div>
-                    <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
-                    <Field type='date' name='dataLimite' placeholder='Selecione a data limite para o encerramento da campanha'/>
-                    {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
+                    <div>
+                      <label htmlFor="encerrarAutomaticamente">Ao atingir a meta, deseja concluir automaticamente a campanha?*</label>
+                      <Field id='select' component='select' name='encerrarAutomaticamente' >
+                        <option value={null}>Escolha uma opção</option>
+                        <option value={true}>Sim</option>
+                        <option value={false}>Não</option>  
+                      </Field>
+                      {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
+                    </div>
+                    <div>
+                      <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
+                      <Field type='date' id='dataLimite' name='dataLimite' placeholder='Selecione a data limite para o encerramento da campanha'/>
+                      {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
+                    </div>
                   </div>
                   <div>
                     <label htmlFor="nomeTag">Digite as tags que mais se encaixam no projeto*</label>
-                    <Field name='nomeTag' placeholder='Digite as tags da campanha'/>
+                    <Field id='nomeTag' name='nomeTag' placeholder='Digite as tags da campanha'/>
                     {errors.nomeTag && touched.nomeTag ? (<Errors>{errors.nomeTag}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
-                    <Field name='descricao' placeholder='Digite a descrição da campanha'/>
+                    <Field as='textarea' id='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
                     {errors.descricao && touched.descricao ? (<Errors>{errors.descricao}</Errors>) : null}
                   </div>
                   <div>
@@ -171,7 +175,7 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="883px" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>Cadastrar campanha</Button>
+                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>Cadastrar campanha</Button>
                 </RegisterCampaign>
               </Form>
             )}
