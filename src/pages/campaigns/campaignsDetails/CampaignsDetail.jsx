@@ -27,8 +27,6 @@ function CampaignsDetail() {
       setLoading(false)
   }
 
-  console.log(campanha)
-
   useEffect(()=>{
     setup()
   },[userDatas, campanha])
