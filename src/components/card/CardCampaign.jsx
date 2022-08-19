@@ -1,6 +1,6 @@
 import { Card } from './Card'
 import capa from '../../imgs/capa.png'
-import { CardContent } from './CardCampaign.styled'
+import { CardContent, FinishedCampaign } from './CardCampaign.styled'
 import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
@@ -12,6 +12,7 @@ const CardCampaign = ({campanha}) => {
   return (
     <Card maxWidth="100%" height="350px">
       <CardContent>
+        {campanha.statusMeta === true && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
         <img src={campanha.fotoCampanha} />
         <div>
           <div>

@@ -2,7 +2,27 @@ import styled from "styled-components";
 import { colorPrimary, colorPrimaryDark } from '../../consts' 
 
 export const CardContent = styled.div`
+  position: relative;
+  overflow: hidden;
   width: 100%;
+  && > div.finished {
+    background: #012201da;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  && > div.finished > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000bc;
+    width: 100%;
+    height: 4rem;
+    color: white
+  }
   && img {
     width: 100%;
     height: 8rem;
@@ -53,4 +73,7 @@ export const CardContent = styled.div`
     height: 2px;
     background: linear-gradient(to bottom right, #2A69BB 0%, #B43E94 100%);
   }
+`;
+
+export const FinishedCampaign = styled.div`
 `;

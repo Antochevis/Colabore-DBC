@@ -4,7 +4,6 @@ import { redColor } from '../../consts'
 
 const Modal = ({closeModal, confirmModal}) => {
   return (
-    
       <div className="modalBackground">
       <ModalContent>
         <div className="title">
@@ -19,7 +18,6 @@ const Modal = ({closeModal, confirmModal}) => {
         </div>
         </ModalContent>
       </div>
-    
   )
 }
 export default Modal
