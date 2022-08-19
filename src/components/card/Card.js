@@ -49,7 +49,7 @@ export const CardContentSm = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
+  min-height: 450px;
   padding: 2.25rem;
   && h3 {
     font-size: 3.125rem;

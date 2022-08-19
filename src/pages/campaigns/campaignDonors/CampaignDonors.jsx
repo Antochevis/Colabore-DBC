@@ -36,8 +36,6 @@ function CampaignDonors() {
     return (<Loading />)
   } 
 
-  console.log(doacoes)
-
   return (
     <>
       <Header userName={userDatas.nome} userImg={userDatas.foto}/>

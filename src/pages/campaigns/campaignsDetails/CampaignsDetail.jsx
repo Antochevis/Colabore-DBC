@@ -21,16 +21,15 @@ function CampaignsDetail() {
     try {
       const {data} = await apiColabore.get(`campanha/campanhaPeloId?idCampanha=${idCampanha}`)
       setCampanha(data)
-      setLoading(false)
     } catch (error) {
     }
-    if(userDatas)
+    if(userDatas && campanha)
       setLoading(false)
   }
 
   useEffect(()=>{
     setup()
-  },[])
+  },[userDatas, campanha])
 
   if(loading) {
     return (<Loading />)
