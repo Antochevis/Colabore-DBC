@@ -39,7 +39,7 @@ export const HeaderContainer = styled.header`
   }
 
   && span {
-    @media (max-width: 600px) {
+    @media (max-width: 770px) {
       display: none;
     }
   }

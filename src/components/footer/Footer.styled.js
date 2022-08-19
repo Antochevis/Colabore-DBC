@@ -25,4 +25,9 @@ export const FooterContainer = styled.header`
     width: 44px;
     clip-path: circle();
   }
-  `;
+  && p:last-child {
+    @media (max-width: 770px) {
+      display: none;
+    }
+  }
+`;
