@@ -37,4 +37,10 @@ export const HeaderContainer = styled.header`
     background: #0000001a;
     cursor: pointer;
   }
+
+  && span {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 `; 
