@@ -23,13 +23,15 @@ function CampaignsDetail() {
       setCampanha(data)
     } catch (error) {
     }
-    if(userDatas && campanha)
+    if(userDatas)
       setLoading(false)
   }
 
+  console.log(campanha)
+
   useEffect(()=>{
     setup()
-  },[userDatas, campanha])
+  },[userDatas])
 
   if(loading) {
     return (<Loading />)
