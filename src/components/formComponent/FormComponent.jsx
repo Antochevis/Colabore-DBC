@@ -33,7 +33,7 @@ const SignupSchema = yup.object().shape({
   .required('Campo obrigatório!'),
   encerrarAutomaticamente: yup.string()
   .required('Escolha uma opção válida!'),
-  dataLimite: yup.string()
+  dataLimite: yup.date()
   .required('Escolha uma data válida!')
 })
 
@@ -41,41 +41,54 @@ const FormComponent = () => {
   const {redirectCampaign} = useContext(CampaignContext)
   const [image, setImage] = useState();
 
+
   const addCampaign = async (values, image) => {
 
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
-
-
+    
     try {
-      const {data: tagValues} = await apiColabore.post('/tag', values.tags)
+      const valueTag = {
+        nomeTag: values.nomeTag
+      }
+
+      console.log(valueTag)
+
+      const newDate = new Date (values.dataLimite)
+
+      const isoDate = newDate.toISOString()
+
+      const {data: tagValues} = await apiColabore.post('/tag', valueTag)
 
       const newValues = {
         titulo: values.titulo,
         meta: OnlyNumbers(values.meta),
         descricao: values.descricao,
         encerrarAutomaticamente: values.encerrarAutomaticamente,
-        dataLimite: values.dataLimite.toISOString(),
+        dataLimite: isoDate,
         tags: [ {
           nomeTag: tagValues.nomeTag,
           idTag: tagValues.idTag
         } ]
+      }
 
-        }
+        
+      try {
+        const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
+        const idCampanha = campanhaValues.idCampanha
 
         try {
-          await apiColabore.post('/campanha/cadastrarFoto', campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+          await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
         } catch (error) {
           toast.error('Não foi possível adicionar a imagem.')
           console.log(error)
         }
-
-        try {
-          await apiColabore.post('/campanha/cadastrar', newValues)
+          
         } catch (error) {
           toast.error('Não foi possível adicionar a imagem.')
           console.log(error)
         }
+        
 
       redirectCampaign()
       toast('Campanha cadastrada com sucesso')
@@ -84,6 +97,7 @@ const FormComponent = () => {
       console.log(e)
       toast.error('Não foi possível cadastrar a campanha.')
     }
+    
   }
 
 
@@ -97,15 +111,14 @@ const FormComponent = () => {
               titulo:'',
               meta: '',
               descricao: '',
-              encerrarAutomaticamente: false,
+              encerrarAutomaticamente: '',
               dataLimite: '',
               foto: '',
-              tags: '' 
+              nomeTag: '' 
             }}
-            validationSchema={SignupSchema}
 
-            onSubmit={() => {
-              console.log('testando')
+            onSubmit={(values) => {
+              addCampaign(values, image)
             }}
           >
             {({errors, touched}) => (
@@ -136,9 +149,9 @@ const FormComponent = () => {
                     {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
                   </div>
                   <div>
-                    <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
-                    <Field name='tags' placeholder='Digite as tags da campanha'/>
-                    {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
+                    <label htmlFor="nomeTag">Digite as tags que mais se encaixam no projeto*</label>
+                    <Field name='nomeTag' placeholder='Digite as tags da campanha'/>
+                    {errors.nomeTag && touched.nomeTag ? (<Errors>{errors.nomeTag}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
