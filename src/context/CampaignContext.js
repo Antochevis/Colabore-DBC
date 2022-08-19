@@ -8,6 +8,8 @@ import { Toaster, toast } from "react-hot-toast"
 const CampaignContext = createContext();
 
 const CampaignProvider = ({ children }) => {
+  const [loading, setLoading] = useState(false)
+  const [campanhaById, setCampanhaById] = useState()
   const navigate = useNavigate();
 
   const redirectCampaign = async () => {
@@ -20,8 +22,17 @@ const CampaignProvider = ({ children }) => {
     }
   }
 
+  const getCampanhaById = async (idCampanha) => {
+    try {
+      const {data} = await apiColabore.get(`campanha/campanhaPeloId?idCampanha=${idCampanha}`)
+      console.log(data)
+      setCampanhaById(data)
+    } catch (error) {
+    }
+  }
+
   return (
-    <CampaignContext.Provider value={{ redirectCampaign }}>
+    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, loading, setLoading }}>
       {children}
       <Toaster />
     </CampaignContext.Provider>

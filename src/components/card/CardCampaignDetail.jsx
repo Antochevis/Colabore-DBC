@@ -19,7 +19,7 @@ const CardCampaignDetail = ({campanha}) => {
         </div>
         <div>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  Vitor Scheffer
+            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  {campanha.nome}
             </TextSm>
           <TextSm>
             <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {campanha.tags.map(tag => tag.nomeTag)}

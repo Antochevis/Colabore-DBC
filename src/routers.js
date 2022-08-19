@@ -30,7 +30,7 @@ const Routers = () => {
               <Route path='campanhas/:idUsuario' element={<Campaigns />} />
               <Route path='criar-campanha/' element={<CampaignsForm />} />
               <Route path='detalhe-campanha/:idCampanha' element={<CampaignsDetail />} />
-              <Route path='doadores-campanha/' element={<CampaignDonors />} />
+              <Route path='doadores-campanha/:idCampanha' element={<CampaignDonors />} />
             </Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>
