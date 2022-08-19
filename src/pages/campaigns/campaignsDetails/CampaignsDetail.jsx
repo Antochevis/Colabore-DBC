@@ -31,7 +31,7 @@ function CampaignsDetail() {
 
   useEffect(()=>{
     setup()
-  },[userDatas])
+  },[userDatas, campanha])
 
   if(loading) {
     return (<Loading />)

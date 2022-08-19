@@ -6,8 +6,8 @@ export const ModalContent = styled.div`
   align-items: center;
   gap: 35px;
   padding: 35px;
-  width: 550px;
-  height: 400px;
+  width: 550px !important;
+  height: 400px !important;
   background-color: white;
   color: black;
   border-radius: 12px;

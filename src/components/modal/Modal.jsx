@@ -11,11 +11,11 @@ const Modal = ({closeModal, confirmModal}) => {
           <h1>Você tem certeza?</h1>
         </div>
         <div className="body">
-          <p>Você tem certeza que deseja realizar essa contribuição?</p>
+          <p>Não será possível reverter essa contribuição.</p>
         </div>
         <div className="btnsModal">
-          <Button onClick={() => closeModal(false)} backgroundColor={redColor} border={`1px solid ${redColor}`}>Cancelar</Button>
-          <Button onClick={() => confirmModal()} >Confirmar</Button>
+          <Button onClick={() => closeModal(false)} background={redColor} border={`1px solid ${redColor}`}>Cancelar</Button>
+          <Button type="submit" >Confirmar</Button>
         </div>
         </ModalContent>
       </div>

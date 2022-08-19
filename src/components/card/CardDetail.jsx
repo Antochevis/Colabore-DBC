@@ -13,6 +13,7 @@ import Modal from '../modal/Modal'
 const CardDetail = ({campanha}) => {
   const [activeDonate, setActiveDonate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
+  const [disabledButton, setDisabledButton] = useState(true)
   const navigate = useNavigate()
 
   const donationSchema = Yup.object().shape({
@@ -22,6 +23,7 @@ const CardDetail = ({campanha}) => {
   const handleDonation = async(values) => {
     try {
       await apiColabore.post(`/doador/${campanha.idCampanha}`, values)
+      setOpenModal(false)
     } catch (error) {
       console.log(error)
     }
@@ -49,8 +51,7 @@ const CardDetail = ({campanha}) => {
             }}
             validationSchema={donationSchema}
             onSubmit={(values, {resetForm}) => {
-              setOpenModal(true)
-              {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDonation(values)}/>}
+              handleDonation(values)
               resetForm()
             }}
           >
@@ -59,11 +60,12 @@ const CardDetail = ({campanha}) => {
                 <FormStyle style={{display: activeDonate ? 'flex' : 'none'}}>
                   <label htmlFor=""><Text>Digite o valor da contribuição:</Text></label>
                   <div>
-                    <Field type="text" name="valor" placeholder="R$" />
-                    <Button disabled={errors.valor} type="submit" width="100px">Enviar</Button>
+                    <Field type="text" name="valor" placeholder="R$" onKeyUp={() => {setDisabledButton(false)}} />
+                    <Button disabled={disabledButton || errors.valor}  type="button" onClick={() => setOpenModal(true)} width="100px">Enviar</Button>
                   </div>
-                  {errors.valor && touched.valor ? (<Errors>{errors.valor}</Errors>) : null}
+                  {errors.valor && touched.valor ? (<Errors>{errors.valor}</Errors>) : null}   
                 </FormStyle>
+                {openModal && <Modal closeModal={setOpenModal}/>}
               </Form>
             )}
       </Formik>
