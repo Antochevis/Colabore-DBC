@@ -13,6 +13,7 @@ export const CardContent = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
+    padding: 0 !important;
   }
   && > div.finished > div {
     display: flex;

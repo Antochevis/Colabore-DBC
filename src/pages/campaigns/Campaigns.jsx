@@ -19,9 +19,9 @@ function Campaigns() {
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
 
-  const setup = async () => {
+  const setup = async (filtroMeta) => {
     try {
-      const {data} = await apiColabore.get('/campanha/listarCampanhas?tipoFiltro=TODAS&minhasContribuicoes=false&minhasCampanhas=false')
+      const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=false&minhasCampanhas=false`)
       setCampanhas(data)
     } catch (error) {
       
@@ -42,9 +42,9 @@ function Campaigns() {
         <Header userName={userDatas.nome} userImg={userDatas.foto}/>
           <Section>
             <FilterMeta>
-              <Button width="310px" padding="22px">Todas campanhas</Button>
-              <Button width="310px" padding="22px">Meta Atingida</Button>
-              <Button width="310px" padding="22px">Meta Não Atingida</Button>
+              <Button width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
+              <Button width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
+              <Button width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
             </FilterMeta>
             <UserCampaignFilter>
               <button>Minhas Campanhas</button>
