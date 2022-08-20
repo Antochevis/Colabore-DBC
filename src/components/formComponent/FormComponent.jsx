@@ -227,7 +227,7 @@ const FormComponent = () => {
             )}
           </Formik>
           <div>
-            <Button onClick={redirectCampaign}>Voltar</Button>
+            <Button onClick={() => window.history.go(-1)}>Voltar</Button>
           </div>
         </ContainerAddCampaign>
       </Card>
