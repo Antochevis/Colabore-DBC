@@ -4,13 +4,14 @@ import { Errors } from "../../pages/register/Register.Styled";
 import { Button } from "../button/Button";
 import { ContainerAddCampaign, ContainerForm, RegisterCampaign } from "./FormComponent.Styled";
 import { Card } from "../card/Card"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CampaignContext } from "../../context/CampaignContext";
 import Dropzone from 'react-dropzone'
 import { apiColabore } from "../../services/api";
 import Loading from "../loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
 import { OnlyNumbers } from "../../utils/Formatting";
+import { useParams } from "react-router-dom";
 
 const CampaignSchema = yup.object().shape({
   titulo: yup.string().required('Campo obrigatório!'),
@@ -24,7 +25,26 @@ const CampaignSchema = yup.object().shape({
 const FormComponent = () => {
   const {redirectCampaign} = useContext(CampaignContext)
   const [image, setImage] = useState();
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([]);
+  const { idCampanha } = useParams();
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [campanha, setCampanha] = useState();
+
+  const setup = async () => {
+    if (idCampanha) {
+      setIsUpdate(true)
+      try {
+        const { data } = await apiColabore.get(`/campanha/campanhaPeloId?idCampanha=${idCampanha}`)
+        setCampanha(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+  useEffect(() => {
+    setup()
+  }, [])
 
   function handleKeyDown(e) {
     if(e.key !== 'Enter') return
@@ -39,55 +59,86 @@ const FormComponent = () => {
   }
 
 
-  const addCampaign = async (values, image, tags) => {
+  const handleCreateCampaign = async (values, image, tags) => {
 
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
 
+    const newDate = new Date (values.dataLimite)
+
+    const isoDate = newDate.toISOString()
+
+    const newValues = {
+      titulo: values.titulo,
+      meta: OnlyNumbers(values.meta),
+      descricao: values.descricao,
+      encerrarAutomaticamente: values.encerrarAutomaticamente,
+      dataLimite: isoDate,
+      tags: tags
+    }
+
+    console.log(newValues)
+
     try {
-      const newDate = new Date (values.dataLimite)
+      const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
+      const idCampanha = campanhaValues.idCampanha
 
-      const isoDate = newDate.toISOString()
-
-      const newValues = {
-        titulo: values.titulo,
-        meta: OnlyNumbers(values.meta),
-        descricao: values.descricao,
-        encerrarAutomaticamente: values.encerrarAutomaticamente,
-        dataLimite: isoDate,
-        tags: tags
+      try {
+        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
       }
-
-      console.log(newValues)
-        
-      // try {
-      //   const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
-      //   const idCampanha = campanhaValues.idCampanha
-
-      //   try {
-      //     await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
-      //   } catch (error) {
-      //     toast.error('Não foi possível adicionar a imagem.')
-      //     console.log(error)
-      //   }
-          
-      //   } catch (error) {
-      //     toast.error('Não foi possível adicionar a imagem.')
-      //     console.log(error)
-      //   }
-        
 
       redirectCampaign()
       toast('Campanha cadastrada com sucesso')
-
-    } catch (e) {
-      console.log(e)
-      toast.error('Não foi possível cadastrar a campanha.')
-    }
-    
+          
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
   }
 
+  const handleUpdateCampaign = async (values, image, tags) => {
 
+    console.log(values)
+
+    const campaignImage = new FormData()
+    image && campaignImage.append('multipartFile', image[0])
+
+    const newDate = new Date (values.dataLimite)
+
+    const isoDate = newDate.toISOString()
+
+    const newValues = {
+      titulo: values.titulo,
+      meta: values.meta,
+      descricao: values.descricao,
+      encerrarAutomaticamente: values.encerrarAutomaticamente,
+      dataLimite: isoDate,
+      tags: tags
+    }
+
+    console.log(newValues)
+
+    try {
+      await apiColabore.put(`/campanha/${idCampanha}`, newValues)
+
+      try {
+        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
+      redirectCampaign()
+      toast('Campanha cadastrada com sucesso')
+    } catch (error) {
+      toast.error('Não foi possível editar a campanha.')
+      console.log(error)
+    }
+  }
+
+  if((isUpdate && campanha) || !isUpdate) {
   return (
     <ContainerForm>
       <Card padding="2rem" >
@@ -95,17 +146,17 @@ const FormComponent = () => {
           <h2>Cadastrar nova campanha</h2>
           <Formik
             initialValues={{
-              titulo:'',
-              meta: '',
-              descricao: '',
-              encerrarAutomaticamente: '',
-              dataLimite: '',
-              foto: '',
-              tags: '' 
+              titulo: isUpdate ? campanha.titulo : '',
+              meta: isUpdate ? campanha.meta : '',
+              descricao: isUpdate ? campanha.descricao : '',
+              encerrarAutomaticamente: isUpdate ? campanha.encerrarAutomaticamente : '',
+              dataLimite: isUpdate ? campanha.dataLimite : '',
+              foto: isUpdate ? campanha.foto : '',
+              tags: isUpdate ? campanha.tags : '' 
             }}
             validationSchema={CampaignSchema}
             onSubmit={(values) => {
-              addCampaign(values, image, tags)
+              !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags)
             }}
           >
             {({errors, touched}) => (
@@ -170,7 +221,7 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>Cadastrar campanha</Button>
+                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                 </RegisterCampaign>
               </Form>
             )}
@@ -182,6 +233,7 @@ const FormComponent = () => {
       </Card>
     </ContainerForm>
   )
+  }
 }
 
 export default FormComponent
