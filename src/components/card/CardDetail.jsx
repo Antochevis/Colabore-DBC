@@ -10,10 +10,12 @@ import * as Yup from 'yup'
 import { Errors } from '../../pages/register/Register.Styled'
 import Modal from '../modal/Modal'
 
-const CardDetail = ({campanha}) => {
+const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
   const [activeDonate, setActiveDonate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [disabledButton, setDisabledButton] = useState(true)
+  const hasDonate = campanha.doacoes.length > 0
+  const isCampaignFinished = campanha.statusMeta
   const navigate = useNavigate()
 
   const donationSchema = Yup.object().shape({
@@ -43,7 +45,17 @@ const CardDetail = ({campanha}) => {
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.doacoes ? campanha.doacoes.length : 0}</TextSm>
         </div>
         <Button width="100%" onClick={() => navigate(`/doadores-campanha/${campanha.idCampanha}`)}>Ver Contribuidores</Button>
-        <Button width="100%" onClick={() => setActiveDonate(!activeDonate ? true : false)}>{activeDonate ? 'Cancelar' : 'Contribuir'}</Button>
+        {!isAuthor &&
+        <Button width="100%"
+        disabled={isCampaignFinished}
+        title={isCampaignFinished ? 'Você não pode doar para campanhas finalizadas.' : ''}
+        onClick={() => setActiveDonate(!activeDonate ? true : false)}>
+          {activeDonate ? 'Cancelar' : !hasUserDonated ? 'Contribuir' : 'Doar Novamente'}
+        </Button>}
+        {isAuthor &&
+        <Button disabled={hasDonate}
+        title={hasDonate ? 'Você não pode editar campanhas que possuem contribuições.' : ''}
+        width="100%">Editar</Button>}
       </CardContentSm>
       <Formik
             initialValues={{
@@ -61,7 +73,7 @@ const CardDetail = ({campanha}) => {
                   <label htmlFor=""><Text>Digite o valor da contribuição:</Text></label>
                   <div>
                     <Field type="text" name="valor" placeholder="R$" onKeyUp={() => {setDisabledButton(false)}} />
-                    <Button disabled={disabledButton || errors.valor}  type="button" onClick={() => setOpenModal(true)} width="100px">Enviar</Button>
+                    <Button disabled={disabledButton || errors.valor} type="button" onClick={() => setOpenModal(true)} width="100px">Enviar</Button>
                   </div>
                   {errors.valor && touched.valor ? (<Errors>{errors.valor}</Errors>) : null}   
                 </FormStyle>

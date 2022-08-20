@@ -14,6 +14,7 @@ import CardDetail from "../../../components/card/CardDetail"
 function CampaignsDetail() {
   const [campanha, setCampanha] = useState()
   const [loading, setLoading] = useState(true)
+  const [donors, setDonors] = useState([])
   const {idCampanha} = useParams()
   const {userDatas} = useContext(AuthContext)
 
@@ -34,6 +35,11 @@ function CampaignsDetail() {
   if(loading) {
     return (<Loading />)
   } 
+
+  const isAuthor = campanha.nome === userDatas.nome
+  const hasUserDonated = campanha.doacoes.some(d => d.nome === userDatas.nome)
+  // campanha.doacoes.forEach(d => donors.some(donor => (donor !== d) && donor.nome === userDatas.nome) ? setDonors(...donors, d) : "")
+
   return (
     <>
       <Header userName={userDatas.nome} userImg={userDatas.foto}/>
@@ -42,7 +48,7 @@ function CampaignsDetail() {
             <CardCampaignDetail
             campanha={campanha}
             />
-            <CardDetail campanha={campanha}/>
+            <CardDetail campanha={campanha} isAuthor={isAuthor} hasUserDonated={hasUserDonated}/>
           </ContainerDetail>
         </Section>
       <Footer />

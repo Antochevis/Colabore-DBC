@@ -12,7 +12,6 @@ const CardCampaign = ({campanha}) => {
   return (
     <Card maxWidth="100%" height="350px">
       <CardContent>
-        {campanha.statusMeta === true && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
         <img src={campanha.fotoCampanha} />
         <div>
           <div>
@@ -43,6 +42,7 @@ const CardCampaign = ({campanha}) => {
             <Text>R$ {campanha.meta}</Text>
           </div>
         </footer>
+        {campanha.statusMeta === true && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
       </CardContent>
     </Card>
   )

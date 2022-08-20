@@ -37,9 +37,9 @@ button:hover {
 }
 
 button:disabled:hover {
-  cursor: not-allowed;
-  background:#3751FF;
-  color: #FFFFFF;
+  cursor: not-allowed !important;
+  background: #2A69BB !important;
+  color: #FFFFFF !important;
 }
 
 .password-strength-meter {

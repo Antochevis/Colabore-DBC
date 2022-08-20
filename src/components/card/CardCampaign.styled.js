@@ -6,13 +6,14 @@ export const CardContent = styled.div`
   overflow: hidden;
   width: 100%;
   && > div.finished {
-    background: #012201da;
+    background: #01220189;
     position: absolute;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 8rem;
     padding: 0 !important;
   }
   && > div.finished > div {
