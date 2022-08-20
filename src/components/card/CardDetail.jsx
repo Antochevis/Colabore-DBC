@@ -23,6 +23,10 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
     valor: Yup.string().required('Campo obrigatório!')
   })
 
+  const redirectUpdateCampaign = idCampanha => {
+    navigate(`/criar-campanha/${idCampanha}`)
+  }
+
   return (
     <Card maxWidth="100%" height="562px">
       <CardContentSm>
@@ -47,6 +51,7 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
         {isAuthor &&
         <Button disabled={hasDonate || finishedByDate || isCampaignFinished}
         title={hasDonate ? 'Você não pode editar campanhas que possuem contribuições ou estão encerradas.' : ''}
+        onClick={() => redirectUpdateCampaign(campanha.idCampanha)}
         width="100%">Editar</Button>}
       </CardContentSm>
       <Formik
