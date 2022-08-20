@@ -126,12 +126,12 @@ function Register() {
               <div>
                 <div>
                   <label htmlFor="nome">Nome completo*</label>
-                  <Field name='nome' placeholder='Digite seu nome completo'/>
+                  <Field id='nome' name='nome' placeholder='Digite seu nome completo'/>
                   {errors.nome && touched.nome ? (<Errors>{errors.nome}</Errors>) : null}
                 </div>
                 <div>
                   <label htmlFor="email">E-mail*</label>
-                  <Field name='email' placeholder='Digite seu e-mail'/>
+                  <Field id='email' name='email' placeholder='Digite seu e-mail'/>
                   {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
                 </div>
               </div>
@@ -139,14 +139,14 @@ function Register() {
                 <div>
                   <div>
                     <label htmlFor="senha">Senha*</label>
-                    <Field type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
+                    <Field id='senha' type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
                     {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
                   </div>
                   <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
                 </div>
                 <div>
                   <label htmlFor="confirmarSenha">Confirmar senha*</label>
-                  <Field type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
+                  <Field id='confirmarSenha ' type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
                   {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
                 </div>
               </div>
@@ -155,7 +155,7 @@ function Register() {
                 <Dropzone onDrop={acceptedFiles => setImage(acceptedFiles)}>
                   {({getRootProps, getInputProps}) => (
                     <section>
-                      <div {...getRootProps()}>
+                      <div id='foto' {...getRootProps()}>
                         <input {...getInputProps()} />
                         { image ? <img src={URL.createObjectURL(image[0])} alt="" /> : <p>Arraste arquivos até aqui, ou clique para buscar.</p>}
                       </div>
@@ -163,12 +163,12 @@ function Register() {
                   )}
                 </Dropzone>
               </div>
-              <Button width="45vw" disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</Button>
+              <Button id='cadastrar' width="45vw" disabled={errors.nome || errors.email || errors.senha || errors.confirmarSenha} type='submit'>Cadastrar</Button>
             </RegisterFormStyle>
           </Form>
         )}
         </Formik>
-        <BackToLogin onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
+        <BackToLogin id='backToLogin' onClick={() => navigate('/')}>Já possuo cadastro</BackToLogin>
       </div>
       <BackgroundRegister>
           <ImgLogin />

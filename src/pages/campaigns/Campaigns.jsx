@@ -56,13 +56,13 @@ function Campaigns() {
         <Header userName={userDatas.nome} userImg={userDatas.foto}/>
           <Section>
             <FilterMeta>
-              <Button width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
-              <Button width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
-              <Button width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
+              <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
+              <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
+              <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
             </FilterMeta>
             <UserCampaignFilter>
-              <button>Minhas Campanhas</button>
-              <button>Minhas contribuições</button>
+              <button id='minhasCampanhas'>Minhas Campanhas</button>
+              <button id='minhasContribuições'>Minhas contribuições</button>
             </UserCampaignFilter>
             <FilterTags>
               <div className="tags-input-container">
@@ -78,7 +78,7 @@ function Campaigns() {
             </FilterTags>
             <ActiveTittle>
               <Tittle>Todas campanhas</Tittle>
-              <Button onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
+              <Button id='criarCampanha' onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
             <ContainerCards>
               {campanhas.map(campanha =>(

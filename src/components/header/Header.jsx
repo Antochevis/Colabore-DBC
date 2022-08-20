@@ -16,13 +16,13 @@ const Header = ({userName, userImg}) => {
         <div>
           <span>{userName}</span>
           <img src={userImg ? userImg : noUserImg} alt="Foto de perfil do usuário." />
-          <Button
+          <Button id='logout'
           onClick={handleLogout}
           width="4.5rem"
           padding="0.5rem"
           background="transparent"
           border="1px solid white">
-            <BiLogOut />Sair
+            <BiLogOut />Sair  
           </Button>
         </div>
       </div>  
