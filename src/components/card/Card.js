@@ -1,14 +1,14 @@
 import { colorWhite, colorBorder } from '../../consts'
 import styled from "styled-components"
 
-export const Card = styled.div(({maxWidth, padding, height, minHeight}) => ({
+export const Card = styled.div(({maxWidth, padding, height, maxHeight}) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'start',
   alignItems: 'center',
   maxWidth: maxWidth ? maxWidth : 1420,
   height: height ? height : '',
-  minHeight: minHeight ? minHeight : 350,
+  maxHeight: maxHeight ? maxHeight : '',
   padding: padding ? padding : 0,
   background: 'white',
   borderRadius: 8,

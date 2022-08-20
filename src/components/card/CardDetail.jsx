@@ -10,7 +10,7 @@ import { Errors } from '../../pages/register/Register.Styled'
 import Modal from '../modal/Modal'
 import { CampaignContext } from '../../context/CampaignContext'
 
-const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
+const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}) => {
   const [activeDonate, setActiveDonate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [disabledButton, setDisabledButton] = useState(true)
@@ -24,7 +24,7 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
   })
 
   return (
-    <Card maxWidth="100%" height="100%">
+    <Card maxWidth="100%" height="562px">
       <CardContentSm>
         <Text fontSize="1.25rem">Arrecadado</Text>
         <h3>R$ {campanha.arrecadacao}</h3>
@@ -39,14 +39,14 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
         <Button width="100%" onClick={() => navigate(`/doadores-campanha/${campanha.idCampanha}`)}>Ver Contribuidores</Button>
         {!isAuthor &&
         <Button width="100%"
-        disabled={isCampaignFinished}
-        title={isCampaignFinished ? 'Você não pode doar para campanhas finalizadas.' : ''}
+        disabled={isCampaignFinished || finishedByDate}
+        title={isCampaignFinished || finishedByDate ? 'Você não pode doar para campanhas finalizadas.' : ''}
         onClick={() => setActiveDonate(!activeDonate ? true : false)}>
           {activeDonate ? 'Cancelar' : !hasUserDonated ? 'Contribuir' : 'Doar Novamente'}
         </Button>}
         {isAuthor &&
-        <Button disabled={hasDonate}
-        title={hasDonate ? 'Você não pode editar campanhas que possuem contribuições.' : ''}
+        <Button disabled={hasDonate || finishedByDate || isCampaignFinished}
+        title={hasDonate ? 'Você não pode editar campanhas que possuem contribuições ou estão encerradas.' : ''}
         width="100%">Editar</Button>}
       </CardContentSm>
       <Formik

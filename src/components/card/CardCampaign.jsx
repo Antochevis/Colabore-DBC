@@ -26,14 +26,14 @@ const CardCampaign = ({campanha}) => {
         </div>
         <div>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm>  {campanha.nome}
-            </TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm> {campanha.nome}
+          </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {campanha.tags.map(tag => tag.nomeTag)}
-            </TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm> <div>{campanha.tags.map(tag => {return(<><span>{tag}</span></>)})}</div>
+          </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Encerra em:</TextSm>  {moment(campanha.dataLimite).format('LL')}
-            </TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">Encerra em:</TextSm> {moment(campanha.dataLimite).format('LL')}
+          </TextSm>
         </div>
         <footer>
           <div>

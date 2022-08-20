@@ -39,6 +39,9 @@ function CampaignsDetail() {
   const isAuthor = campanha.nome === userDatas.nome
   const hasUserDonated = campanha.doacoes.some(d => d.nome === userDatas.nome)
   // campanha.doacoes.forEach(d => donors.some(donor => (donor !== d) && donor.nome === userDatas.nome) ? setDonors(...donors, d) : "")
+  const dateToFinished = new Date(campanha.dataLimite)
+  const currentDate = new Date()
+  const finishedByDate = currentDate > dateToFinished || campanha.statusMeta
 
   return (
     <>
@@ -47,8 +50,12 @@ function CampaignsDetail() {
           <ContainerDetail>
             <CardCampaignDetail
             campanha={campanha}
+            finishedByDate={finishedByDate}
             />
-            <CardDetail campanha={campanha} isAuthor={isAuthor} hasUserDonated={hasUserDonated}/>
+            <CardDetail campanha={campanha}
+            isAuthor={isAuthor}
+            hasUserDonated={hasUserDonated}
+            finishedByDate={finishedByDate}/>
           </ContainerDetail>
         </Section>
       <Footer />

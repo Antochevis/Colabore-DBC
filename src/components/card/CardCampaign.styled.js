@@ -45,6 +45,21 @@ export const CardContent = styled.div`
     flex-direction: column;
     gap: 5px;
   }
+  && > div:nth-child(3) > span:nth-child(2) {
+    display: flex;
+    gap: 5px;
+  }
+  && > div:nth-child(3) > span:nth-child(2) > div {
+    display: flex;
+    gap: 5px;
+  }
+  && > div:nth-child(3) > span:nth-child(2) > div > span {
+    background: ${colorPrimary};
+    color: white;
+    padding: 0 8px;
+    border-radius: 8px;
+    line-height: 17px
+  }
   && button {
     border: none;
     background: none;
@@ -77,5 +92,3 @@ export const CardContent = styled.div`
   }
 `;
 
-export const FinishedCampaign = styled.div`
-`;
