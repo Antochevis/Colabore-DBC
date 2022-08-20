@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { colorPrimary } from "../../consts";
 
 export const FilterMeta = styled.div`
   display: flex;
@@ -37,4 +38,32 @@ export const ActiveTittle = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 1.5rem;
+`;
+
+export const FilterTags = styled.div`
+position: relative;
+padding-bottom: 1.5rem;
+ && input {
+  background: #FCFDFE;
+  width: 100%;
+  border: 1px solid #F0F1F7;
+  border-radius: 8px;
+  height: 3rem;
+  padding: 0.8rem 1rem;
+  color: #4B506D;
+ }
+ && input:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px #2A69BB;
+ }
+ && svg {
+  color: ${colorPrimary};
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+ }
+ && svg:hover {
+  cursor: pointer;
+ }
 `;
