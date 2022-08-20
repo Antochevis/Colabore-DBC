@@ -66,4 +66,7 @@ padding-bottom: 1.5rem;
  && svg:hover {
   cursor: pointer;
  }
+ && button.active {
+  background: red;
+ }
 `;

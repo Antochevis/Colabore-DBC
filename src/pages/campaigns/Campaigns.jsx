@@ -17,19 +17,29 @@ import { FaSearchDollar } from 'react-icons/fa'
 function Campaigns() {
   const [loading, setLoading] = useState(true)
   const [campanhas, setCampanhas] = useState()
+  const [isMyContributions, setIsMyContributions] = useState(false)
+  const [isMyCampaigns, setIsMyCampaigns] = useState(false)
   const [tags, setTags] = useState([]);
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
 
   const setup = async (filtroMeta) => {
     try {
-      const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=false&minhasCampanhas=false`)
+      const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=${isMyContributions}&minhasCampanhas=${isMyCampaigns}`)
       setCampanhas(data)
     } catch (error) {
       
     }
     if(userDatas)
       setLoading(false)
+  }
+
+  const handleMyContributionsFilter = () => {
+    setIsMyContributions(!isMyContributions ? true : false)
+  }
+
+  const handleMyCampaignsFilter = () => {
+    setIsMyCampaigns(!isMyCampaigns ? true : false)
   }
 
   const handleKeyDown = (e) => {
@@ -46,7 +56,7 @@ function Campaigns() {
 
   useEffect(()=>{
     setup()
-  },[userDatas])
+  },[userDatas, isMyContributions, isMyCampaigns])
 
   if(loading) {
     return (<Loading />)
@@ -61,8 +71,8 @@ function Campaigns() {
               <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
             </FilterMeta>
             <UserCampaignFilter>
-              <button id='minhasCampanhas'>Minhas Campanhas</button>
-              <button id='minhasContribuições'>Minhas contribuições</button>
+              <button id='minhasContribuições' onClick={handleMyContributionsFilter} className={isMyCampaigns ? 'active' : ''}>Minhas contribuições</button>
+              <button id='minhasCampanhas' onClick={handleMyCampaignsFilter} className={isMyContributions ? 'active' : ''}>Minhas Campanhas</button>
             </UserCampaignFilter>
             <FilterTags>
               <div className="tags-input-container">

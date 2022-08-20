@@ -12,7 +12,7 @@ import Loading from "../loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
 import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
-import MaskedInput from 'react-text-mask';
+// import MaskedInput from 'react-text-mask';
 import { maskDate } from "../../utils/Masks";
 
 const CampaignSchema = yup.object().shape({
@@ -185,7 +185,7 @@ const FormComponent = () => {
                       </Field>
                       {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
                     </div>
-                    <div>
+                    {/* <div>
                       <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
                       <MaskedInput
                         mask={maskDate}
@@ -194,7 +194,7 @@ const FormComponent = () => {
                         placeholder='Digite a data limite da campanha'
                       />
                       {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
-                    </div>
+                    </div> */}
                   </div>
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
