@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiColabore } from "../services/api";
-import { Toaster, toast } from "react-hot-toast"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CampaignContext = createContext();
 
@@ -31,10 +31,22 @@ const CampaignProvider = ({ children }) => {
     }
   }
 
+  const handleDonation = async(values, campanha, setOpenModal) => {
+    try {
+      await apiColabore.post(`/doador/${campanha.idCampanha}`, values)
+      setOpenModal(false)
+      toast.success('Contribuição realizada com sucesso!')
+
+    } catch (error) {
+      console.log(error)
+      toast.error('Ocorreu um erro.')
+    }
+  }
+
   return (
-    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, loading, setLoading }}>
+    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, handleDonation }}>
       {children}
-      <Toaster />
+      <ToastContainer />
     </CampaignContext.Provider>
   )
 

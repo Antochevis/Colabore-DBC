@@ -25,7 +25,7 @@ const CardCampaignDetail = ({campanha}) => {
             <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {campanha.tags.map(tag => tag.nomeTag)}
             </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {moment(campanha.dataLimite).format('LL')}
+            <TextSm color={colorHoverMenu} fontWeight="400">Encerra em:</TextSm>  {moment(campanha.dataLimite).format('LL')}
             </TextSm>
         </div>
         <div>

@@ -9,6 +9,10 @@ import 'moment/locale/pt-br'
 const CardCampaign = ({campanha}) => {
   const navigate = useNavigate();
 
+  const dateToFinished = new Date(campanha.dataLimite)
+  const currentDate = new Date()
+  const isFinished = currentDate > dateToFinished
+
   return (
     <Card maxWidth="100%" height="350px">
       <CardContent>
@@ -28,7 +32,7 @@ const CardCampaign = ({campanha}) => {
             <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm>  {campanha.tags.map(tag => tag.nomeTag)}
             </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Colabore até:</TextSm>  {moment(campanha.dataLimite).format('LL')}
+            <TextSm color={colorHoverMenu} fontWeight="400">Encerra em:</TextSm>  {moment(campanha.dataLimite).format('LL')}
             </TextSm>
         </div>
         <footer>
@@ -42,7 +46,7 @@ const CardCampaign = ({campanha}) => {
             <Text>R$ {campanha.meta}</Text>
           </div>
         </footer>
-        {campanha.statusMeta === true && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
+        {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
       </CardContent>
     </Card>
   )

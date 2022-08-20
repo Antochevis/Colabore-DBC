@@ -1,19 +1,20 @@
+import { useState, useContext } from 'react'
 import { CardContentSm, Card } from './Card'
 import { Text, TextSm, colorHoverMenu } from '../../consts'
 import { Button } from '../button/Button'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 import { FormStyle } from './CardDetail.styled'
 import { Formik, Field, Form } from 'formik'
-import { apiColabore } from "../../services/api";
 import * as Yup from 'yup' 
 import { Errors } from '../../pages/register/Register.Styled'
 import Modal from '../modal/Modal'
+import { CampaignContext } from '../../context/CampaignContext'
 
 const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
   const [activeDonate, setActiveDonate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [disabledButton, setDisabledButton] = useState(true)
+  const {handleDonation} = useContext(CampaignContext)
   const hasDonate = campanha.doacoes.length > 0
   const isCampaignFinished = campanha.statusMeta
   const navigate = useNavigate()
@@ -21,15 +22,6 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
   const donationSchema = Yup.object().shape({
     valor: Yup.string().required('Campo obrigatório!')
   })
-
-  const handleDonation = async(values) => {
-    try {
-      await apiColabore.post(`/doador/${campanha.idCampanha}`, values)
-      setOpenModal(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   return (
     <Card maxWidth="100%" height="100%">
@@ -63,7 +55,7 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, donors}) => {
             }}
             validationSchema={donationSchema}
             onSubmit={(values, {resetForm}) => {
-              handleDonation(values)
+              handleDonation(values, campanha, setOpenModal)
               resetForm()
             }}
           >
