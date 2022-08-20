@@ -40,13 +40,53 @@ const SignupSchema = yup.object().shape({
 const FormComponent = () => {
   const {redirectCampaign} = useContext(CampaignContext)
   const [image, setImage] = useState();
+  const [tags, setTags] = useState()
+
+  function handleKeyDown(e) {
+    if(e.key !== 'Enter') return
+    const value = e.target.value 
+    if(!value.trim()) return
+    setTags([...tags, value])
+    e.target.value = ''
+  }
+
+  function removeTag(index) {
+    setTags(tags.filter((el, i) => i !==index))
+  }
 
 
   const addCampaign = async (values, image) => {
+    
+    const listTags = [ { nomeTag: 'agasalho' }, { nomeTag: 'zéBonitinho' } ]
 
+    const {data: listTagsCreated} = await apiColabore.get('/tag') 
+
+    let tagExistInDB = []
+
+    const listTagFiltered = listTagsCreated.filter(tag => {
+      let existInList = listTags.some(tagReceived => tagReceived.nomeTag.toLowerCase() === listTagsCreated.nomeTag.toLowerCase())
+      
+      if(!existInList) {
+        return tag
+      } else {
+        tagExistInDB.append(tag)
+      }
+    } )
+    
+    let listTagFilteredWithId = []
+
+    listTagFiltered.forEach(tag => {
+      const {data: tagValues} = await apiColabore.post('/tag', tag)
+
+      listTagFilteredWithId.append(tag.values)
+    })
+
+    const listEnd = [ ...tagExistInDB, ...listTagFilteredWithId ]
+
+    
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
-    
+
     try {
       const valueTag = {
         nomeTag: values.nomeTag
@@ -66,12 +106,8 @@ const FormComponent = () => {
         descricao: values.descricao,
         encerrarAutomaticamente: values.encerrarAutomaticamente,
         dataLimite: isoDate,
-        tags: [ {
-          nomeTag: tagValues.nomeTag,
-          idTag: tagValues.idTag
-        } ]
+        tags: listEnd
       }
-
         
       try {
         const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
@@ -154,8 +190,11 @@ const FormComponent = () => {
                   </div>
                   <div>
                     <label htmlFor="nomeTag">Digite as tags que mais se encaixam no projeto*</label>
-                    <Field id='nomeTag' name='nomeTag' placeholder='Digite as tags da campanha'/>
+                    <Field id='nomeTag' name='nomeTag' placeholder='Digite as tags da campanha' onKeyDown={handleKeyDown}/>
                     {errors.nomeTag && touched.nomeTag ? (<Errors>{errors.nomeTag}</Errors>) : null}
+
+
+
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
