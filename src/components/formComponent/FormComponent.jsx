@@ -12,14 +12,15 @@ import Loading from "../loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
 import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
+import MaskedInput from 'react-text-mask';
+import { maskDate } from "../../utils/Masks";
 
 const CampaignSchema = yup.object().shape({
   titulo: yup.string().required('Campo obrigatório!'),
   meta: yup.number().required('Campo obrigatório!'),
   descricao: yup.string().required('Campo obrigatório!'),
   tags: yup.string().required('Campo obrigatório!'),
-  encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!'),
-  dataLimite: yup.date().required('Escolha uma data válida!')
+  encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
 })
 
 const FormComponent = () => {
@@ -159,7 +160,7 @@ const FormComponent = () => {
               !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags)
             }}
           >
-            {({errors, touched}) => (
+            {({errors, touched, props}) => (
               <Form>
                 <RegisterCampaign>
                   <div>
@@ -186,7 +187,12 @@ const FormComponent = () => {
                     </div>
                     <div>
                       <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
-                      <Field type='date' id='dataLimite' name='dataLimite' placeholder='Selecione a data limite para o encerramento da campanha'/>
+                      <MaskedInput
+                        mask={maskDate}
+                        id='dataLimite'
+                        name="dataLimite"
+                        placeholder='Digite a data limite da campanha'
+                      />
                       {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
                     </div>
                   </div>
@@ -221,7 +227,7 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  <Button type='submit' width="100%" >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                 </RegisterCampaign>
               </Form>
             )}
