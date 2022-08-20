@@ -12,35 +12,19 @@ import Loading from "../loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
 import { OnlyNumbers } from "../../utils/Formatting";
 
-const SignupSchema = yup.object().shape({
-  titulo: yup.string()
-    .min(2, 'Mínimo de 2 caractéres')
-    .max(50, 'Máximo de 50 caractéres')
-    .required('Campo obrigatório!'),
-  meta: yup.string()
-    .min(2, 'Mínimo de 2 caractéres')
-    .max(50, 'Máximo de 50 caractéres')
-    .required('Campo obrigatório!'),
-  /*concluirAutomaticamenteACampanha: yup.string()
-    .required('Campo obrigatório!'),*/
-  descricao: yup.string()
-  .min(2, 'Mínimo de 2 caractéres')
-  .max(200, 'Máximo de 200 caractéres')
-  .required('Campo obrigatório!'),
-  tags: yup.string()
-  .required('Campo obrigatório!'),
-  foto: yup.string()
-  .required('Campo obrigatório!'),
-  encerrarAutomaticamente: yup.string()
-  .required('Escolha uma opção válida!'),
-  dataLimite: yup.date()
-  .required('Escolha uma data válida!')
+const CampaignSchema = yup.object().shape({
+  titulo: yup.string().required('Campo obrigatório!'),
+  meta: yup.number().required('Campo obrigatório!'),
+  descricao: yup.string().required('Campo obrigatório!'),
+  tags: yup.string().required('Campo obrigatório!'),
+  encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!'),
+  dataLimite: yup.date().required('Escolha uma data válida!')
 })
 
 const FormComponent = () => {
   const {redirectCampaign} = useContext(CampaignContext)
   const [image, setImage] = useState();
-  const [tags, setTags] = useState()
+  const [tags, setTags] = useState([])
 
   function handleKeyDown(e) {
     if(e.key !== 'Enter') return
@@ -51,54 +35,19 @@ const FormComponent = () => {
   }
 
   function removeTag(index) {
-    setTags(tags.filter((el, i) => i !==index))
+    setTags(tags.filter((el, i) => i !== index))
   }
 
 
-  const addCampaign = async (values, image) => {
-    
-    const listTags = [ { nomeTag: 'agasalho' }, { nomeTag: 'zéBonitinho' } ]
+  const addCampaign = async (values, image, tags) => {
 
-    const {data: listTagsCreated} = await apiColabore.get('/tag') 
-
-    let tagExistInDB = []
-
-    const listTagFiltered = listTagsCreated.filter(tag => {
-      let existInList = listTags.some(tagReceived => tagReceived.nomeTag.toLowerCase() === listTagsCreated.nomeTag.toLowerCase())
-      
-      if(!existInList) {
-        return tag
-      } else {
-        tagExistInDB.append(tag)
-      }
-    } )
-    
-    let listTagFilteredWithId = []
-
-    listTagFiltered.forEach(tag => {
-      const {data: tagValues} = await apiColabore.post('/tag', tag)
-
-      listTagFilteredWithId.append(tag.values)
-    })
-
-    const listEnd = [ ...tagExistInDB, ...listTagFilteredWithId ]
-
-    
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
 
     try {
-      const valueTag = {
-        nomeTag: values.nomeTag
-      }
-
-      console.log(valueTag)
-
       const newDate = new Date (values.dataLimite)
 
       const isoDate = newDate.toISOString()
-
-      const {data: tagValues} = await apiColabore.post('/tag', valueTag)
 
       const newValues = {
         titulo: values.titulo,
@@ -106,24 +55,26 @@ const FormComponent = () => {
         descricao: values.descricao,
         encerrarAutomaticamente: values.encerrarAutomaticamente,
         dataLimite: isoDate,
-        tags: listEnd
+        tags: tags
       }
-        
-      try {
-        const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
-        const idCampanha = campanhaValues.idCampanha
 
-        try {
-          await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
-        } catch (error) {
-          toast.error('Não foi possível adicionar a imagem.')
-          console.log(error)
-        }
+      console.log(newValues)
+        
+      // try {
+      //   const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
+      //   const idCampanha = campanhaValues.idCampanha
+
+      //   try {
+      //     await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+      //   } catch (error) {
+      //     toast.error('Não foi possível adicionar a imagem.')
+      //     console.log(error)
+      //   }
           
-        } catch (error) {
-          toast.error('Não foi possível adicionar a imagem.')
-          console.log(error)
-        }
+      //   } catch (error) {
+      //     toast.error('Não foi possível adicionar a imagem.')
+      //     console.log(error)
+      //   }
         
 
       redirectCampaign()
@@ -150,11 +101,11 @@ const FormComponent = () => {
               encerrarAutomaticamente: '',
               dataLimite: '',
               foto: '',
-              nomeTag: '' 
+              tags: '' 
             }}
-
+            validationSchema={CampaignSchema}
             onSubmit={(values) => {
-              addCampaign(values, image)
+              addCampaign(values, image, tags)
             }}
           >
             {({errors, touched}) => (
@@ -189,12 +140,17 @@ const FormComponent = () => {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="nomeTag">Digite as tags que mais se encaixam no projeto*</label>
-                    <Field id='nomeTag' name='nomeTag' placeholder='Digite as tags da campanha' onKeyDown={handleKeyDown}/>
-                    {errors.nomeTag && touched.nomeTag ? (<Errors>{errors.nomeTag}</Errors>) : null}
-
-
-
+                    <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
+                    <div className="tags-input-container">
+                      {tags.map((tag, index) => (
+                        <div className="tag-item" key={index}>
+                          <span className="text">{tag}</span>
+                          <span className="text">&times;</span>
+                        </div>
+                      ))}
+                      <Field id='tags' name='tags' placeholder='Digite as tags da campanha' onKeyDown={handleKeyDown}/>
+                    </div>
+                    {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
