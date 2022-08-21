@@ -33,7 +33,7 @@ export const CardContent = styled.div`
   
   && h2 {
     
-    width: 274px;
+    width: 240px;
     height: 1.625rem;
     background: linear-gradient(91.13deg, #181818 80%, rgba(24, 24, 24, 0) 99.54%);
     -webkit-background-clip: text;

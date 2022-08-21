@@ -46,7 +46,7 @@ const CardCampaign = ({campanha}) => {
             <Text>R$ {campanha.meta}</Text>
           </div>
         </footer>
-        {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
+        {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>{isFinished ? 'Campanha Finalizada' : campanha.statusMeta ? 'Meta Atingida' : ''}</h3></div></div>}
       </CardContent>
     </Card>
   )

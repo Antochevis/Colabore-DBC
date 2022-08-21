@@ -55,7 +55,7 @@ function CampaignDonors() {
                   </DonorsInfos>
                 )
               }) : <h2>Ainda não existem doações.</h2>}
-              <Button onClick={() => window.history.go(-1)}>Voltar</Button>
+              <Button id="contribuidoresVoltar" onClick={() => window.history.go(-1)}>Voltar</Button>
             </DonorsList>
           </Card>
         </DonorsContainer>

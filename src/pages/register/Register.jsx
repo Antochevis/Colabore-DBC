@@ -146,7 +146,7 @@ function Register() {
                 </div>
                 <div>
                   <label htmlFor="confirmarSenha">Confirmar senha*</label>
-                  <Field id='confirmarSenha ' type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
+                  <Field id='confirmarSenha' type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
                   {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
                 </div>
               </div>

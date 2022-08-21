@@ -37,19 +37,25 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>R$ {campanha.meta}</TextSm>
         </div>
         <div>
-          <TextSm fontSize="1.25rem" color={colorHoverMenu}>Apoiadores</TextSm>
+          <TextSm fontSize="1.25rem" color={colorHoverMenu}>Contribuições</TextSm>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.doacoes ? campanha.doacoes.length : 0}</TextSm>
         </div>
-        <Button width="100%" onClick={() => navigate(`/doadores-campanha/${campanha.idCampanha}`)}>Ver Contribuidores</Button>
+        <Button id="botaoContribuicoes"
+        width="100%" 
+        onClick={() => navigate(`/doadores-campanha/${campanha.idCampanha}`)}>Ver Contribuições</Button>
         {!isAuthor &&
-        <Button width="100%"
+        <Button
+        id="botaoContribuir"
+        width="100%"
         disabled={isCampaignFinished || finishedByDate}
         title={isCampaignFinished || finishedByDate ? 'Você não pode doar para campanhas finalizadas.' : ''}
         onClick={() => setActiveDonate(!activeDonate ? true : false)}>
-          {activeDonate ? 'Cancelar' : !hasUserDonated ? 'Contribuir' : 'Doar Novamente'}
+        {activeDonate ? 'Cancelar' : !hasUserDonated ? 'Contribuir' : 'Doar Novamente'}
         </Button>}
         {isAuthor &&
-        <Button disabled={hasDonate || finishedByDate || isCampaignFinished}
+        <Button
+        id="botaoEditar" 
+        disabled={hasDonate || finishedByDate || isCampaignFinished}
         title={hasDonate ? 'Você não pode editar campanhas que possuem contribuições ou estão encerradas.' : ''}
         onClick={() => redirectUpdateCampaign(campanha.idCampanha)}
         width="100%">Editar</Button>}
@@ -70,7 +76,11 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
                   <label htmlFor=""><Text>Digite o valor da contribuição:</Text></label>
                   <div>
                     <Field type="text" name="valor" placeholder="R$" onKeyUp={() => {setDisabledButton(false)}} />
-                    <Button disabled={disabledButton || errors.valor} type="button" onClick={() => setOpenModal(true)} width="100px">Enviar</Button>
+                    <Button
+                    id="enviarContribuicao"
+                    disabled={disabledButton || errors.valor} 
+                    type="button" onClick={() => setOpenModal(true)}
+                    width="100px">Enviar</Button>
                   </div>
                   {errors.valor && touched.valor ? (<Errors>{errors.valor}</Errors>) : null}   
                 </FormStyle>

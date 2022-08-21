@@ -82,13 +82,14 @@ function Campaigns() {
               <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
               <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
               <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
+              {/* <Button id='campanhasAbertas' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Campanhas Abertas</Button> */}
             </FilterMeta>
             <UserCampaignFilter>
               <div>
                 <button
                 id='minhasCampanhas'
                 onClick={handleMyCampaignsFilter}
-                className={isMyCampaigns ? 'active' : 'right'}
+                className={isMyCampaigns ? 'active' : 'left'}
                 disabled={isMyContributions}
                 >Minhas Campanhas</button> 
               </div>
@@ -96,13 +97,13 @@ function Campaigns() {
                 <button
                 id='minhasContribuições'
                 onClick={handleMyContributionsFilter}
-                className={isMyContributions ? 'active' : 'left'}
+                className={isMyContributions ? 'active' : 'right'}
                 disabled={isMyCampaigns}
                 >Minhas contribuições</button>                
               </div>
             </UserCampaignFilter>
             <ActiveTittle>
-              <Tittle>Todas campanhas</Tittle>
+              <Tittle>{isMyCampaigns ? 'Minhas Campanhas' : isMyContributions? 'Minhas Contribuições' : 'Todas campanhas'}</Tittle>
               <Button id='criarCampanha' onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
             <ContainerCards>

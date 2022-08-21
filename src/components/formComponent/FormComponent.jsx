@@ -12,7 +12,6 @@ import Loading from "../loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
 import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
-// import MaskedInput from 'react-text-mask';
 import { maskDate } from "../../utils/Masks";
 import CurrencyInput from "../currencyInput/CurrencyInput";
 
@@ -170,6 +169,7 @@ const FormComponent = () => {
             }}
             validationSchema={CampaignSchema}
             onSubmit={(values) => {
+              console.log(values)
               !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags)
             }}
           >
@@ -184,7 +184,17 @@ const FormComponent = () => {
                     </div>
                     <div>
                       <label htmlFor="meta">Quantidade a ser arrecadada*</label>
-                      <CurrencyInput name="meta" placeholder="R$ 0,00" />
+                      <Field
+                      name="meta"
+                      render= {({field}) => (
+                        <CurrencyInput
+                          {...field}
+                          id="meta"
+                          placeholder="R$ 0,00"
+                          />
+                      )}
+                      />
+                      
                       {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
                     </div>
                   </div>

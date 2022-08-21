@@ -13,8 +13,8 @@ const Modal = ({closeModal, confirmModal}) => {
           <p>Não será possível reverter essa contribuição.</p>
         </div>
         <div className="btnsModal">
-          <Button onClick={() => closeModal(false)} background={redColor} border={`1px solid ${redColor}`}>Cancelar</Button>
-          <Button type="submit" >Confirmar</Button>
+          <Button id="cancelarModal" onClick={() => closeModal(false)} background={redColor} border={`1px solid ${redColor}`}>Cancelar</Button>
+          <Button id="confirmarModal" type="submit" >Confirmar</Button>
         </div>
         </ModalContent>
       </div>
