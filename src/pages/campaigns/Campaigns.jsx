@@ -89,6 +89,7 @@ function Campaigns() {
                 id='minhasCampanhas'
                 onClick={handleMyCampaignsFilter}
                 className={isMyCampaigns ? 'active' : 'right'}
+                disabled={isMyContributions}
                 >Minhas Campanhas</button> 
               </div>
               <div>
@@ -96,6 +97,7 @@ function Campaigns() {
                 id='minhasContribuições'
                 onClick={handleMyContributionsFilter}
                 className={isMyContributions ? 'active' : 'left'}
+                disabled={isMyCampaigns}
                 >Minhas contribuições</button>                
               </div>
             </UserCampaignFilter>

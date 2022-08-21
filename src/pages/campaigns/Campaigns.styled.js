@@ -49,6 +49,13 @@ export const UserCampaignFilter = styled.div`
     border-top-left-radius: 4px;
     cursor: pointer;
   }
+  && button:disabled:hover {
+    cursor: default !important;
+    height: 40px;
+    background: #FFFFFF !important;
+    color: #0000004e !important;
+    border: none;
+  }
 `;
 
 export const ActiveTittle = styled.div`
