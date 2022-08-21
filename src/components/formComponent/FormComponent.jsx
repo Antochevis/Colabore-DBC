@@ -14,10 +14,10 @@ import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
 // import MaskedInput from 'react-text-mask';
 import { maskDate } from "../../utils/Masks";
+import CurrencyInput from "../currencyInput/CurrencyInput";
 
 const CampaignSchema = yup.object().shape({
   titulo: yup.string().required('Campo obrigatório!'),
-  meta: yup.number().required('Campo obrigatório!'),
   descricao: yup.string().required('Campo obrigatório!'),
   tags: yup.string().required('Campo obrigatório!'),
   encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
@@ -61,6 +61,8 @@ const FormComponent = () => {
 
 
   const handleCreateCampaign = async (values, image, tags) => {
+
+    console.log(values)
 
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
@@ -139,6 +141,17 @@ const FormComponent = () => {
     }
   }
 
+  const handleDeleteCampaign = async () => {
+    try {
+      await apiColabore.delete(`/campanha/delete?id=${idCampanha}`)
+      redirectCampaign()
+      toast('Campanha excluída com sucesso')
+    } catch (error) {
+      toast.error('Não foi possível excluir a campanha.')
+      console.log(error)
+    }
+  }
+
   if((isUpdate && campanha) || !isUpdate) {
   return (
     <ContainerForm>
@@ -171,7 +184,7 @@ const FormComponent = () => {
                     </div>
                     <div>
                       <label htmlFor="meta">Quantidade a ser arrecadada*</label>
-                      <Field id='meta' name='meta' placeholder='Digite a quantidade a ser arrecada'/>
+                      <CurrencyInput name="meta" placeholder="R$ 0,00" />
                       {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
                     </div>
                   </div>
@@ -222,7 +235,10 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao } >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  <Button type='submit' width="100%"  >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  {!isUpdate ? <></> : 
+                  <Button type='submit' width='100%' onClick={handleDeleteCampaign}>Excluir</Button>
+                  }
                 </RegisterCampaign>
               </Form>
             )}
