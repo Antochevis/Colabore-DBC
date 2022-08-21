@@ -222,7 +222,7 @@ const FormComponent = () => {
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="100%" >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  <Button type='submit' width="100%" disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.dataLimite || errors.tags || errors.descricao } >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                 </RegisterCampaign>
               </Form>
             )}
