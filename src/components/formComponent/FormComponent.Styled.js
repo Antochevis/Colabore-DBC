@@ -32,12 +32,13 @@ export const RegisterCampaign = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin: 0 auto;
-  gap: 2rem;
+  gap: 1  rem;
 
   > div:nth-child(-n + 2) {
     display: flex;
     gap: 1rem;
     width: 1000px;
+    height: 93px;
     @media (max-width: 1200px) {
       flex-direction: column;
       width: 100%;
@@ -71,11 +72,12 @@ export const RegisterCampaign = styled.div`
     }
   }
 
-  > div:nth-child(3), >div:nth-child(4) {
+  > div:nth-child(3) {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
+    height: 93px;
 
     > label {
       font-size: 12px;
@@ -93,6 +95,32 @@ export const RegisterCampaign = styled.div`
       padding: 0.8rem 1rem;
       color: #4B506D;
     }
+    > textarea {
+      background: #FCFDFE;
+      border: 1px solid #F0F1F7;
+      border-radius: 8px;
+      height: 6rem;
+      padding: 0.8rem 1rem;
+      color: #4B506D;
+      resize: none;
+    }
+  }
+
+  >div:nth-child(4) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 140px;
+
+    > label {
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #9FA2B4;
+    }
+
     > textarea {
       background: #FCFDFE;
       border: 1px solid #F0F1F7;
