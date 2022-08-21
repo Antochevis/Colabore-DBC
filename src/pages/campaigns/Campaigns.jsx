@@ -12,10 +12,12 @@ import { useNavigate } from 'react-router-dom'
 import { FilterMeta, UserCampaignFilter, ActiveTittle, FilterTags, TagsContainer } from './Campaigns.styled'
 import { AuthContext } from '../../context/AuthContext'
 import { FaSearchDollar } from 'react-icons/fa'
+import LoadingBody from '../../components/loading/LoadingBody'
 
 
 function Campaigns() {
   const [loading, setLoading] = useState(true)
+  const [loadingBody, setLoadingBody] = useState(false)
   const [campanhas, setCampanhas] = useState()
   const [isMyContributions, setIsMyContributions] = useState(false)
   const [isMyCampaigns, setIsMyCampaigns] = useState(false)
@@ -36,13 +38,24 @@ function Campaigns() {
     }
     if(userDatas)
       setLoading(false)
+      setLoadingBody(false)
   }
 
   const handleMyContributionsFilter = () => {
+    setLoadingBody(true)
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
+    setIsOpenCampaign(false)
     setIsMyContributions(!isMyContributions ? true : false)
   }
 
   const handleMyCampaignsFilter = () => {
+    setLoadingBody(true)
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
+    setIsOpenCampaign(false)
     setIsMyCampaigns(!isMyCampaigns ? true : false)
   }
 
@@ -70,21 +83,25 @@ function Campaigns() {
   }
 
   const setOpenCampaigns = () => {
+    setLoadingBody(true)
     setIsOpenCampaign(!isOpenCampaign ? true : false)
     setup('META_NAO_ATINGIDA')
   }
 
   const setAllCampaigns = () => {
+    setLoadingBody(true)
     setIsAllCampaigns(!isAllCampaigns ? true : false)
     setup('TODAS')
   }
 
   const setReachedGoals = () => {
+    setLoadingBody(true)
     setIsReachedGoals(!isReachedGoals ? true : false)
     setup('META_ATINGIDA')
   }
 
   const setNotReachedGoals = () => {
+    setLoadingBody(true)
     setIsNotReachedGoals(!isNotReachedGoals ? true : false)
     setup('META_NAO_ATINGIDA')
   }
@@ -158,14 +175,17 @@ function Campaigns() {
               <Button id='criarCampanha' onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
             <ContainerCards>
-              {campanhas.length > 0 ? campanhas.map(campanha =>(
+              {loadingBody ?
+              <><div></div><LoadingBody /></> :
+              campanhas.length > 0 ? campanhas.map(campanha =>(
                 isOpenCampaign ? verifyOpenCampaigns(campanha) &&
                 <CardCampaign key={campanha.idCampanha}
                 campanha={campanha}/>
                 : <CardCampaign key={campanha.idCampanha}
                 campanha={campanha}/>
               )
-              ) : <><h1>Nenhuma campanha foi encontrada.</h1></>}
+              ) : <><div></div><h1>Nenhuma campanha foi encontrada.</h1></>
+              }
             </ContainerCards>  
           </Section>
         <Footer />
