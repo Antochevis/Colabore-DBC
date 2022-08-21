@@ -252,7 +252,7 @@ const FormComponent = () => {
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
                     <div>
                       <input id='tags' name='tags' placeholder='Digite as tags da campanha' value={searchTag} onChange={(e) => setSearchTag(e.target.value)} onClick={() => handleShowTags()} onKeyDown={handleKeyDown} autoComplete="off"/>
-                      <div>
+                      <div className={showTag ? 'active' : ''}>
                         {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
                           <div key={index}>
                             <span onClick={() => handleShowTags(tag)}>{tag}</span>

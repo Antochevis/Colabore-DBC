@@ -26,19 +26,45 @@ function Campaigns() {
   const [isAllCampaigns, setIsAllCampaigns] = useState(false)
   const [isReachedGoals, setIsReachedGoals] = useState(false)
   const [isNotReachedGoals, setIsNotReachedGoals] = useState(false)
+
+  const [showTag, setShowTag] = useState(false);
+  const [searchTag, setSearchTag] = useState([]);
+  const [listTagsDB, setListTagsDB] = useState([]);
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
 
   const setup = async (filtroMeta) => {
+    
     try {
-      const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=${isMyContributions}&minhasCampanhas=${isMyCampaigns}`)
+      const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=${isMyContributions}&minhasCampanhas=${isMyCampaigns}${tags ? tags.map(tag => `&idTags=${tag.idTag}`).join('') : ''}`)
       setCampanhas(data)
     } catch (error) {
       
     }
     if(userDatas)
+      await listTags()
       setLoading(false)
       setLoadingBody(false)
+  }
+
+  const handleShowTags = (tag) => {
+    if(tag) {
+      setTags([...tags, tag]);
+    }
+
+    showTag ? setShowTag(false) : setShowTag(true)
+
+  }
+
+  const listTags = async () => {
+    try {
+      const { data } = await apiColabore.get('/tag')
+      
+      setListTagsDB(data)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleMyContributionsFilter = () => {
@@ -68,6 +94,7 @@ function Campaigns() {
   }
 
   const removeTag = (index) => {
+    setLoadingBody(true)
     setTags(tags.filter((el, i) => i !== index))
   }
 
@@ -106,6 +133,8 @@ function Campaigns() {
     setup('META_NAO_ATINGIDA')
   }
 
+  console.log(tags.map(tag => `&idTags=${tag.idTag}`).join(''))
+
   if(loading) {
     return (<Loading />)
   } 
@@ -115,11 +144,26 @@ function Campaigns() {
           <Section>
             <FilterTags>
               <TagsContainer>
-              <input id='tags' name='tags' placeholder='Busque campanhas por categoria' onKeyDown={handleKeyDown}/>
+              <input
+              id='tags'
+              autoComplete="off"
+              value={searchTag}
+              onChange={(e) => setSearchTag(e.target.value)} 
+              name='tags'
+              placeholder='Busque campanhas por categoria'
+              onClick={() => handleShowTags()}
+              onKeyDown={handleKeyDown}/>
+              <div className={showTag ? 'active' : ''}>
+                {(showTag || searchTag.length > 0) && listTagsDB.map((tag, index) => (
+                  <div key={index} onClick={() => setLoadingBody(true)}>
+                    <span onClick={() => handleShowTags(tag)}>{tag.nomeTag}</span>
+                  </div>
+                ))}
+              </div>
               <div>
                 {tags.map((tag, index) => (
                     <div key={index}>
-                      <span>{tag} <span onClick={() => removeTag(index)}>&times;</span></span>
+                      <span>{tag.nomeTag} <span onClick={() => removeTag(index)}>&times;</span></span>
                     </div>
                 ))}
               </div>

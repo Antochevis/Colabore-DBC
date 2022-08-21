@@ -91,18 +91,34 @@ padding-bottom: 1.5rem;
   top: 0.7rem;
   right: 1rem;
  }
- && svg:hover {
-  cursor: pointer;
- }
 `;
 
 export const TagsContainer = styled.div`
-  && > div {
+  && > div:nth-child(2).active {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    width: 80%;
+    z-index: 1;
+    height: 25rem !important;
+    overflow: auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+  && > div:nth-child(2) div > span {
+    display: flex;
+    background: #ffffff;
+    width: 100%;
+    border-top: 1px solid #f4f4f4;
+    padding: 0.5rem;
+  }
+  && > div:nth-child(3) {
     display: flex;
     gap: 5px;
     margin-top: 0.5rem;
   }
-  && > div > div > span {
+  && > div:nth-child(3) > div > span {
     background: #2A69BB;
     color: white;
     padding: 0 8px;

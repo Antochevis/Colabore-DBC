@@ -111,6 +111,26 @@ export const RegisterCampaign = styled.div`
         padding: 0.2rem 0.5rem;
       }
       }
+      
+      /* > div:nth-child(3) > div > div.active {
+      position: absolute !important;
+      display: flex;
+      flex-direction: column;
+      margin-top: 0.5rem;
+      width: 80%;
+      z-index: 1;
+      height: 25rem !important;
+      overflow: auto;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+    && > div.active div > span {
+      display: flex;
+      background: #ffffff;
+      width: 100%;
+      border-top: 1px solid #f4f4f4;
+      padding: 0.5rem;
+    } */
     }
   }
 
