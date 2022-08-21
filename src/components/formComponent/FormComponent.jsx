@@ -151,7 +151,7 @@ const FormComponent = () => {
               meta: isUpdate ? campanha.meta : '',
               descricao: isUpdate ? campanha.descricao : '',
               encerrarAutomaticamente: isUpdate ? campanha.encerrarAutomaticamente : '',
-              dataLimite: isUpdate ? campanha.dataLimite : '',
+              dataLimite: '',
               foto: isUpdate ? campanha.foto : '',
               tags: isUpdate ? campanha.tags : '' 
             }}
@@ -185,16 +185,11 @@ const FormComponent = () => {
                       </Field>
                       {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
                     </div>
-                    {/* <div>
+                    <div>
                       <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
-                      <MaskedInput
-                        mask={maskDate}
-                        id='dataLimite'
-                        name="dataLimite"
-                        placeholder='Digite a data limite da campanha'
-                      />
+                      <Field id='dataLimite' type='date' name='dataLimite' ></Field>
                       {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
-                    </div> */}
+                    </div>
                   </div>
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
