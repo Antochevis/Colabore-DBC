@@ -23,7 +23,7 @@ export const ContainerAddCampaign = styled.div`
   }
 
   > div:last-child {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 `
 
@@ -32,7 +32,7 @@ export const RegisterCampaign = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin: 0 auto;
-  gap: 1  rem;
+  gap: 1rem;
 
   > div:nth-child(-n + 2) {
     display: flex;
@@ -106,7 +106,7 @@ export const RegisterCampaign = styled.div`
     }
   }
 
-  >div:nth-child(4) {
+  > div:nth-child(4) {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
