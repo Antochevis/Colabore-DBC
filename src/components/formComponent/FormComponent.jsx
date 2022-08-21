@@ -18,7 +18,7 @@ import CurrencyInput from "../currencyInput/CurrencyInput";
 const CampaignSchema = yup.object().shape({
   titulo: yup.string().required('Campo obrigatório!'),
   descricao: yup.string().required('Campo obrigatório!'),
-  tags: yup.string().required('Campo obrigatório!'),
+  //tags: yup.string().required('Campo obrigatório!'),
   encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
 })
 
@@ -30,6 +30,35 @@ const FormComponent = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [campanha, setCampanha] = useState();
 
+  const [showTag, setShowTag] = useState(false);
+  const [searchTag, setSearchTag] = useState([]);
+  const [listTagsDB, setListTagsDB] = useState([]);
+
+  const handleShowTags = (nameTag) => {
+    if(nameTag) {
+      setTags([...tags, nameTag]);
+    }
+
+    showTag ? setShowTag(false) : setShowTag(true)
+
+  }
+
+
+  const listTags = async () => {
+    try {
+      const { data } = await apiColabore.get('/tag')
+
+      const listTagsFormated = data.map((tag) => tag.nomeTag)
+
+      setListTagsDB(listTagsFormated)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  
+  
   const setup = async () => {
     if (idCampanha) {
       setIsUpdate(true)
@@ -40,17 +69,20 @@ const FormComponent = () => {
         console.log(error)
       }
     }
+    await listTags()
   }
 
   useEffect(() => {
     setup()
   }, [])
 
+  
   function handleKeyDown(e) {
     if(e.key !== 'Enter') return
     const value = e.target.value 
     if(!value.trim()) return
     setTags([...tags, value])
+    setSearchTag('')
     e.target.value = ''
   }
 
@@ -150,6 +182,8 @@ const FormComponent = () => {
       console.log(error)
     }
   }
+  
+  const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.includes(searchTag)) : listTagsDB
 
   if((isUpdate && campanha) || !isUpdate) {
   return (
@@ -217,7 +251,14 @@ const FormComponent = () => {
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
                     <div>
-                      <Field id='tags' name='tags' placeholder='Digite as tags da campanha' onKeyDown={handleKeyDown}/>
+                      <input id='tags' name='tags' placeholder='Digite as tags da campanha' value={searchTag} onChange={(e) => setSearchTag(e.target.value)} onClick={() => handleShowTags()} onKeyDown={handleKeyDown} autoComplete="off"/>
+                      <div>
+                        {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
+                          <div key={index}>
+                            <span onClick={() => handleShowTags(tag)}>{tag}</span>
+                          </div>
+                        ))}
+                      </div>
                       <div>
                         {tags.map((tag, index) => (
                           <div key={index}>

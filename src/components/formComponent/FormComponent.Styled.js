@@ -178,6 +178,7 @@ export const RegisterCampaign = styled.div`
 
   && section img {
     width: 4rem;
+    height: 4rem;
     clip-path: circle();
   }
 `
