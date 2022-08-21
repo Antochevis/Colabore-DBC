@@ -42,6 +42,7 @@ export const RegisterCampaign = styled.div`
     @media (max-width: 1200px) {
       flex-direction: column;
       width: 100%;
+      height: 186px;
     }
 
     > div {
@@ -75,7 +76,6 @@ export const RegisterCampaign = styled.div`
   > div:nth-child(3) {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     width: 100%;
     height: 93px;
 
@@ -85,6 +85,7 @@ export const RegisterCampaign = styled.div`
       letter-spacing: 0.3px;
       text-transform: uppercase;
       color: #9FA2B4;
+      margin-bottom: 0.5rem;
     }
 
     > div {
@@ -101,13 +102,14 @@ export const RegisterCampaign = styled.div`
       > div {
         display: flex;
         gap: 5px;
-      }
-      > div > div > span {
+        
+        > div > span {
         background: #2A69BB;
         color: white;
         padding: 0 8px;
         border-radius: 8px;
         padding: 0.2rem 0.5rem;
+      }
       }
     }
   }
