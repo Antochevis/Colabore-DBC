@@ -21,6 +21,9 @@ function Campaigns() {
   const [isMyCampaigns, setIsMyCampaigns] = useState(false)
   const [tags, setTags] = useState([]);
   const [isOpenCampaign, setIsOpenCampaign] = useState(false)
+  const [isAllCampaigns, setIsAllCampaigns] = useState(false)
+  const [isReachedGoals, setIsReachedGoals] = useState(false)
+  const [isNotReachedGoals, setIsNotReachedGoals] = useState(false)
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
 
@@ -71,6 +74,21 @@ function Campaigns() {
     setup('META_NAO_ATINGIDA')
   }
 
+  const setAllCampaigns = () => {
+    setIsAllCampaigns(!isAllCampaigns ? true : false)
+    setup('TODAS')
+  }
+
+  const setReachedGoals = () => {
+    setIsReachedGoals(!isReachedGoals ? true : false)
+    setup('META_ATINGIDA')
+  }
+
+  const setNotReachedGoals = () => {
+    setIsNotReachedGoals(!isNotReachedGoals ? true : false)
+    setup('META_NAO_ATINGIDA')
+  }
+
   if(loading) {
     return (<Loading />)
   } 
@@ -92,10 +110,30 @@ function Campaigns() {
               </TagsContainer>
             </FilterTags>
             <FilterMeta>
-              <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
-              <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
-              <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
-              <Button id='campanhasAbertas' width="310px" padding="22px" onClick={setOpenCampaigns}>Campanhas Abertas</Button>
+              <Button
+              disabled={isOpenCampaign || isReachedGoals || isNotReachedGoals} 
+              id='todasCampanhas'
+              width="310px"
+              padding="22px"
+              onClick={setAllCampaigns}>Todas campanhas</Button>
+              <Button
+              disabled={isOpenCampaign || isAllCampaigns || isNotReachedGoals}
+              id='metaAtingida'
+              width="310px"
+              padding="22px"
+              onClick={setReachedGoals}>Meta Atingida</Button>
+              <Button
+              disabled={isOpenCampaign || isAllCampaigns || isReachedGoals}
+              id='metaNaoAtingida'
+              width="310px"
+              padding="22px"
+              onClick={setNotReachedGoals}>Meta Não Atingida</Button>
+              <Button
+              disabled={isAllCampaigns || isNotReachedGoals || isReachedGoals}
+              id='campanhasAbertas'
+              width="310px"
+              padding="22px"
+              onClick={setOpenCampaigns}>Campanhas Abertas</Button>
             </FilterMeta>
             <UserCampaignFilter>
               <div>
