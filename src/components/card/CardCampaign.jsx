@@ -1,17 +1,23 @@
 import { Card } from './Card'
 import capa from '../../imgs/capa.png'
 import { CardContent, FinishedCampaign } from './CardCampaign.styled'
-import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage } from '../../consts'
+import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage, ColorGreen, ColorRed, ColorOrange, TextColor } from '../../consts'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
-const CardCampaign = ({campanha}) => {
+const CardCampaign = ({ campanha }) => {
   const navigate = useNavigate();
 
   const dateToFinished = new Date(campanha.dataLimite)
   const currentDate = new Date()
   const isFinished = currentDate > dateToFinished
+
+  const isRed = campanha.arrecadacao < 0.3 * campanha.meta
+
+  const isOrange = campanha.arrecadacao >= 0.3 * campanha.meta && campanha.arrecadacao <= 0.8 * campanha.meta
+
+  const isGreen = campanha.arrecadacao > 0.8 * campanha.meta
 
   return (
     <Card maxWidth="100%" height="350px">
@@ -29,7 +35,7 @@ const CardCampaign = ({campanha}) => {
             <TextSm color={colorHoverMenu} fontWeight="400">Por:</TextSm> {campanha.nome}
           </TextSm>
           <TextSm>
-            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm> <div>{campanha.tags.map(tag => {return(<><span>{tag}</span></>)})}</div>
+            <TextSm color={colorHoverMenu} fontWeight="400">Categoria:</TextSm> <div>{campanha.tags.map(tag => { return (<><span>{tag}</span></>) })}</div>
           </TextSm>
           <TextSm>
             <TextSm color={colorHoverMenu} fontWeight="400">Encerra em:</TextSm> {moment(campanha.dataLimite).format('LL')}
@@ -38,12 +44,12 @@ const CardCampaign = ({campanha}) => {
         <footer>
           <div>
             <Text>Arrecadado</Text>
-            <Text>{campanha.arrecadacao.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
+            <TextColor className={isRed ? 'ColorRed' : 'default' && isOrange ? 'ColorOrange' : 'default' && isGreen ? 'ColorGreen' : 'default'} >{campanha.arrecadacao.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</TextColor>
           </div>
           <div></div>
           <div>
             <Text>Meta</Text>
-            <Text>{campanha.meta.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
+            <Text>{campanha.meta.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Text>
           </div>
         </footer>
         {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>{campanha.statusMeta ? 'Meta Atingida' : isFinished ? 'Campanha Finalizada' : ''}</h3></div></div>}

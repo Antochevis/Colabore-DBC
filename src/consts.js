@@ -42,3 +42,8 @@ export const TextSm = styled.span(({color, fontSize, fontWeight}) => ({
   color: color ? color : colorInput,
   fontWeight: fontWeight ? fontWeight : 500,
 }));
+
+export const TextColor = styled.p(({fontSize, fontWeight}) => ({
+  fontSize: fontSize ? fontSize : fontMd,
+  fontWeight: fontWeight ? fontWeight : 500
+}));

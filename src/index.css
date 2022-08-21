@@ -128,3 +128,19 @@ button:disabled:hover {
   padding: 35px 0;
   gap: 100px;
 }
+
+.ColorRed {
+  color: red;
+}
+
+.ColorOrange {
+  color: Orange;
+}
+
+.ColorGreen {
+  color: Green;
+}
+
+.default {
+  color: #252733;
+}
