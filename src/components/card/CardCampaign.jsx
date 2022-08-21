@@ -44,7 +44,7 @@ const CardCampaign = ({ campanha }) => {
         <footer>
           <div>
             <Text>Arrecadado</Text>
-            <TextColor className={isRed ? 'ColorRed' : 'default' && isOrange ? 'ColorOrange' : 'default' && isGreen ? 'ColorGreen' : 'default'} >{campanha.arrecadacao.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</TextColor>
+            <Text className={isRed ? 'ColorRed' : isOrange ? 'ColorOrange' : isGreen ? 'ColorGreen' : ''} >{campanha.arrecadacao.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Text>
           </div>
           <div></div>
           <div>

@@ -104,5 +104,16 @@ export const CardContent = styled.div`
     height: 2px;
     background: linear-gradient(to bottom right, #2A69BB 0%, #B43E94 100%);
   }
+  && p.ColorRed {
+  color: red;
+  }
+
+  && p.ColorOrange {
+  color: Orange;
+  }
+
+  && p.ColorGreen {
+  color: rgb(6, 161, 6);
+  }
 `;
 
