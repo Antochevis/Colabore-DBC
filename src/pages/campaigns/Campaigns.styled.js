@@ -87,3 +87,20 @@ padding-bottom: 1.5rem;
   cursor: pointer;
  }
 `;
+
+export const TagsContainer = styled.div`
+  && > div {
+    display: flex;
+    gap: 5px;
+    margin-top: 0.5rem;
+  }
+  && > div > div > span {
+    background: #2A69BB;
+    color: white;
+    padding: 0 8px;
+    border-radius: 8px;
+  }
+  && > div > div > span > span:hover {
+   cursor: pointer;
+  }
+`;

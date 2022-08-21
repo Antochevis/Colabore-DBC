@@ -9,7 +9,7 @@ import { Button } from '../../components/button/Button'
 import { Tittle } from '../../consts'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from 'react-router-dom'
-import { FilterMeta, UserCampaignFilter, ActiveTittle, FilterTags } from './Campaigns.styled'
+import { FilterMeta, UserCampaignFilter, ActiveTittle, FilterTags, TagsContainer } from './Campaigns.styled'
 import { AuthContext } from '../../context/AuthContext'
 import { FaSearchDollar } from 'react-icons/fa'
 
@@ -56,7 +56,7 @@ function Campaigns() {
 
   useEffect(()=>{
     setup()
-  },[userDatas, isMyContributions, isMyCampaigns])
+  },[userDatas, isMyContributions, isMyCampaigns, tags])
 
   if(loading) {
     return (<Loading />)
@@ -66,16 +66,17 @@ function Campaigns() {
         <Header userName={userDatas.nome} userImg={userDatas.foto}/>
           <Section>
             <FilterTags>
-              <div className="tags-input-container">
+              <TagsContainer>
               <input id='tags' name='tags' placeholder='Busque campanhas por categoria' onKeyDown={handleKeyDown}/>
+              <div>
                 {tags.map((tag, index) => (
-                  <div className="tag-item" key={index}>
-                    <span className="text">{tag}</span>
-                    <span className="text" onClick={() => removeTag(index)}>&times;</span>
-                  </div>
+                    <div key={index}>
+                      <span>{tag} <span onClick={() => removeTag(index)}>&times;</span></span>
+                    </div>
                 ))}
-                <FaSearchDollar />
               </div>
+              <FaSearchDollar />
+              </TagsContainer>
             </FilterTags>
             <FilterMeta>
               <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
