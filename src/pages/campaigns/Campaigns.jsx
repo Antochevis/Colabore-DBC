@@ -65,15 +65,6 @@ function Campaigns() {
       <>
         <Header userName={userDatas.nome} userImg={userDatas.foto}/>
           <Section>
-            <FilterMeta>
-              <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
-              <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
-              <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
-            </FilterMeta>
-            <UserCampaignFilter>
-              <button id='minhasContribuições' onClick={handleMyContributionsFilter} className={isMyCampaigns ? 'active' : ''}>Minhas contribuições</button>
-              <button id='minhasCampanhas' onClick={handleMyCampaignsFilter} className={isMyContributions ? 'active' : ''}>Minhas Campanhas</button>
-            </UserCampaignFilter>
             <FilterTags>
               <div className="tags-input-container">
               <input id='tags' name='tags' placeholder='Busque campanhas por categoria' onKeyDown={handleKeyDown}/>
@@ -86,16 +77,37 @@ function Campaigns() {
                 <FaSearchDollar />
               </div>
             </FilterTags>
+            <FilterMeta>
+              <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
+              <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
+              <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
+            </FilterMeta>
+            <UserCampaignFilter>
+              <div>
+                <button
+                id='minhasContribuições'
+                onClick={handleMyContributionsFilter}
+                className={isMyContributions ? 'active' : 'left'}
+                >Minhas contribuições</button>                
+              </div>
+              <div>
+                <button
+                id='minhasCampanhas'
+                onClick={handleMyCampaignsFilter}
+                className={isMyCampaigns ? 'active' : 'right'}
+                >Minhas Campanhas</button> 
+              </div>
+            </UserCampaignFilter>
             <ActiveTittle>
               <Tittle>Todas campanhas</Tittle>
               <Button id='criarCampanha' onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
             <ContainerCards>
-              {campanhas.map(campanha =>(
+              {campanhas.length > 0 ? campanhas.map(campanha =>(
                 <CardCampaign key={campanha.idCampanha}
                 campanha={campanha}/>
               )
-              )}
+              ) : <><h1>Nenhuma campanha foi encontrada.</h1></>}
             </ContainerCards>  
           </Section>
         <Footer />

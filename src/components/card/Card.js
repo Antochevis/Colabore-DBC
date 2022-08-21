@@ -18,10 +18,14 @@ export const Card = styled.div(({maxWidth, padding, height, maxHeight}) => ({
 }));
 
 export const ContainerCards = styled.div`
+  position: relative;
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem 1rem;
+  && h1 {
+    padding-top: 3rem;
+  }
 
   @media (max-width:1300px) {
     grid-template-columns: 1fr 1fr;

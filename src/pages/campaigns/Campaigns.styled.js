@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import { colorPrimary } from "../../consts";
+import { colorPrimary, colorPrimaryDark } from "../../consts";
 
 export const FilterMeta = styled.div`
   display: flex;
   gap: 2rem;
+  padding-bottom: 1.5rem;
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 1rem;
@@ -15,21 +16,35 @@ export const FilterMeta = styled.div`
 `;
 
 export const UserCampaignFilter = styled.div`
-  display: flex;
-  padding: 1.5rem 0;
-  gap: 2rem;
-  && button {
-    font-weight: 600;
-    height: 2rem;
-    width: 12.5rem;
-    background: white;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
+    display: flex;
+    height: 3.125rem;
+    align-items: end;
+    width: 720px;
+  && button.left {
+    border-top-left-radius: 8px;
   }
-  && button:hover {
+  && button.right {
+    border-top-right-radius: 8px;
+  }
+  && button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    width: 240px;
+    border: 1px solid #f4f4f4;
+    height: 40px;
+    background: #FFFFFF;
+    border-bottom: 0px;
+  }
+  && button:hover, button.active {
+    height: 50px;
+    color: #ffffff;
+    background: ${colorPrimary};
+    border-color: var(--color-blue);
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
     cursor: pointer;
-    background: #ffffff29;
   }
 `;
 
@@ -37,7 +52,9 @@ export const ActiveTittle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem 0;
+  background: linear-gradient(0deg, #F7F8FC 85%, #FFFFFF 100%);
+  border-top: 1px solid #f4f4f4;
 `;
 
 export const FilterTags = styled.div`
@@ -65,8 +82,5 @@ padding-bottom: 1.5rem;
  }
  && svg:hover {
   cursor: pointer;
- }
- && button.active {
-  background: red;
  }
 `;
