@@ -87,22 +87,28 @@ export const RegisterCampaign = styled.div`
       color: #9FA2B4;
     }
 
-    > input {
-      background: #FCFDFE;
-      border: 1px solid #F0F1F7;
-      border-radius: 8px;
-      height: 3rem;
-      padding: 0.8rem 1rem;
-      color: #4B506D;
-    }
-    > textarea {
-      background: #FCFDFE;
-      border: 1px solid #F0F1F7;
-      border-radius: 8px;
-      height: 6rem;
-      padding: 0.8rem 1rem;
-      color: #4B506D;
-      resize: none;
+    > div {
+      > input {
+        background: #FCFDFE;
+        border: 1px solid #F0F1F7;
+        border-radius: 8px;
+        height: 3rem;
+        padding: 0.8rem 1rem;
+        color: #4B506D;
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+      > div {
+        display: flex;
+        gap: 5px;
+      }
+      > div > div > span {
+        background: #2A69BB;
+        color: white;
+        padding: 0 8px;
+        border-radius: 8px;
+        padding: 0.2rem 0.5rem;
+      }
     }
   }
 

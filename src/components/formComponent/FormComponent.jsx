@@ -164,8 +164,8 @@ const FormComponent = () => {
               descricao: isUpdate ? campanha.descricao : '',
               encerrarAutomaticamente: isUpdate ? campanha.encerrarAutomaticamente : '',
               dataLimite: '',
-              foto: isUpdate ? campanha.foto : '',
-              tags: isUpdate ? campanha.tags : '' 
+              foto: '',
+              tags: '' 
             }}
             validationSchema={CampaignSchema}
             onSubmit={(values) => {
@@ -216,14 +216,15 @@ const FormComponent = () => {
                   </div>
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
-                    <div className="tags-input-container">
-                      {tags.map((tag, index) => (
-                        <div className="tag-item" key={index}>
-                          <span className="text">{tag}</span>
-                          <span className="text">&times;</span>
-                        </div>
-                      ))}
+                    <div>
                       <Field id='tags' name='tags' placeholder='Digite as tags da campanha' onKeyDown={handleKeyDown}/>
+                      <div>
+                        {tags.map((tag, index) => (
+                          <div key={index}>
+                            <span>{tag} <span onClick={() => removeTag(index)}>&times;</span></span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
                   </div>
