@@ -20,6 +20,7 @@ function Campaigns() {
   const [isMyContributions, setIsMyContributions] = useState(false)
   const [isMyCampaigns, setIsMyCampaigns] = useState(false)
   const [tags, setTags] = useState([]);
+  const [isOpenCampaign, setIsOpenCampaign] = useState(false)
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
 
@@ -57,6 +58,18 @@ function Campaigns() {
   useEffect(()=>{
     setup()
   },[userDatas, isMyContributions, isMyCampaigns, tags])
+  
+  const verifyOpenCampaigns = (campanha) => {
+    const dateToFinished = new Date(campanha.dataLimite)
+    const currentDate = new Date()
+    const isFinished = currentDate > dateToFinished
+    return !isFinished
+  }
+
+  const setOpenCampaigns = () => {
+    setIsOpenCampaign(!isOpenCampaign ? true : false)
+    setup('META_NAO_ATINGIDA')
+  }
 
   if(loading) {
     return (<Loading />)
@@ -82,7 +95,7 @@ function Campaigns() {
               <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
               <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
               <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
-              <Button id='campanhasAbertas' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Campanhas Abertas</Button>
+              <Button id='campanhasAbertas' width="310px" padding="22px" onClick={setOpenCampaigns}>Campanhas Abertas</Button>
             </FilterMeta>
             <UserCampaignFilter>
               <div>
@@ -108,7 +121,10 @@ function Campaigns() {
             </ActiveTittle>
             <ContainerCards>
               {campanhas.length > 0 ? campanhas.map(campanha =>(
+                isOpenCampaign ? verifyOpenCampaigns(campanha) &&
                 <CardCampaign key={campanha.idCampanha}
+                campanha={campanha}/>
+                : <CardCampaign key={campanha.idCampanha}
                 campanha={campanha}/>
               )
               ) : <><h1>Nenhuma campanha foi encontrada.</h1></>}

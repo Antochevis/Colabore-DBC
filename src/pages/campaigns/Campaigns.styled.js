@@ -3,6 +3,7 @@ import { colorPrimary, colorPrimaryDark } from "../../consts";
 
 export const FilterMeta = styled.div`
   display: flex;
+  justify-content: center;
   gap: 2rem;
   padding-bottom: 1.5rem;
   @media (max-width: 768px) {

@@ -46,7 +46,7 @@ const CardCampaign = ({campanha}) => {
             <Text>{campanha.meta.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
           </div>
         </footer>
-        {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>{isFinished ? 'Campanha Finalizada' : campanha.statusMeta ? 'Meta Atingida' : ''}</h3></div></div>}
+        {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>{campanha.statusMeta ? 'Meta Atingida' : isFinished ? 'Campanha Finalizada' : ''}</h3></div></div>}
       </CardContent>
     </Card>
   )
