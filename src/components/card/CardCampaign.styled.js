@@ -30,6 +30,20 @@ export const CardContent = styled.div`
     height: 8rem;
     object-fit: cover;
   }
+  
+  && h2 {
+    
+    width: 274px;
+    height: 1.625rem;
+    background: linear-gradient(91.13deg, #181818 80%, rgba(24, 24, 24, 0) 99.54%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    overflow: hidden;
+    @media (max-width: 768px) {
+      width: 200px;
+    }
+  }
   && > div:nth-child(2) {
     display: flex;
     align-items: baseline;

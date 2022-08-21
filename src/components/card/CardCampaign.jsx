@@ -16,7 +16,7 @@ const CardCampaign = ({campanha}) => {
   return (
     <Card maxWidth="100%" height="350px">
       <CardContent>
-        <img src={campanha.fotoCampanha} />
+        <img src={campanha.fotoCampanha ? campanha.fotoCampanha : capa} />
         <div>
           <div>
             <Subtitle color={colorTittlePage}>{campanha.titulo}</Subtitle>
