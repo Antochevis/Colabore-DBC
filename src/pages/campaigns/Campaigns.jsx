@@ -82,7 +82,7 @@ function Campaigns() {
               <Button id='todasCampanhas' width="310px" padding="22px" onClick={() => setup('TODAS')}>Todas campanhas</Button>
               <Button id='metaAtingida' width="310px" padding="22px" onClick={() => setup('META_ATINGIDA')}>Meta Atingida</Button>
               <Button id='metaNaoAtingida' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Meta Não Atingida</Button>
-              {/* <Button id='campanhasAbertas' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Campanhas Abertas</Button> */}
+              <Button id='campanhasAbertas' width="310px" padding="22px" onClick={() => setup('META_NAO_ATINGIDA')}>Campanhas Abertas</Button>
             </FilterMeta>
             <UserCampaignFilter>
               <div>

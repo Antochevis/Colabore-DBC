@@ -31,10 +31,10 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
     <Card maxWidth="100%" height="562px">
       <CardContentSm>
         <Text fontSize="1.25rem">Arrecadado</Text>
-        <h3>R$ {campanha.arrecadacao}</h3>
+        <h3>{campanha.arrecadacao.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h3>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Meta</TextSm>
-          <TextSm fontSize="1.25rem" color={colorHoverMenu}>R$ {campanha.meta}</TextSm>
+          <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.meta.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</TextSm>
         </div>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Contribuições</TextSm>

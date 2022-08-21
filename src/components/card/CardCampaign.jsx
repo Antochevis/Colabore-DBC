@@ -38,12 +38,12 @@ const CardCampaign = ({campanha}) => {
         <footer>
           <div>
             <Text>Arrecadado</Text>
-            <Text>R$ {campanha.arrecadacao}</Text>
+            <Text>{campanha.arrecadacao.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
           </div>
           <div></div>
           <div>
             <Text>Meta</Text>
-            <Text>R$ {campanha.meta}</Text>
+            <Text>{campanha.meta.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
           </div>
         </footer>
         {(campanha.statusMeta === true || isFinished) && <div className="finished"><div><h3>{isFinished ? 'Campanha Finalizada' : campanha.statusMeta ? 'Meta Atingida' : ''}</h3></div></div>}

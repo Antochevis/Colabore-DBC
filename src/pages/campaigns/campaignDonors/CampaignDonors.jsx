@@ -50,7 +50,7 @@ function CampaignDonors() {
                     <img src={doador.foto} />
                     <div>
                       <p>{doador.nome}</p>
-                      <p>Valor: R$ {doador.valor}</p>
+                      <p>Valor: {doador.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
                     </div>
                   </DonorsInfos>
                 )
