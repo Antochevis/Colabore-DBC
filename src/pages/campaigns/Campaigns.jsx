@@ -85,17 +85,17 @@ function Campaigns() {
             <UserCampaignFilter>
               <div>
                 <button
-                id='minhasContribuições'
-                onClick={handleMyContributionsFilter}
-                className={isMyContributions ? 'active' : 'left'}
-                >Minhas contribuições</button>                
-              </div>
-              <div>
-                <button
                 id='minhasCampanhas'
                 onClick={handleMyCampaignsFilter}
                 className={isMyCampaigns ? 'active' : 'right'}
                 >Minhas Campanhas</button> 
+              </div>
+              <div>
+                <button
+                id='minhasContribuições'
+                onClick={handleMyContributionsFilter}
+                className={isMyContributions ? 'active' : 'left'}
+                >Minhas contribuições</button>                
               </div>
             </UserCampaignFilter>
             <ActiveTittle>

@@ -19,7 +19,7 @@ export const UserCampaignFilter = styled.div`
     display: flex;
     height: 3.125rem;
     align-items: end;
-    width: 720px;
+    width: 100%;
   && button.left {
     border-top-left-radius: 8px;
   }
@@ -36,6 +36,9 @@ export const UserCampaignFilter = styled.div`
     height: 40px;
     background: #FFFFFF;
     border-bottom: 0px;
+    @media(max-width: 768px) {
+      width: 165px;
+    }
   }
   && button:hover, button.active {
     height: 50px;
