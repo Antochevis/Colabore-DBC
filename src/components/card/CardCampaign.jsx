@@ -24,11 +24,11 @@ const CardCampaign = ({ campanha }) => {
       <CardContent>
         <img src={campanha.fotoCampanha ? campanha.fotoCampanha : capa} />
         <div>
+          <Subtitle color={colorTittlePage}>{campanha.titulo}</Subtitle>
           <div>
-            <Subtitle color={colorTittlePage}>{campanha.titulo}</Subtitle>
-            <TextSm color={colorHoverMenu} fontWeight="400">{moment(campanha.ultimaAlteracao).startOf('minutes').fromNow()}</TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">{moment(campanha.ultimaAlteracao).startOf('minute').fromNow()}</TextSm>
+            <button id='verDetalhes' onClick={() => navigate(`/detalhe-campanha/${campanha.idCampanha}`)}>Ver detalhes</button>
           </div>
-          <button id='verDetalhes' onClick={() => navigate(`/detalhe-campanha/${campanha.idCampanha}`)}>Ver detalhes</button>
         </div>
         <div>
           <TextSm>
