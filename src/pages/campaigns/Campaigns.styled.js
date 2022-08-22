@@ -6,7 +6,7 @@ export const FilterMeta = styled.div`
   justify-content: center;
   gap: 2rem;
   padding-bottom: 1.5rem;
-  && button.active, button:hover {
+  && button.active {
     background: linear-gradient(to bottom right, #2A69BB, #B43E94);
     border: #2A69BB;
   }
@@ -46,7 +46,7 @@ export const UserCampaignFilter = styled.div`
       width: 165px;
     }
   }
-  && button:hover, button.active {
+  && button.active:hover, button.active, button:hover {
     height: 50px;
     color: #ffffff;
     background: linear-gradient(to bottom right, #2A69BB, #B43E94);
@@ -55,6 +55,11 @@ export const UserCampaignFilter = styled.div`
     border-top-left-radius: 4px;
     cursor: pointer;
   }
+  
+  && button:hover {
+    background: #2A69BB;
+  }
+
   && button:disabled:hover {
     cursor: default !important;
     height: 40px;
