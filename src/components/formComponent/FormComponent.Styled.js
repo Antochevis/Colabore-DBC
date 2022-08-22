@@ -184,24 +184,29 @@ export const RegisterCampaign = styled.div`
   }
 `
 export const ListTagsStyle = styled.div`
-  && > div:nth-child(2).active {
+    && > ul:nth-child(2).active {
     position: absolute;
     display: flex;
     flex-direction: column;
     margin-top: 0.5rem;
     width: 40%;
-    z-index: 1;
     max-height: 25rem;
+    z-index: 1;
     overflow: auto;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    background: #ffffff;
   }
-  && > div:nth-child(2) div > span {
+  && > ul:nth-child(2) li > span {
     display: flex;
     background: #ffffff;
     width: 100%;
     border-top: 1px solid #f4f4f4;
     padding: 0.5rem;
+  }
+  && > ul:nth-child(2) li > span:hover {
+    cursor: pointer;
+    background: #F7F8FC;
   }
   && > div:nth-child(3) {
     display: flex;

@@ -165,15 +165,15 @@ const FormComponent = () => {
                       onClick={() => handleShowTags()} 
                       onKeyDown={handleKeyDown} 
                         autoComplete="off"/>
-                      <div className={showTag ? 'active' : ''}>
-                        <div>
+                      <ul className={showTag ? 'active' : ''}>
+                       
                         {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
-                          <div key={index}>
+                          <li key={index}>
                             <span onClick={() => handleShowTags(tag)}>{tag}</span>
-                          </div>
+                          </li>
                         ))}
-                        </div>
-                      </div>
+                        
+                      </ul>
                       <div>
                         {tags.map((tag, index) => (
                           <div key={index}>
