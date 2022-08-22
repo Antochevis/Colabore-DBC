@@ -92,7 +92,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('token')
     apiColabore.defaults.headers.common['Authorization'] = undefined
     setAuth(false)
-    window('/')
+    navigate('/')
     toast.success('Tchau!')
   }
 

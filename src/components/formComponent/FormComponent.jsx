@@ -8,11 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { CampaignContext } from "../../context/CampaignContext";
 import Dropzone from 'react-dropzone'
 import { apiColabore } from "../../services/api";
-import Loading from "../loading/Loading";
-import { ToastContainer, toast } from 'react-toastify';
-import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
-import { maskDate } from "../../utils/Masks";
 import CurrencyInput from "../currencyInput/CurrencyInput";
 import moment from 'moment'
 
