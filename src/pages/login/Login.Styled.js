@@ -91,6 +91,19 @@ export const FormStyle = styled.div`
   gap: 32px;
   width: 100%;
 
+  && div:nth-child(2) {
+    position: relative;
+  }
+  && div:nth-child(2) > svg {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    color: ${colorPrimary};
+  }
+  && svg:hover {
+    cursor: pointer;
+  }
+
   div:nth-child(-n + 2) {
     display: flex;
     flex-direction: column;

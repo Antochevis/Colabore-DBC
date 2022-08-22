@@ -9,6 +9,7 @@ import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 import Dropzone from 'react-dropzone'
 import { Button } from '../../components/button/Button';
 import { SignUpSchema } from '../../utils/Schemas'
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 
 function Register() {
   const { handleSignUp } = useContext(AuthContext);
@@ -19,6 +20,7 @@ function Register() {
   });
   const [isError, setError] = useState(null);
   const [isStrength, setStrength] = useState(null);
+  const [typePassword, setTypePassword] = useState('password');
 
   const handleChangePassword = (e) => {
     let password  = e.target.value;
@@ -102,14 +104,22 @@ function Register() {
                 <div>
                   <div>
                     <label htmlFor="senha">Senha*</label>
-                    <Field id='senha' type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
+                    <Field id='senha' type={typePassword} name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
+                      {typePassword === 'password' ? 
+                      <AiFillEyeInvisible title='Mostrar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} /> :
+                      <AiFillEye title='Ocultar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} />
+                      }
                     {errors.senha && touched.senha ? (<Errors id='erro-senha'>{errors.senha}</Errors>) : null}
                   </div>
                   <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
                 </div>
                 <div>
                   <label htmlFor="confirmarSenha">Confirmar senha*</label>
-                  <Field id='confirmarSenha' type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
+                  <Field id='confirmarSenha' type={typePassword} name='confirmarSenha' placeholder='Confirme sua senha'/>
+                  {typePassword === 'password' ? 
+                      <AiFillEyeInvisible title='Mostrar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} /> :
+                      <AiFillEye title='Ocultar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} />
+                      }
                   {errors.confirmarSenha && touched.confirmarSenha ? (<Errors id='erro-confirmarSenha'>{errors.confirmarSenha}</Errors>) : null}
                 </div>
               </div>

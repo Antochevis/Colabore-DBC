@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { BackgroundPage, Errors, FormStyle, LoginContainer, LogoAndText, Signup } from "./Login.Styled";
@@ -7,8 +7,10 @@ import { Logo } from "../../components/logo/Logo";
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 import { Button } from "../../components/button/Button";
 import { SignInSchema } from '../../utils/Schemas'
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 
 const Login = () => {
+  const [typePassword, setTypePassword] = useState('password');
   const {handleLogin} = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -46,7 +48,11 @@ const Login = () => {
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
-                <Field id='senha' type='password' name='senha' placeholder='Password'/>
+                <Field id='senha' type={typePassword} name='senha' placeholder='Password'/>
+                {typePassword === 'password' ? 
+                  <AiFillEyeInvisible title='Mostrar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} /> :
+                  <AiFillEye title='Ocultar Senha' onClick={() => setTypePassword(typePassword === 'password' ? 'text' : 'password')} />
+                }
                 {errors.senha && touched.senha ? (<Errors id='erro-senha'>{errors.senha}</Errors>) : null}
               </div>
               <Button id="entrar" width="35rem" type="submit">Entrar</Button>

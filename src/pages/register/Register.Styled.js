@@ -104,8 +104,27 @@ export const RegisterFormStyle = styled.div`
     height: 5rem;
   }
   && > div:nth-child(2) > div > div {
+    position: relative;
     width: 100%;
     height: 5rem;
+  }
+  && div:nth-child(2) > div > div > svg {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    color: ${colorPrimary};
+  }
+  && div:nth-child(2) > div:nth-child(2) {
+    position: relative;
+  }
+  && div:nth-child(2) > div:nth-child(2) > svg {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    color: ${colorPrimary};
+  }
+  && svg:hover {
+    cursor: pointer;
   }
 
     > div:nth-child(-n + 2) {
