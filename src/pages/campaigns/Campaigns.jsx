@@ -60,7 +60,9 @@ function Campaigns() {
     try {
       const { data } = await apiColabore.get('/tag')
       
-      setListTagsDB(data)
+      const listTagsFormated = data.map((tag) => tag.nomeTag)
+      
+      setListTagsDB(listTagsFormated)
 
     } catch (error) {
       console.log(error)
@@ -148,6 +150,8 @@ function Campaigns() {
     setup('META_NAO_ATINGIDA')
   }
 
+  const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.includes(searchTag)) : listTagsDB
+
   if(loading) {
     return (<Loading />)
   } 
@@ -167,11 +171,11 @@ function Campaigns() {
               onClick={() => handleShowTags()}
               onKeyDown={handleKeyDown}/>
               <ul className={showTag ? 'active' : ''}>
-                {(showTag || searchTag.length > 0) && listTagsDB.map((tag, index) => (
-                  <li key={index} onClick={() => setLoadingBody(true)}>
-                    <span onClick={() => handleShowTags(tag)}>{tag.nomeTag}</span>
-                  </li>
-                ))}
+              {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
+                <div key={index}>
+                  <span onClick={() => handleShowTags(tag)}>{tag}</span>
+                </div>
+              ))}
               </ul>
               <div>
                 {tags.map((tag, index) => (
