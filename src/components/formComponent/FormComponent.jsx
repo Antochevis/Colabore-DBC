@@ -14,11 +14,13 @@ import { OnlyNumbers } from "../../utils/Formatting";
 import { useParams } from "react-router-dom";
 import { maskDate } from "../../utils/Masks";
 import CurrencyInput from "../currencyInput/CurrencyInput";
+import moment from 'moment'
 
 const CampaignSchema = yup.object().shape({
   titulo: yup.string().required('Campo obrigatório!'),
   descricao: yup.string().required('Campo obrigatório!'),
-  //tags: yup.string().required('Campo obrigatório!'),
+  meta: yup.string().required('Campo obrigatório!'),
+  dataLimite: yup.string().required('Campo obrigatório'),
   encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
 })
 
@@ -64,6 +66,8 @@ const FormComponent = () => {
       setIsUpdate(true)
       try {
         const { data } = await apiColabore.get(`/campanha/campanhaPeloId?idCampanha=${idCampanha}`)
+        setImage(data.fotoCampanha)
+        setTags(data.tags)
         setCampanha(data)
       } catch (error) {
         console.log(error)
@@ -125,7 +129,7 @@ const FormComponent = () => {
       }
 
       redirectCampaign()
-      toast('Campanha cadastrada com sucesso')
+      toast.success('Campanha cadastrada com sucesso')
           
       } catch (error) {
         toast.error('Não foi possível adicionar a imagem.')
@@ -134,8 +138,6 @@ const FormComponent = () => {
   }
 
   const handleUpdateCampaign = async (values, image, tags) => {
-
-    console.log(values)
 
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
@@ -153,8 +155,6 @@ const FormComponent = () => {
       tags: tags
     }
 
-    console.log(newValues)
-
     try {
       await apiColabore.put(`/campanha/${idCampanha}`, newValues)
 
@@ -165,7 +165,7 @@ const FormComponent = () => {
         console.log(error)
       }
       redirectCampaign()
-      toast('Campanha cadastrada com sucesso')
+      toast.success('Campanha editada com sucesso!')
     } catch (error) {
       toast.error('Não foi possível editar a campanha.')
       console.log(error)
@@ -176,7 +176,7 @@ const FormComponent = () => {
     try {
       await apiColabore.delete(`/campanha/delete?id=${idCampanha}`)
       redirectCampaign()
-      toast('Campanha excluída com sucesso')
+      toast.success('Campanha excluída com sucesso')
     } catch (error) {
       toast.error('Não foi possível excluir a campanha.')
       console.log(error)
@@ -197,13 +197,11 @@ const FormComponent = () => {
               meta: isUpdate ? campanha.meta : '',
               descricao: isUpdate ? campanha.descricao : '',
               encerrarAutomaticamente: isUpdate ? campanha.encerrarAutomaticamente : '',
-              dataLimite: '',
+              dataLimite: isUpdate ? moment(campanha.dataLimite, 'YYYY-MM-DD').format('YYYY-MM-DD') : '',
               foto: '',
-              tags: '' 
             }}
             validationSchema={CampaignSchema}
             onSubmit={(values) => {
-              console.log(values)
               !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags)
             }}
           >
@@ -281,13 +279,16 @@ const FormComponent = () => {
                         <section>
                           <div {...getRootProps()}>
                             <input {...getInputProps()} />
-                            { image ? <img src={URL.createObjectURL(image[0])} alt="" /> : <p>Arraste arquivos até aqui, ou clique para buscar.</p>}
+                            { image ? <img src={(isUpdate && typeof image  === 'string') ? image : URL.createObjectURL(image[0])} alt="" /> : <p>Arraste arquivos até aqui, ou clique para buscar.</p>}
                           </div>
                         </section>
                       )}
                     </Dropzone>
                   </div>
-                  <Button type='submit' width="100%"  >{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  <Button
+                  type='submit'
+                  width="100%"
+                  disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0 || !image}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                   {!isUpdate ? <></> : 
                   <Button type='submit' width='100%' onClick={handleDeleteCampaign}>Excluir</Button>
                   }

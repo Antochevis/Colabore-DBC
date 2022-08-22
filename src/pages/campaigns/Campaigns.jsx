@@ -133,8 +133,6 @@ function Campaigns() {
     setup('META_NAO_ATINGIDA')
   }
 
-  console.log(tags.map(tag => `&idTags=${tag.idTag}`).join(''))
-
   if(loading) {
     return (<Loading />)
   } 
