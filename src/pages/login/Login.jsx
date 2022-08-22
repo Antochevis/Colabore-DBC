@@ -1,7 +1,6 @@
 import { Formik, Field, Form } from "formik";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
 import { BackgroundPage, Errors, FormStyle, LoginContainer, LogoAndText, Signup } from "./Login.Styled";
 import { Logo } from "../../components/logo/Logo";

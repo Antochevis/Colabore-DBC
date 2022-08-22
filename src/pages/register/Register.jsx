@@ -20,7 +20,6 @@ function Register() {
   const [isError, setError] = useState(null);
   const [isStrength, setStrength] = useState(null);
 
-
   const handleChangePassword = (e) => {
     let password  = e.target.value;
     setuserInfo({
