@@ -2,7 +2,7 @@ import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import { Errors } from "../../pages/register/Register.Styled";
 import { Button } from "../button/Button";
-import { ContainerAddCampaign, ContainerForm, RegisterCampaign } from "./FormComponent.Styled";
+import { ContainerAddCampaign, ContainerForm, ListTagsStyle, RegisterCampaign, TestTags } from "./FormComponent.Styled";
 import { Card } from "../card/Card"
 import { useContext, useEffect, useState } from "react";
 import { CampaignContext } from "../../context/CampaignContext";
@@ -248,14 +248,16 @@ const FormComponent = () => {
                   </div>
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
-                    <div>
+                    <ListTagsStyle>
                       <input id='tags' name='tags' placeholder='Digite as tags da campanha' value={searchTag} onChange={(e) => setSearchTag(e.target.value)} onClick={() => handleShowTags()} onKeyDown={handleKeyDown} autoComplete="off"/>
                       <div className={showTag ? 'active' : ''}>
+                        <div>
                         {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
                           <div key={index}>
                             <span onClick={() => handleShowTags(tag)}>{tag}</span>
                           </div>
                         ))}
+                        </div>
                       </div>
                       <div>
                         {tags.map((tag, index) => (
@@ -264,7 +266,7 @@ const FormComponent = () => {
                           </div>
                         ))}
                       </div>
-                    </div>
+                    </ListTagsStyle>
                     {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
                   </div>
                   <div>

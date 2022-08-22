@@ -99,38 +99,19 @@ export const RegisterCampaign = styled.div`
         width: 100%;
         margin-bottom: 0.5rem;
       }
-      > div {
+
+      > div:last-child {
         display: flex;
         gap: 5px;
         
         > div > span {
-        background: #2A69BB;
-        color: white;
-        padding: 0 8px;
-        border-radius: 8px;
-        padding: 0.2rem 0.5rem;
+          background: #2A69BB;
+          color: white;
+          padding: 0 8px;
+          border-radius: 8px;
+          padding: 0.2rem 0.5rem;
+        }
       }
-      }
-      
-      /* > div:nth-child(3) > div > div.active {
-      position: absolute !important;
-      display: flex;
-      flex-direction: column;
-      margin-top: 0.5rem;
-      width: 80%;
-      z-index: 1;
-      height: 25rem !important;
-      overflow: auto;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-      border-radius: 8px;
-    }
-    && > div.active div > span {
-      display: flex;
-      background: #ffffff;
-      width: 100%;
-      border-top: 1px solid #f4f4f4;
-      padding: 0.5rem;
-    } */
     }
   }
 
@@ -200,5 +181,39 @@ export const RegisterCampaign = styled.div`
     width: 4rem;
     height: 4rem;
     clip-path: circle();
+  }
+`
+export const ListTagsStyle = styled.div`
+  && > div:nth-child(2).active {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    width: 40%;
+    z-index: 1;
+    height: 25rem !important;
+    overflow: auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
+  && > div:nth-child(2) div > span {
+    display: flex;
+    background: #ffffff;
+    width: 100%;
+    border-top: 1px solid #f4f4f4;
+    padding: 0.5rem;
+  }
+  && > div:nth-child(3) {
+    display: flex;
+    gap: 5px;
+  }
+  && > div:nth-child(3) > div > span {
+    background: #2A69BB;
+    color: white;
+    padding: 0 8px;
+    border-radius: 8px;
+  }
+  && > div > div > span > span:hover {
+   cursor: pointer;
   }
 `
