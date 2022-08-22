@@ -13,6 +13,7 @@ import { FilterMeta, UserCampaignFilter, ActiveTittle, FilterTags, TagsContainer
 import { AuthContext } from '../../context/AuthContext'
 import { FaSearchDollar } from 'react-icons/fa'
 import LoadingBody from '../../components/loading/LoadingBody'
+import {CampaignContext } from '../../context/CampaignContext'
 
 
 function Campaigns() {
@@ -32,6 +33,7 @@ function Campaigns() {
   const [listTagsDB, setListTagsDB] = useState([]);
   const navigate = useNavigate()
   const {userDatas} = useContext(AuthContext)
+  const {handleMyContributionsFilter, handleMyCampaignsFilter} = useContext(CampaignContext)
 
   const setup = async (filtroMeta) => {
     
@@ -46,6 +48,10 @@ function Campaigns() {
       setLoading(false)
       setLoadingBody(false)
   }
+
+  useEffect(()=>{
+    setup()
+  },[userDatas, isMyContributions, isMyCampaigns, tags])
 
   const handleShowTags = (tag) => {
     if(tag) {
@@ -68,26 +74,6 @@ function Campaigns() {
     }
   }
 
-  const handleMyContributionsFilter = () => {
-    setLoadingBody(true)
-    setIsAllCampaigns(false)
-    setIsReachedGoals(false)
-    setIsNotReachedGoals(false)
-    setIsOpenCampaign(false)
-    setIsMyCampaigns(false)
-    setIsMyContributions(!isMyContributions ? true : false)
-  }
-
-  const handleMyCampaignsFilter = () => {
-    setLoadingBody(true)
-    setIsAllCampaigns(false)
-    setIsReachedGoals(false)
-    setIsNotReachedGoals(false)
-    setIsOpenCampaign(false)
-    setIsMyContributions(false)
-    setIsMyCampaigns(!isMyCampaigns ? true : false)
-  }
-
   const handleKeyDown = (e) => {
     if(e.key !== 'Enter') return
     const value = e.target.value 
@@ -102,9 +88,7 @@ function Campaigns() {
     setTags(tags.filter((el, i) => i !== index))
   }
 
-  useEffect(()=>{
-    setup()
-  },[userDatas, isMyContributions, isMyCampaigns, tags])
+
   
   const verifyOpenCampaigns = (campanha) => {
     const dateToFinished = new Date(campanha.dataLimite)
@@ -150,8 +134,6 @@ function Campaigns() {
   }
 
   const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.nomeTag.includes(searchTag)) : listTagsDB
-
-  console.log(showTag)
 
   if(loading) {
     return (<Loading />)
@@ -218,14 +200,14 @@ function Campaigns() {
               <div>
                 <button
                 id='minhasCampanhas'
-                onClick={handleMyCampaignsFilter}
+                onClick={() => handleMyCampaignsFilter(setLoadingBody, setIsAllCampaigns, setIsReachedGoals, setIsNotReachedGoals, setIsOpenCampaign, setIsMyCampaigns, setIsMyContributions, isMyCampaigns)}
                 className={isMyCampaigns ? 'active' : 'left'}
                 >Minhas Campanhas</button> 
               </div>
               <div>
                 <button
                 id='minhasContribuições'
-                onClick={handleMyContributionsFilter}
+                onClick={() => handleMyContributionsFilter(setLoadingBody, setIsAllCampaigns, setIsReachedGoals, setIsNotReachedGoals, setIsOpenCampaign, setIsMyCampaigns, setIsMyContributions, isMyContributions)}
                 className={isMyContributions ? 'active' : 'right'}
                 >Minhas contribuições</button>                
               </div>

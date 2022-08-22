@@ -1,3 +1,4 @@
+import { colorPrimary, colorBgSection } from "../../consts";
 import styled from "styled-components";
 
 export const ContainerForm = styled.div`
@@ -105,7 +106,7 @@ export const RegisterCampaign = styled.div`
         gap: 5px;
         
         > div > span {
-          background: #2A69BB;
+          background: ${colorPrimary};
           color: white;
           padding: 0 8px;
           border-radius: 8px;
@@ -206,14 +207,14 @@ export const ListTagsStyle = styled.div`
   }
   && > ul:nth-child(2) li > span:hover {
     cursor: pointer;
-    background: #F7F8FC;
+    background: ${colorBgSection};
   }
   && > div:nth-child(3) {
     display: flex;
     gap: 5px;
   }
   && > div:nth-child(3) > div > span {
-    background: #2A69BB;
+    background: ${colorPrimary};
     color: white;
     padding: 0 8px;
     border-radius: 8px;

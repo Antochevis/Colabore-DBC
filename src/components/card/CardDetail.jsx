@@ -5,14 +5,14 @@ import { Button } from '../button/Button'
 import { useNavigate } from 'react-router-dom'
 import { FormStyle } from './CardDetail.styled'
 import { Formik, Field, Form } from 'formik'
-import * as Yup from 'yup' 
+import { donationSchema } from '../../utils/Schemas'
 import { Errors } from '../../pages/register/Register.Styled'
 import Modal from '../modal/Modal'
 import { CampaignContext } from '../../context/CampaignContext'
 import { OnlyNumbers } from "../../utils/Formatting";
 import CurrencyInput from "../currencyInput/CurrencyInput";
 
-const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}) => {
+const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate}) => {
   const [activeDonate, setActiveDonate] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [disabledButton, setDisabledButton] = useState(true)
@@ -20,10 +20,6 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
   const hasDonate = campanha.doacoes.length > 0
   const isCampaignFinished = campanha.statusMeta
   const navigate = useNavigate()
-
-  const donationSchema = Yup.object().shape({
-    valor: Yup.string().required('Campo obrigatório!')
-  })
 
   const redirectUpdateCampaign = idCampanha => {
     navigate(`/criar-campanha/${idCampanha}`)

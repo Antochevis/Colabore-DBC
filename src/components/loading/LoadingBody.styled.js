@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { colorPrimary } from '../../consts'
+import { colorPrimary, colorBgSection } from '../../consts'
 
 export const PageLoad = styled.div`
   height: 26rem;
   width: 100%;
-  background-color: #F7F8FC;
+  background-color: ${colorBgSection};
   display: flex;
   flex-direction: row;
   justify-content: center;

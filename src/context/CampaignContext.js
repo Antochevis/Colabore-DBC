@@ -25,7 +25,6 @@ const CampaignProvider = ({ children }) => {
   }
 
   const handleUpdateCampaign = async (values, image, tags, idCampanha) => {
-
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
 
@@ -61,8 +60,6 @@ const CampaignProvider = ({ children }) => {
 
   const handleCreateCampaign = async (values, image, tags) => {
 
-    console.log(values)
-
     const campaignImage = new FormData()
     image && campaignImage.append('multipartFile', image[0])
 
@@ -78,8 +75,6 @@ const CampaignProvider = ({ children }) => {
       dataLimite: isoDate,
       tags: tags
     }
-
-    console.log(newValues)
 
     try {
       const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
@@ -132,10 +127,29 @@ const CampaignProvider = ({ children }) => {
     }
   }
 
+  const handleMyContributionsFilter = (setLoadingBody, setIsAllCampaigns, setIsReachedGoals, setIsNotReachedGoals, setIsOpenCampaign, setIsMyCampaigns, setIsMyContributions, isMyContributions) => {
+    setLoadingBody(true)
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
+    setIsOpenCampaign(false)
+    setIsMyCampaigns(false)
+    setIsMyContributions(!isMyContributions ? true : false)
+  }
+
+  const handleMyCampaignsFilter = (setLoadingBody, setIsAllCampaigns, setIsReachedGoals, setIsNotReachedGoals, setIsOpenCampaign, setIsMyCampaigns, setIsMyContributions, isMyCampaigns) => {
+    setLoadingBody(true)
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
+    setIsOpenCampaign(false)
+    setIsMyContributions(false)
+    setIsMyCampaigns(!isMyCampaigns ? true : false)
+  }
+
   return (
-    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, handleDonation, handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign }}>
+    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, handleDonation, handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign, handleMyContributionsFilter, handleMyCampaignsFilter }}>
       {children}
-      <ToastContainer />
     </CampaignContext.Provider>
   )
 

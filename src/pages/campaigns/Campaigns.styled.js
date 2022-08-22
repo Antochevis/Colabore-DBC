@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { colorPrimary, colorPrimaryDark } from "../../consts";
+import { colorPrimary, colorBgSection } from "../../consts";
 
 export const FilterMeta = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const FilterMeta = styled.div`
   padding-bottom: 1.5rem;
   && button.active {
     background: linear-gradient(to bottom right, #2A69BB, #B43E94);
-    border: #2A69BB;
+    border: ${colorPrimary};
   }
   @media (max-width: 768px) {
     display: grid;
@@ -57,7 +57,7 @@ export const UserCampaignFilter = styled.div`
   }
   
   && button:hover {
-    background: #2A69BB;
+    background: ${colorPrimary};
   }
 
   && button:disabled:hover {
@@ -92,7 +92,7 @@ padding-bottom: 1.5rem;
  }
  && input:focus {
   outline: transparent;
-  box-shadow: 0 0 0 2px #2A69BB;
+  box-shadow: 0 0 0 2px ${colorPrimary};
  }
  && svg {
   color: ${colorPrimary};
@@ -126,7 +126,7 @@ export const TagsContainer = styled.div`
   }
   && > ul:nth-child(2) li > span:hover {
     cursor: pointer;
-    background: #F7F8FC;
+    background: ${colorBgSection};
   }
   && > div:nth-child(3) {
     display: flex;
@@ -134,7 +134,7 @@ export const TagsContainer = styled.div`
     margin-top: 0.5rem;
   }
   && > div:nth-child(3) > div > span {
-    background: #2A69BB;
+    background: ${colorPrimary};
     color: white;
     padding: 0 8px;
     border-radius: 8px;

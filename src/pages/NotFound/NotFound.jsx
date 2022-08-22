@@ -1,6 +1,5 @@
 import { PageNotFound, TitleNotFound } from "./NotFound.styled"
 import astronaut from '../../imgs/astronaut.svg'
-import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (

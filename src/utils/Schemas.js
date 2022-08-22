@@ -42,3 +42,7 @@ export const CampaignSchema = yup.object().shape({
   dataLimite: yup.string().required('Campo obrigatório'),
   encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
 }) 
+
+export const donationSchema = yup.object().shape({
+  valor: yup.string().required('Campo obrigatório!')
+})
