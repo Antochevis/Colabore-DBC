@@ -110,11 +110,12 @@ export const TagsContainer = styled.div`
     flex-direction: column;
     margin-top: 0.5rem;
     width: 80%;
+    max-height: 25rem;
     z-index: 1;
-    height: 25rem !important;
     overflow: auto;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    background: #ffffff;
   }
   && > ul:nth-child(2) li > span {
     display: flex;

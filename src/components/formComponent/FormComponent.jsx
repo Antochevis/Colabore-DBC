@@ -40,6 +40,7 @@ const FormComponent = () => {
     if(nameTag) {
       setTags([...tags, nameTag]);
     }
+    setSearchTag('')
 
     showTag ? setShowTag(false) : setShowTag(true)
 

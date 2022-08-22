@@ -51,6 +51,7 @@ function Campaigns() {
     if(tag) {
       setTags([...tags, tag]);
     }
+    setSearchTag('')
 
     showTag ? setShowTag(false) : setShowTag(true)
 
@@ -60,9 +61,7 @@ function Campaigns() {
     try {
       const { data } = await apiColabore.get('/tag')
       
-      const listTagsFormated = data.map((tag) => tag.nomeTag)
-      
-      setListTagsDB(listTagsFormated)
+      setListTagsDB(data)
 
     } catch (error) {
       console.log(error)
@@ -150,7 +149,9 @@ function Campaigns() {
     setup('META_NAO_ATINGIDA')
   }
 
-  const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.includes(searchTag)) : listTagsDB
+  const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.nomeTag.includes(searchTag)) : listTagsDB
+
+  console.log(showTag)
 
   if(loading) {
     return (<Loading />)
@@ -165,17 +166,17 @@ function Campaigns() {
               id='tags'
               autoComplete="off"
               value={searchTag}
-              onChange={(e) => setSearchTag(e.target.value)} 
+              onChange={(e) => setSearchTag(e.target.value)}
               name='tags'
               placeholder='Busque campanhas por categoria'
               onClick={() => handleShowTags()}
               onKeyDown={handleKeyDown}/>
               <ul className={showTag ? 'active' : ''}>
-              {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
-                <div key={index}>
-                  <span onClick={() => handleShowTags(tag)}>{tag}</span>
-                </div>
-              ))}
+                {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (
+                  <li key={index} onClick={() => setLoadingBody(true)}>
+                    <span onClick={() => handleShowTags(tag)}>{tag.nomeTag}</span>
+                  </li>
+                ))}
               </ul>
               <div>
                 {tags.map((tag, index) => (
