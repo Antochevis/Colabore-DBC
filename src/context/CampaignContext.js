@@ -34,7 +34,7 @@ const CampaignProvider = ({ children }) => {
 
     const newValues = {
       titulo: values.titulo,
-      meta: OnlyNumbers(values.meta),
+      meta: typeof values.meta === 'string' ? OnlyNumbers(values.meta) : values.meta,
       descricao: values.descricao,
       encerrarAutomaticamente: values.encerrarAutomaticamente,
       dataLimite: isoDate,
