@@ -59,8 +59,18 @@ export const CardContentSm = styled.div`
     font-size: 3.125rem;
     font-weight: 500;
     line-height: 62.75px;
-    color: #17BF14;
     padding-bottom: 1rem;
+  }
+  && h3.ColorRed {
+  color: red;
+  }
+
+  && h3.ColorOrange {
+  color: Orange;
+  }
+
+  && h3.ColorGreen {
+  color: rgb(6, 161, 6);
   }
   && div:nth-child(3) {
     display: flex;
