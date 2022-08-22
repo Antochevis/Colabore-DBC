@@ -18,7 +18,7 @@ const CampaignSchema = yup.object().shape({
   meta: yup.string().required('Campo obrigatório!'),
   dataLimite: yup.string().required('Campo obrigatório'),
   encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
-})
+})  
 
 const FormComponent = () => {
   const { handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign } = useContext(CampaignContext)
@@ -146,7 +146,7 @@ const FormComponent = () => {
                     <div>
                       <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
                       <Field id='dataLimite' type='date' name='dataLimite' ></Field>
-                      {errors.dataLimite && touched.dataLimite ? (<Errors id='erro-dataLimite'>{errors.dataLimite}</Errors>) : null}                      
+                      {errors.dataLimite && touched.dataLimite ? (<Errors id='erro-dataLimite'>{errors.dataLimite}</Errors>) : null}        
                     </div>
                   </div>
                   <div>
