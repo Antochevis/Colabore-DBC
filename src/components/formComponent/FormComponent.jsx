@@ -288,7 +288,7 @@ const FormComponent = () => {
                   <Button
                   type='submit'
                   width="100%"
-                  disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0 || !image}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                  disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                   {!isUpdate ? <></> : 
                   <Button type='submit' width='100%' onClick={handleDeleteCampaign}>Excluir</Button>
                   }
