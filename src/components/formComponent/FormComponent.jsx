@@ -156,7 +156,7 @@ const FormComponent = () => {
                   <div>
                     <label htmlFor="tags">Digite as tags que mais se encaixam no projeto*</label>
                     <ListTagsStyle>
-                      <input 
+                      <Field 
                       id='tags' 
                       name='tags' 
                       placeholder='Digite as tags da campanha' 
@@ -182,7 +182,7 @@ const FormComponent = () => {
                         ))}
                       </div>
                     </ListTagsStyle>
-                    {errors.tags && touched.tags ? (<Errors id='erro-tags'>{errors.tags}</Errors>) : null}
+                    {tags.length < 1 && touched.tags ? (<Errors id='erro-tags'>Campo obrigatório!</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
