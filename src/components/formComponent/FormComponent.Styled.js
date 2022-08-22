@@ -191,7 +191,7 @@ export const ListTagsStyle = styled.div`
     margin-top: 0.5rem;
     width: 40%;
     z-index: 1;
-    height: 25rem !important;
+    max-height: 25rem;
     overflow: auto;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
