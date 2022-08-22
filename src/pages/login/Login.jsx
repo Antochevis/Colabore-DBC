@@ -11,12 +11,11 @@ import { Button } from "../../components/button/Button";
 
 const SignupSchema = yup.object().shape({
   email: yup.string()
-    .min(2, 'Mínimo de 2 caractéres')
-    .max(50, 'Máximo de 50 caractéres')
+    .matches(/@dbccompany.com.br/, 'O email deve conter: @dbccompany.com.br')
     .required('Campo obrigatório!'),
   senha: yup.string()
-    .min(2, 'Mínimo de 2 caractéres')
-    .max(50, 'Máximo de 50 caractéres')
+    .min(8, 'Mínimo de 8 caractéres')
+    .max(16, 'Máximo de 16 caractéres')
     .required('Campo obrigatório!')
 })
 

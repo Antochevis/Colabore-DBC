@@ -19,6 +19,7 @@ export const RegisterContainer = styled.div`
     background: #ffffff;
     @media(max-width: 1200px) {
       width: 100vw;
+      min-height: 100vh;
       padding: 0 1rem;
     }
   }
@@ -52,6 +53,7 @@ export const LogoAndTextRegister = styled.div`
   margin-top: 10px;
 
   && img {
+    margin-top: 1.625rem;
     width: 70px
   }
 
@@ -190,7 +192,7 @@ export const Errors = styled.p`
 export const BackToLogin = styled.small`
   color: ${colorPrimary};
   font-weight: 600;
-  margin-top: 1.625rem;
+  margin: 1.625rem 0;
 
   &:hover {
     text-decoration: underline;
