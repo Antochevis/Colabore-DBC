@@ -19,7 +19,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 1rem;
   }
-  div:nth-child(1):hover {
+  && > div > div:nth-child(1):hover {
     cursor: pointer;
     opacity: 0.95;
   }

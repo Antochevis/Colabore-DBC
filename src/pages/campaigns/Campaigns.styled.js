@@ -114,6 +114,10 @@ export const TagsContainer = styled.div`
     border-top: 1px solid #f4f4f4;
     padding: 0.5rem;
   }
+  && > ul:nth-child(2) li > span:hover {
+    cursor: pointer;
+    background: #F7F8FC;
+  }
   && > div:nth-child(3) {
     display: flex;
     gap: 5px;
