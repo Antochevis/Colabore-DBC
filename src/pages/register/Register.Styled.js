@@ -3,7 +3,7 @@ import { colorPrimary } from "../../consts";
 
 export const RegisterContainer = styled.div`
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   @media (max-width: 1200px) {
     display: flex;
     justify-content: center;
