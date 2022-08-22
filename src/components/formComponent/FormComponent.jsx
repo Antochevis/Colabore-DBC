@@ -161,7 +161,7 @@ const FormComponent = () => {
       try {
         await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
       } catch (error) {
-        toast.error('Não foi possível adicionar a imagem.')
+        typeof image !== 'string' && toast.error('Não foi possível adicionar a imagem.')
         console.log(error)
       }
       redirectCampaign()

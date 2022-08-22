@@ -26,7 +26,7 @@ const CardCampaign = ({ campanha }) => {
         <div>
           <div>
             <Subtitle color={colorTittlePage}>{campanha.titulo}</Subtitle>
-            <TextSm color={colorHoverMenu} fontWeight="400">{moment(campanha.ultimaAlteracao).startOf('hour').fromNow()}</TextSm>
+            <TextSm color={colorHoverMenu} fontWeight="400">{moment(campanha.ultimaAlteracao).startOf('minutes').fromNow()}</TextSm>
           </div>
           <button id='verDetalhes' onClick={() => navigate(`/detalhe-campanha/${campanha.idCampanha}`)}>Ver detalhes</button>
         </div>
