@@ -33,7 +33,10 @@ export const RegisterCampaign = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin: 0 auto;
-  gap: 1rem;
+  gap: 1rem;  
+  @media (max-width: 1200px) {
+    gap: 5px;
+  }
 
   > div:nth-child(-n + 2) {
     display: flex;
@@ -43,7 +46,8 @@ export const RegisterCampaign = styled.div`
     @media (max-width: 1200px) {
       flex-direction: column;
       width: 100%;
-      height: 186px;
+      height: 200px;
+      gap: 5px;
     }
 
     > div {
@@ -74,11 +78,25 @@ export const RegisterCampaign = styled.div`
     }
   }
 
+  > div:nth-child(2) {
+    @media (max-width: 1200px) {
+      height: 220px;
+      gap: 0;
+
+      > div:last-child {
+        margin-top: 10px;
+      }
+    }
+  }
+
   > div:nth-child(3) {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 95px;
+    min-height: 95px;
+    @media (max-width: 1200px) {
+      min-height: 120px;
+    }
 
     > label {
       font-size: 12px;
@@ -100,19 +118,6 @@ export const RegisterCampaign = styled.div`
         width: 100%;
         margin-bottom: 0.5rem;
       }
-
-      > div:last-child {
-        display: flex;
-        gap: 5px;
-        
-        > div > span {
-          background: ${colorPrimary};
-          color: white;
-          padding: 0 8px;
-          border-radius: 8px;
-          padding: 0.2rem 0.5rem;
-        }
-      }
     }
   }
 
@@ -122,6 +127,9 @@ export const RegisterCampaign = styled.div`
     gap: 0.5rem;
     width: 100%;
     height: 140px;
+    @media (max-width: 1200px) {
+      height: 150px;
+    }
 
     > label {
       font-size: 12px;
@@ -148,6 +156,9 @@ export const RegisterCampaign = styled.div`
     width: 100%;
     height: 6rem;
     gap: 6px;
+    @media (max-width: 1200px) {
+      margin-bottom: 10px;
+    }
 
     > label, p {
       font-size: 12px;
@@ -155,6 +166,12 @@ export const RegisterCampaign = styled.div`
       letter-spacing: 0.3px;
       text-transform: uppercase;
       color: #9FA2B4;
+    }
+
+    p {
+      @media (max-width: 1200px) {
+        text-align: center;
+      }
     }
   }
 
@@ -212,6 +229,8 @@ export const ListTagsStyle = styled.div`
   && > div:nth-child(3) {
     display: flex;
     gap: 5px;
+    max-width: 1000px;
+    flex-wrap: wrap;
   }
   && > div:nth-child(3) > div > span {
     background: ${colorPrimary};
