@@ -25,7 +25,7 @@ const CampaignSchema = yup.object().shape({
 })
 
 const FormComponent = () => {
-  const {redirectCampaign} = useContext(CampaignContext)
+  const { handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign } = useContext(CampaignContext)
   const [image, setImage] = useState();
   const [tags, setTags] = useState([]);
   const { idCampanha } = useParams();
@@ -35,32 +35,6 @@ const FormComponent = () => {
   const [showTag, setShowTag] = useState(false);
   const [searchTag, setSearchTag] = useState([]);
   const [listTagsDB, setListTagsDB] = useState([]);
-
-  const handleShowTags = (nameTag) => {
-    if(nameTag) {
-      setTags([...tags, nameTag]);
-    }
-    setSearchTag('')
-
-    showTag ? setShowTag(false) : setShowTag(true)
-
-  }
-
-
-  const listTags = async () => {
-    try {
-      const { data } = await apiColabore.get('/tag')
-
-      const listTagsFormated = data.map((tag) => tag.nomeTag)
-
-      setListTagsDB(listTagsFormated)
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  
-  
   
   const setup = async () => {
     if (idCampanha) {
@@ -81,7 +55,6 @@ const FormComponent = () => {
     setup()
   }, [])
 
-  
   function handleKeyDown(e) {
     if(e.key !== 'Enter') return
     const value = e.target.value 
@@ -95,91 +68,25 @@ const FormComponent = () => {
     setTags(tags.filter((el, i) => i !== index))
   }
 
-
-  const handleCreateCampaign = async (values, image, tags) => {
-
-    console.log(values)
-
-    const campaignImage = new FormData()
-    image && campaignImage.append('multipartFile', image[0])
-
-    const newDate = new Date (values.dataLimite)
-
-    const isoDate = newDate.toISOString()
-
-    const newValues = {
-      titulo: values.titulo,
-      meta: OnlyNumbers(values.meta),
-      descricao: values.descricao,
-      encerrarAutomaticamente: values.encerrarAutomaticamente,
-      dataLimite: isoDate,
-      tags: tags
+  const handleShowTags = (nameTag) => {
+    if(nameTag) {
+      setTags([...tags, nameTag]);
     }
+    setSearchTag('')
 
-    console.log(newValues)
+    showTag ? setShowTag(false) : setShowTag(true)
 
-    try {
-      const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
-      const idCampanha = campanhaValues.idCampanha
-
-      try {
-        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
-      } catch (error) {
-        toast.error('Não foi possível adicionar a imagem.')
-        console.log(error)
-      }
-
-      redirectCampaign()
-      toast.success('Campanha cadastrada com sucesso')
-          
-      } catch (error) {
-        toast.error('Não foi possível adicionar a imagem.')
-        console.log(error)
-      }
   }
 
-  const handleUpdateCampaign = async (values, image, tags) => {
-
-    const campaignImage = new FormData()
-    image && campaignImage.append('multipartFile', image[0])
-
-    const newDate = new Date (values.dataLimite)
-
-    const isoDate = newDate.toISOString()
-
-    const newValues = {
-      titulo: values.titulo,
-      meta: values.meta,
-      descricao: values.descricao,
-      encerrarAutomaticamente: values.encerrarAutomaticamente,
-      dataLimite: isoDate,
-      tags: tags
-    }
-
+  const listTags = async () => {
     try {
-      await apiColabore.put(`/campanha/${idCampanha}`, newValues)
+      const { data } = await apiColabore.get('/tag')
 
-      try {
-        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
-      } catch (error) {
-        typeof image !== 'string' && toast.error('Não foi possível adicionar a imagem.')
-        console.log(error)
-      }
-      redirectCampaign()
-      toast.success('Campanha editada com sucesso!')
-    } catch (error) {
-      toast.error('Não foi possível editar a campanha.')
-      console.log(error)
-    }
-  }
+      const listTagsFormated = data.map((tag) => tag.nomeTag)
 
-  const handleDeleteCampaign = async () => {
-    try {
-      await apiColabore.delete(`/campanha/delete?id=${idCampanha}`)
-      redirectCampaign()
-      toast.success('Campanha excluída com sucesso')
+      setListTagsDB(listTagsFormated)
+
     } catch (error) {
-      toast.error('Não foi possível excluir a campanha.')
       console.log(error)
     }
   }
@@ -203,7 +110,7 @@ const FormComponent = () => {
             }}
             validationSchema={CampaignSchema}
             onSubmit={(values) => {
-              !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags)
+              !isUpdate ? handleCreateCampaign(values, image, tags) : handleUpdateCampaign(values, image, tags, idCampanha)
             }}
           >
             {({errors, touched, props}) => (
@@ -227,7 +134,6 @@ const FormComponent = () => {
                           />
                       )}
                       />
-                      
                       {errors.meta && touched.meta ? (<Errors id='erro-meta'>{errors.meta}</Errors>) : null}
                     </div>
                   </div>
@@ -301,7 +207,7 @@ const FormComponent = () => {
                   width="100%"
                   disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                   {!isUpdate ? <></> : 
-                  <Button type='submit' width='100%' onClick={handleDeleteCampaign}>Excluir</Button>
+                  <Button type='submit' width='100%' onClick={() => handleDeleteCampaign(idCampanha)}>Excluir</Button>
                   }
                 </RegisterCampaign>
               </Form>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiColabore } from "../services/api";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { OnlyNumbers } from "../utils/Formatting";
 
 const CampaignContext = createContext();
 
@@ -11,6 +12,94 @@ const CampaignProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [campanhaById, setCampanhaById] = useState()
   const navigate = useNavigate();
+
+  const handleDeleteCampaign = async (idCampanha) => {
+    try {
+      await apiColabore.delete(`/campanha/delete?id=${idCampanha}`)
+      redirectCampaign()
+      toast.success('Campanha excluída com sucesso')
+    } catch (error) {
+      toast.error('Não foi possível excluir a campanha.')
+      console.log(error)
+    }
+  }
+
+  const handleUpdateCampaign = async (values, image, tags, idCampanha) => {
+
+    const campaignImage = new FormData()
+    image && campaignImage.append('multipartFile', image[0])
+
+    const newDate = new Date (values.dataLimite)
+
+    const isoDate = newDate.toISOString()
+
+    const newValues = {
+      titulo: values.titulo,
+      meta: values.meta,
+      descricao: values.descricao,
+      encerrarAutomaticamente: values.encerrarAutomaticamente,
+      dataLimite: isoDate,
+      tags: tags
+    }
+
+    try {
+      await apiColabore.put(`/campanha/${idCampanha}`, newValues)
+
+      try {
+        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+      } catch (error) {
+        typeof image !== 'string' && toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
+      redirectCampaign()
+      toast.success('Campanha editada com sucesso!')
+    } catch (error) {
+      toast.error('Não foi possível editar a campanha.')
+      console.log(error)
+    }
+  }
+
+  const handleCreateCampaign = async (values, image, tags) => {
+
+    console.log(values)
+
+    const campaignImage = new FormData()
+    image && campaignImage.append('multipartFile', image[0])
+
+    const newDate = new Date (values.dataLimite)
+
+    const isoDate = newDate.toISOString()
+
+    const newValues = {
+      titulo: values.titulo,
+      meta: OnlyNumbers(values.meta),
+      descricao: values.descricao,
+      encerrarAutomaticamente: values.encerrarAutomaticamente,
+      dataLimite: isoDate,
+      tags: tags
+    }
+
+    console.log(newValues)
+
+    try {
+      const {data: campanhaValues} =   await apiColabore.post('/campanha/cadastrar', newValues)
+      const idCampanha = campanhaValues.idCampanha
+
+      try {
+        await apiColabore.post(`/campanha/cadastrarFoto?idCampanha=${idCampanha}`, campaignImage, {headers: {'Content-Type': 'multipart/form-data'}})
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
+
+      redirectCampaign()
+      toast.success('Campanha cadastrada com sucesso')
+          
+      } catch (error) {
+        toast.error('Não foi possível adicionar a imagem.')
+        console.log(error)
+      }
+  }
 
   const redirectCampaign = async () => {
     try{
@@ -44,7 +133,7 @@ const CampaignProvider = ({ children }) => {
   }
 
   return (
-    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, handleDonation }}>
+    <CampaignContext.Provider value={{ redirectCampaign, getCampanhaById, campanhaById, handleDonation, handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign }}>
       {children}
       <ToastContainer />
     </CampaignContext.Provider>
