@@ -212,7 +212,7 @@ const FormComponent = () => {
                     <div>
                       <label htmlFor="titulo">Título da campanha*</label>
                       <Field id='titulo' name='titulo' placeholder='Digite o título da campanha' />
-                      {errors.titulo && touched.titulo ? (<Errors>{errors.titulo}</Errors>) : null}
+                      {errors.titulo && touched.titulo ? (<Errors id='erro-titulo'>{errors.titulo}</Errors>) : null}
                     </div>
                     <div>
                       <label htmlFor="meta">Quantidade a ser arrecadada*</label>
@@ -227,7 +227,7 @@ const FormComponent = () => {
                       )}
                       />
                       
-                      {errors.meta && touched.meta ? (<Errors>{errors.meta}</Errors>) : null}
+                      {errors.meta && touched.meta ? (<Errors id='erro-meta'>{errors.meta}</Errors>) : null}
                     </div>
                   </div>
                   <div>
@@ -238,12 +238,12 @@ const FormComponent = () => {
                         <option value={true}>Sim</option>
                         <option value={false}>Não</option>  
                       </Field>
-                      {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors>{errors.encerrarAutomaticamente}</Errors>) : null}
+                      {errors.encerrarAutomaticamente && touched.encerrarAutomaticamente ? (<Errors id='erro-select'>{errors.encerrarAutomaticamente}</Errors>) : null}
                     </div>
                     <div>
                       <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
                       <Field id='dataLimite' type='date' name='dataLimite' ></Field>
-                      {errors.dataLimite && touched.dataLimite ? (<Errors>{errors.dataLimite}</Errors>) : null}                      
+                      {errors.dataLimite && touched.dataLimite ? (<Errors id='erro-dataLimite'>{errors.dataLimite}</Errors>) : null}                      
                     </div>
                   </div>
                   <div>
@@ -275,12 +275,12 @@ const FormComponent = () => {
                         ))}
                       </div>
                     </ListTagsStyle>
-                    {errors.tags && touched.tags ? (<Errors>{errors.tags}</Errors>) : null}
+                    {errors.tags && touched.tags ? (<Errors id='erro-tags'>{errors.tags}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
                     <Field as='textarea' id='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
-                    {errors.descricao && touched.descricao ? (<Errors>{errors.descricao}</Errors>) : null}
+                    {errors.descricao && touched.descricao ? (<Errors id='erro-descricao'>{errors.descricao}</Errors>) : null}
                   </div>
                   <div>
                     <label htmlFor="foto">Foto</label>

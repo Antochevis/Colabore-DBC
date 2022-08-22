@@ -53,12 +53,12 @@ const Login = () => {
               <div>
                 <label htmlFor="email">E-mail*</label>
                 <Field id='email' name='email' placeholder='Digite seu e-mail' />
-                {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
+                {errors.email && touched.email ? (<Errors id='erro-email'>{errors.email}</Errors>) : null}
               </div>
               <div>
                 <label htmlFor="senha">Senha*</label>
                 <Field id='senha' type='password' name='senha' placeholder='Password'/>
-                {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+                {errors.senha && touched.senha ? (<Errors id='erro-senha'>{errors.senha}</Errors>) : null}
               </div>
               <Button id="entrar" width="35rem" type="submit">Entrar</Button>
             </FormStyle>

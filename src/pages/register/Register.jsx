@@ -132,7 +132,7 @@ function Register() {
                 <div>
                   <label htmlFor="email">E-mail*</label>
                   <Field id='email' name='email' placeholder='Digite seu e-mail'/>
-                  {errors.email && touched.email ? (<Errors>{errors.email}</Errors>) : null}
+                  {errors.email && touched.email ? (<Errors id='erro-email'>{errors.email}</Errors>) : null}
                 </div>
               </div>
               <div>
@@ -140,14 +140,14 @@ function Register() {
                   <div>
                     <label htmlFor="senha">Senha*</label>
                     <Field id='senha' type='password' name='senha' placeholder='Digite sua senha' data-component='password-strength' onKeyUp={handleChangePassword}/>
-                    {errors.senha && touched.senha ? (<Errors>{errors.senha}</Errors>) : null}
+                    {errors.senha && touched.senha ? (<Errors id='erro-senha'>{errors.senha}</Errors>) : null}
                   </div>
                   <PasswordStrengthMeter password={userInfo.password} actions={dataHandler}/>
                 </div>
                 <div>
                   <label htmlFor="confirmarSenha">Confirmar senha*</label>
                   <Field id='confirmarSenha' type='password' name='confirmarSenha' placeholder='Confirme sua senha'/>
-                  {errors.confirmarSenha && touched.confirmarSenha ? (<Errors>{errors.confirmarSenha}</Errors>) : null}
+                  {errors.confirmarSenha && touched.confirmarSenha ? (<Errors id='erro-confirmarSenha'>{errors.confirmarSenha}</Errors>) : null}
                 </div>
               </div>
               <div>
