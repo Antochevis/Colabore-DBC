@@ -98,7 +98,7 @@ const FormComponent = () => {
     <ContainerForm>
       <Card padding="2rem" >
         <ContainerAddCampaign>
-          <h2>Cadastrar nova campanha</h2>
+          <h2>{!isUpdate ? 'Cadastrar nova campanha' : 'Atualizar campanha'}</h2>
           <Formik
             initialValues={{
               titulo: isUpdate ? campanha.titulo : '',
