@@ -122,6 +122,9 @@ export const RegisterFormStyle = styled.div`
     bottom: 30px;
     right: 10px;
     color: ${colorPrimary};
+    @media (max-width: 768px) {
+      bottom: 15px
+    }
   }
   && svg:hover {
     cursor: pointer;
