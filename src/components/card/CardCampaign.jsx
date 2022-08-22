@@ -1,12 +1,14 @@
-import { Card } from './Card'
-import capa from '../../imgs/capa.png'
-import { CardContent, FinishedCampaign } from './CardCampaign.styled'
-import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage, ColorGreen, ColorRed, ColorOrange, TextColor } from '../../consts'
-import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/pt-br'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Card } from './Card'
+import { CardContent, FinishedCampaign } from './CardCampaign.styled'
+import capa from '../../imgs/capa.png'
+import { TextSm, Text, Subtitle, colorHoverMenu, colorTittlePage, ColorGreen, ColorRed, ColorOrange, TextColor } from '../../consts'
 
-const CardCampaign = ({ campanha }) => {
+const CardCampaign = ({ campanha, isMyContributions, idUsuario }) => {
+  // const [userDonors, setuserDonors] = useState();
   const navigate = useNavigate();
 
   const dateToFinished = new Date(campanha.dataLimite)
@@ -19,8 +21,12 @@ const CardCampaign = ({ campanha }) => {
 
   const isGreen = campanha.arrecadacao > 0.8 * campanha.meta
 
+  let userDonors = 0;
+
+  campanha.doacoes.map(doacao => (doacao.idUsuario === idUsuario) ? userDonors = userDonors + doacao.valor : '')
+
   return (
-    <Card maxWidth="100%" height="350px">
+    <Card maxWidth="100%" height='350px'>
       <CardContent>
         <img src={campanha.fotoCampanha ? campanha.fotoCampanha : capa} />
         <div>
@@ -42,10 +48,16 @@ const CardCampaign = ({ campanha }) => {
           </TextSm>
         </div>
         <footer>
+          {isMyContributions ?
+          <div>
+            <Text>Você contribuiu</Text>
+            <Text>{userDonors.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Text>
+          </div> :
           <div>
             <Text>Arrecadado</Text>
             <Text className={isRed ? 'ColorRed' : isOrange ? 'ColorOrange' : isGreen ? 'ColorGreen' : ''} >{campanha.arrecadacao.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Text>
           </div>
+          }
           <div></div>
           <div>
             <Text>Meta</Text>

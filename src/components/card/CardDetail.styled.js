@@ -14,11 +14,10 @@ export const FormStyle = styled.div`
     color: #4B506D;
     width: 100%;
   }
-  && div {
+  && > div {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    gap: 1rem;
+    gap: 2.5rem;
     padding-top: 0.625rem;
   }
 `;

@@ -222,9 +222,15 @@ function Campaigns() {
               campanhas.length > 0 ? campanhas.map(campanha =>(
                 isOpenCampaign ? verifyOpenCampaigns(campanha) &&
                 <CardCampaign key={campanha.idCampanha}
-                campanha={campanha}/>
+                campanha={campanha}
+                isMyContributions={isMyContributions}
+                idUsuario={userDatas.idUsuario}
+                />
                 : <CardCampaign key={campanha.idCampanha}
-                campanha={campanha}/>
+                campanha={campanha}
+                isMyContributions={isMyContributions}
+                idUsuario={userDatas.idUsuario}
+                />
               )
               ) : <><div></div><h1>Nenhuma campanha foi encontrada.</h1></>
               }

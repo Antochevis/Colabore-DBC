@@ -9,6 +9,8 @@ import * as Yup from 'yup'
 import { Errors } from '../../pages/register/Register.Styled'
 import Modal from '../modal/Modal'
 import { CampaignContext } from '../../context/CampaignContext'
+import { OnlyNumbers } from "../../utils/Formatting";
+import CurrencyInput from "../currencyInput/CurrencyInput";
 
 const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}) => {
   const [activeDonate, setActiveDonate] = useState(false)
@@ -66,6 +68,7 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
             }}
             validationSchema={donationSchema}
             onSubmit={(values, {resetForm}) => {
+              values.valor = OnlyNumbers(values.valor)
               handleDonation(values, campanha, setOpenModal)
               resetForm()
             }}
@@ -75,7 +78,17 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
                 <FormStyle style={{display: activeDonate ? 'flex' : 'none'}}>
                   <label htmlFor=""><Text>Digite o valor da contribuição:</Text></label>
                   <div>
-                    <Field type="text" name="valor" placeholder="R$" onKeyUp={() => {setDisabledButton(false)}} />
+                    <Field 
+                    name="valor"
+                    render= {({field}) => (
+                      <CurrencyInput
+                        {...field}
+                        id="valor"
+                        placeholder="R$ 0,00"
+                        onKeyUp={() => {setDisabledButton(false)}}
+                        />
+                    )}
+                    />
                     <Button
                     id="enviarContribuicao"
                     disabled={disabledButton || errors.valor} 
