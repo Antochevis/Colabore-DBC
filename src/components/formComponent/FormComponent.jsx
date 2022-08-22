@@ -257,7 +257,7 @@ const FormComponent = () => {
                       onChange={(e) => setSearchTag(e.target.value)} 
                       onClick={() => handleShowTags()} 
                       onKeyDown={handleKeyDown} 
-                      autoComplete="off"/>
+                        autoComplete="off"/>
                       <div className={showTag ? 'active' : ''}>
                         <div>
                         {(showTag || searchTag.length > 0) && filteredTags && filteredTags.map((tag, index) => (

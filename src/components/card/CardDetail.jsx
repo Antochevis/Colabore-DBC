@@ -29,11 +29,17 @@ const CardDetail = ({campanha, isAuthor, hasUserDonated, finishedByDate, donors}
     navigate(`/criar-campanha/${idCampanha}`)
   }
 
+  const isRed = campanha.arrecadacao < 0.3 * campanha.meta
+
+  const isOrange = campanha.arrecadacao >= 0.3 * campanha.meta && campanha.arrecadacao <= 0.8 * campanha.meta
+
+  const isGreen = campanha.arrecadacao > 0.8 * campanha.meta
+
   return (
     <Card maxWidth="100%" height="562px">
       <CardContentSm>
         <Text fontSize="1.25rem">Arrecadado</Text>
-        <h3>{campanha.arrecadacao.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h3>
+        <h3 className={isRed ? 'ColorRed' : isOrange ? 'ColorOrange' : isGreen ? 'ColorGreen' : ''} >{campanha.arrecadacao.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
         <div>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>Meta</TextSm>
           <TextSm fontSize="1.25rem" color={colorHoverMenu}>{campanha.meta.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</TextSm>
