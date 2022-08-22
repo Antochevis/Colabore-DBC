@@ -6,6 +6,10 @@ export const FilterMeta = styled.div`
   justify-content: center;
   gap: 2rem;
   padding-bottom: 1.5rem;
+  && button.active {
+    background: linear-gradient(to bottom right, #2A69BB, #B43E94);
+    border: #2A69BB;
+  }
   @media (max-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -45,7 +49,7 @@ export const UserCampaignFilter = styled.div`
   && button:hover, button.active {
     height: 50px;
     color: #ffffff;
-    background: ${colorPrimary};
+    background: linear-gradient(to bottom right, #2A69BB, #B43E94);
     border-color: var(--color-blue);
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;

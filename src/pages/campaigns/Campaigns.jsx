@@ -73,6 +73,7 @@ function Campaigns() {
     setIsReachedGoals(false)
     setIsNotReachedGoals(false)
     setIsOpenCampaign(false)
+    setIsMyCampaigns(false)
     setIsMyContributions(!isMyContributions ? true : false)
   }
 
@@ -82,6 +83,7 @@ function Campaigns() {
     setIsReachedGoals(false)
     setIsNotReachedGoals(false)
     setIsOpenCampaign(false)
+    setIsMyContributions(false)
     setIsMyCampaigns(!isMyCampaigns ? true : false)
   }
 
@@ -111,24 +113,36 @@ function Campaigns() {
   }
 
   const setOpenCampaigns = () => {
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
     setLoadingBody(true)
     setIsOpenCampaign(!isOpenCampaign ? true : false)
     setup('META_NAO_ATINGIDA')
   }
 
   const setAllCampaigns = () => {
+    setIsOpenCampaign(false)
+    setIsReachedGoals(false)
+    setIsNotReachedGoals(false)
     setLoadingBody(true)
     setIsAllCampaigns(!isAllCampaigns ? true : false)
     setup('TODAS')
   }
 
   const setReachedGoals = () => {
+    setIsOpenCampaign(false)
+    setIsAllCampaigns(false)
+    setIsNotReachedGoals(false)
     setLoadingBody(true)
     setIsReachedGoals(!isReachedGoals ? true : false)
     setup('META_ATINGIDA')
   }
 
   const setNotReachedGoals = () => {
+    setIsOpenCampaign(false)
+    setIsAllCampaigns(false)
+    setIsReachedGoals(false)
     setLoadingBody(true)
     setIsNotReachedGoals(!isNotReachedGoals ? true : false)
     setup('META_NAO_ATINGIDA')
@@ -171,25 +185,25 @@ function Campaigns() {
             </FilterTags>
             <FilterMeta>
               <Button
-              disabled={isOpenCampaign || isReachedGoals || isNotReachedGoals} 
+              className={isAllCampaigns ? 'active' : ''}
               id='todasCampanhas'
               width="310px"
               padding="22px"
               onClick={setAllCampaigns}>Todas campanhas</Button>
               <Button
-              disabled={isAllCampaigns || isNotReachedGoals || isReachedGoals}
+              className={isOpenCampaign ? 'active' : ''}
               id='campanhasAbertas'
               width="310px"
               padding="22px"
               onClick={setOpenCampaigns}>Campanhas Abertas</Button>
               <Button
-              disabled={isOpenCampaign || isAllCampaigns || isNotReachedGoals}
+              className={isReachedGoals ? 'active' : ''}
               id='metaAtingida'
               width="310px"
               padding="22px"
               onClick={setReachedGoals}>Meta Atingida</Button>
               <Button
-              disabled={isOpenCampaign || isAllCampaigns || isReachedGoals}
+              className={isNotReachedGoals ? 'active' : ''}
               id='metaNaoAtingida'
               width="310px"
               padding="22px"
@@ -201,7 +215,6 @@ function Campaigns() {
                 id='minhasCampanhas'
                 onClick={handleMyCampaignsFilter}
                 className={isMyCampaigns ? 'active' : 'left'}
-                disabled={isMyContributions}
                 >Minhas Campanhas</button> 
               </div>
               <div>
@@ -209,12 +222,11 @@ function Campaigns() {
                 id='minhasContribuições'
                 onClick={handleMyContributionsFilter}
                 className={isMyContributions ? 'active' : 'right'}
-                disabled={isMyCampaigns}
                 >Minhas contribuições</button>                
               </div>
             </UserCampaignFilter>
             <ActiveTittle>
-              <Tittle>{isMyCampaigns ? 'Minhas Campanhas' : isMyContributions? 'Minhas Contribuições' : 'Todas campanhas'}</Tittle>
+              <Tittle>{isReachedGoals ? 'Meta Atingida' : isNotReachedGoals ? 'Meta Não Atingida' : isOpenCampaign ? 'Campanhas Abertas' : 'Todas Campanhas'}</Tittle>
               <Button id='criarCampanha' onClick={() => navigate('/criar-campanha')}>Criar campanha</Button>
             </ActiveTittle>
             <ContainerCards>
