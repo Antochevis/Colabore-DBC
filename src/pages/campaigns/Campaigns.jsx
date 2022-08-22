@@ -88,8 +88,9 @@ function Campaigns() {
   const handleKeyDown = (e) => {
     if(e.key !== 'Enter') return
     const value = e.target.value 
-    if(!value.trim()) return
+    if(!value.trim() || !listTagsDB.includes(value)) return
     setTags([...tags, value])
+    setSearchTag('')
     e.target.value = ''
   }
 
@@ -151,13 +152,13 @@ function Campaigns() {
               placeholder='Busque campanhas por categoria'
               onClick={() => handleShowTags()}
               onKeyDown={handleKeyDown}/>
-              <div className={showTag ? 'active' : ''}>
+              <ul className={showTag ? 'active' : ''}>
                 {(showTag || searchTag.length > 0) && listTagsDB.map((tag, index) => (
-                  <div key={index} onClick={() => setLoadingBody(true)}>
+                  <li key={index} onClick={() => setLoadingBody(true)}>
                     <span onClick={() => handleShowTags(tag)}>{tag.nomeTag}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <div>
                 {tags.map((tag, index) => (
                     <div key={index}>
@@ -176,6 +177,12 @@ function Campaigns() {
               padding="22px"
               onClick={setAllCampaigns}>Todas campanhas</Button>
               <Button
+              disabled={isAllCampaigns || isNotReachedGoals || isReachedGoals}
+              id='campanhasAbertas'
+              width="310px"
+              padding="22px"
+              onClick={setOpenCampaigns}>Campanhas Abertas</Button>
+              <Button
               disabled={isOpenCampaign || isAllCampaigns || isNotReachedGoals}
               id='metaAtingida'
               width="310px"
@@ -187,12 +194,6 @@ function Campaigns() {
               width="310px"
               padding="22px"
               onClick={setNotReachedGoals}>Meta Não Atingida</Button>
-              <Button
-              disabled={isAllCampaigns || isNotReachedGoals || isReachedGoals}
-              id='campanhasAbertas'
-              width="310px"
-              padding="22px"
-              onClick={setOpenCampaigns}>Campanhas Abertas</Button>
             </FilterMeta>
             <UserCampaignFilter>
               <div>

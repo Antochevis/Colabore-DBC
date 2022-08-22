@@ -7,10 +7,11 @@ export const FilterMeta = styled.div`
   gap: 2rem;
   padding-bottom: 1.5rem;
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 0.5rem;
     && button {
-      width: 200px;
+      width: 180px;
       height: 25px;
     }
   }
@@ -94,7 +95,7 @@ padding-bottom: 1.5rem;
 `;
 
 export const TagsContainer = styled.div`
-  && > div:nth-child(2).active {
+  && > ul:nth-child(2).active {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -106,7 +107,7 @@ export const TagsContainer = styled.div`
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
   }
-  && > div:nth-child(2) div > span {
+  && > ul:nth-child(2) li > span {
     display: flex;
     background: #ffffff;
     width: 100%;
