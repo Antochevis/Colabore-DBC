@@ -38,7 +38,7 @@ export const RegisterCampaign = styled.div`
     display: flex;
     gap: 1rem;
     width: 1000px;
-    height: 93px;
+    height: 95px;
     @media (max-width: 1200px) {
       flex-direction: column;
       width: 100%;
@@ -77,7 +77,7 @@ export const RegisterCampaign = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 93px;
+    height: 95px;
 
     > label {
       font-size: 12px;
