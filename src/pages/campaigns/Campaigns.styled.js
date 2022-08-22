@@ -6,7 +6,7 @@ export const FilterMeta = styled.div`
   justify-content: center;
   gap: 2rem;
   padding-bottom: 1.5rem;
-  && button.active {
+  && button.active, button:hover {
     background: linear-gradient(to bottom right, #2A69BB, #B43E94);
     border: #2A69BB;
   }
