@@ -181,7 +181,7 @@ const FormComponent = () => {
                     {tags.length < 1 && touched.tags ? (<Errors id='erro-tags'>Campo obrigatório!</Errors>) : null}
                   </div>
                   <div>
-                    <label htmlFor="descricao">Descrição</label>
+                    <label htmlFor="descricao">Descrição*</label>
                     <Field as='textarea' id='descricao' name='descricao' placeholder='Digite a descrição da campanha'/>
                     {errors.descricao && touched.descricao ? (<Errors id='erro-descricao'>{errors.descricao}</Errors>) : null}
                   </div>

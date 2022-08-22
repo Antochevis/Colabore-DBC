@@ -7,17 +7,7 @@ import { BackgroundPage, Errors, FormStyle, LoginContainer, LogoAndText, Signup 
 import { Logo } from "../../components/logo/Logo";
 import { ImgLogin } from "../../components/imgLogin/ImgLogin";
 import { Button } from "../../components/button/Button";
-
-
-const SignupSchema = yup.object().shape({
-  email: yup.string()
-    .matches(/@dbccompany.com.br/, 'O email deve conter: @dbccompany.com.br')
-    .required('Campo obrigatório!'),
-  senha: yup.string()
-    .min(8, 'Mínimo de 8 caractéres')
-    .max(16, 'Máximo de 16 caractéres')
-    .required('Campo obrigatório!')
-})
+import { SignInSchema } from '../../utils/Schemas'
 
 const Login = () => {
   const {handleLogin} = useContext(AuthContext)
@@ -42,7 +32,7 @@ const Login = () => {
             email:'',
             senha:''
           }}
-          validationSchema={SignupSchema}
+          validationSchema={SignInSchema}
           onSubmit={values => {
             handleLogin(values);
           }}
