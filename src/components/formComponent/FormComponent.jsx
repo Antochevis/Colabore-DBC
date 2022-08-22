@@ -1,5 +1,4 @@
 import { Formik, Field, Form } from "formik";
-import * as yup from "yup";
 import { Errors } from "../../pages/register/Register.Styled";
 import { Button } from "../button/Button";
 import { ContainerAddCampaign, ContainerForm, ListTagsStyle, RegisterCampaign, TestTags } from "./FormComponent.Styled";
@@ -10,15 +9,8 @@ import Dropzone from 'react-dropzone'
 import { apiColabore } from "../../services/api";
 import { useParams } from "react-router-dom";
 import CurrencyInput from "../currencyInput/CurrencyInput";
-import moment from 'moment'
-
-const CampaignSchema = yup.object().shape({
-  titulo: yup.string().required('Campo obrigatório!'),
-  descricao: yup.string().required('Campo obrigatório!'),
-  meta: yup.string().required('Campo obrigatório!'),
-  dataLimite: yup.string().required('Campo obrigatório'),
-  encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
-})  
+import moment from 'moment' 
+import { CampaignSchema } from '../../utils/Schemas'
 
 const FormComponent = () => {
   const { handleCreateCampaign, handleUpdateCampaign, handleDeleteCampaign } = useContext(CampaignContext)
@@ -27,7 +19,6 @@ const FormComponent = () => {
   const { idCampanha } = useParams();
   const [isUpdate, setIsUpdate] = useState(false);
   const [campanha, setCampanha] = useState();
-
   const [showTag, setShowTag] = useState(false);
   const [searchTag, setSearchTag] = useState([]);
   const [listTagsDB, setListTagsDB] = useState([]);

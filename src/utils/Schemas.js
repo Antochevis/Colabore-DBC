@@ -34,3 +34,11 @@ export const SignUpSchema = yup.object().shape({
     .oneOf([yup.ref('senha'), null], 'As senhas precisam ser iguais.')
     .required('Campo obrigatório!')
 })
+
+export const CampaignSchema = yup.object().shape({
+  titulo: yup.string().required('Campo obrigatório!'),
+  descricao: yup.string().required('Campo obrigatório!'),
+  meta: yup.string().required('Campo obrigatório!'),
+  dataLimite: yup.string().required('Campo obrigatório'),
+  encerrarAutomaticamente: yup.string().required('Escolha uma opção válida!')
+}) 
