@@ -110,7 +110,7 @@ export const RegisterFormStyle = styled.div`
   }
   && div:nth-child(2) > div > div > svg {
     position: absolute;
-    bottom: 30px;
+    bottom: 32px;
     right: 10px;
     color: ${colorPrimary};
   }
@@ -119,11 +119,11 @@ export const RegisterFormStyle = styled.div`
   }
   && div:nth-child(2) > div:nth-child(2) > svg {
     position: absolute;
-    bottom: 30px;
+    bottom: 32px;
     right: 10px;
     color: ${colorPrimary};
-    @media (max-width: 768px) {
-      bottom: 15px
+    @media (max-width: 1200px) {
+      bottom: 12px
     }
   }
   && svg:hover {
@@ -158,8 +158,8 @@ export const RegisterFormStyle = styled.div`
     gap: 6px;
     margin-top: 2rem;
     @media (max-width: 1200px) {
-    margin-top: 6rem;
-  }
+      margin-top: 6rem;
+    }
 
     label, p {
       font-size: 12px;
@@ -167,6 +167,12 @@ export const RegisterFormStyle = styled.div`
       letter-spacing: 0.3px;
       text-transform: uppercase;
       color: #9FA2B4;
+    }
+
+    p {
+      @media (max-width: 1200px) {
+        text-align: center;
+      }
     }
   }
 
