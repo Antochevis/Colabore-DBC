@@ -22,6 +22,7 @@ const FormComponent = () => {
   const [showTag, setShowTag] = useState(false);
   const [searchTag, setSearchTag] = useState([]);
   const [listTagsDB, setListTagsDB] = useState([]);
+  const [invalidDate, setInvalidDate] = useState(false);
 
   const setup = async () => {
     if (idCampanha) {
@@ -80,6 +81,13 @@ const FormComponent = () => {
 
   const filteredTags = (searchTag.length > 0 && listTagsDB.length > 0) ? listTagsDB.filter(tag => tag.includes(searchTag)) : listTagsDB
 
+  const validDate = (e) => {
+    const dataLimite = moment(e.target.value, 'YYYY-MM-DD').format('MM/DD/YYYY')
+    const formatteddataLimite = new Date(dataLimite)
+    const currentDate = new Date()
+    formatteddataLimite < currentDate ? setInvalidDate(true) : setInvalidDate(false)
+  }
+
   if ((isUpdate && campanha) || !isUpdate) {
     return (
       <ContainerForm>
@@ -136,8 +144,8 @@ const FormComponent = () => {
                       </div>
                       <div>
                         <label htmlFor="dataLimite">Selecione a data limite do projeto*</label>
-                        <Field id='dataLimite' type='date' name='dataLimite' ></Field>
-                        {errors.dataLimite && touched.dataLimite ? (<Errors id='erro-dataLimite'>{errors.dataLimite}</Errors>) : null}
+                        <Field id='dataLimite' type='date' name='dataLimite' onKeyUp={(e) => validDate(e)}></Field>
+                        {(errors.dataLimite || invalidDate) && touched.dataLimite ? (<Errors id='erro-dataLimite'>{invalidDate ? 'Digite uma data válida' : errors.dataLimite}</Errors>) : null}
                       </div>
                     </div>
                     <div>
@@ -192,7 +200,7 @@ const FormComponent = () => {
                     <Button
                       type='submit'
                       width="100%"
-                      disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
+                      disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0 || invalidDate}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                     {!isUpdate ? null :
                       <Button width='100%' type="button" onClick={() => handleDeleteCampaign(idCampanha)}>Excluir</Button>
                     }
