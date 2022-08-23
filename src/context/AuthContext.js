@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiColabore } from "../services/api";
@@ -25,12 +25,27 @@ const AuthProvider = ({ children }) => {
     }
   }
 
+  const redirectHome = async () => {
+    try{
+      const { data } = await apiColabore.get('/usuario/dadosUsuario')
+      navigate(`/campanhas/${data.idUsuario}`)
+    } catch(e) {
+      console.log(e)
+      toast.error('Ops! Ocorreu algum erro.')
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
       apiColabore.defaults.headers.common['Authorization'] = token
       setAuth(true)
       getUserDatas()
+    }
+    const currentLocation = window.location.pathname
+
+    if(token && currentLocation === "/") {
+      redirectHome()
     }
     setLoading(false)
   }, [auth]);

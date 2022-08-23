@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 import { AuthContext, AuthProvider } from "./context/AuthContext"
 import { CampaignProvider } from "./context/CampaignContext"
@@ -12,6 +12,7 @@ import Register from "./pages/register/Register"
 
 const PrivateRoute = () => {
   const {auth} = useContext(AuthContext)
+  const [token, setToken] = useState()
 
   return (
     auth ? <Outlet/> : <Navigate to="/"/>
