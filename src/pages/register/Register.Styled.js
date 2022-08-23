@@ -81,12 +81,22 @@ export const RegisterFormStyle = styled.div`
     gap: 2rem;
     height: 5rem;
     @media (max-width: 1200px) {
-    flex-direction: column;
-  }
+      flex-direction: column;
+      gap: 0;
+    }
   }
   && > div:nth-child(1) > div {
     width: 100%;
     height: 5rem;
+    @media (max-width: 1200px) {
+      gap: 0.4rem;
+    }
+  }
+  && > div:nth-child(1) > div:first-child {
+    @media (max-width: 1200px) {
+      height: 80px;
+      padding-bottom: 2rem;
+    }
   }
   && > div:nth-child(2) {
     display: flex;
@@ -96,7 +106,7 @@ export const RegisterFormStyle = styled.div`
     height: 5rem;
     @media (max-width: 1200px) {
     flex-direction: column;
-    margin-top: 5rem;
+    margin-top: 4rem;
   }
   }
   && > div:nth-child(2) > div {
