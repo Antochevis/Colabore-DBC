@@ -194,7 +194,7 @@ const FormComponent = () => {
                       width="100%"
                       disabled={errors.titulo || errors.meta || errors.encerrarAutomaticamente || errors.descricao || tags.length === 0}>{!isUpdate ? 'Cadastrar campanha' : 'Atualizar campanha'}</Button>
                     {!isUpdate ? null :
-                      <Button width='100%' onClick={() => handleDeleteCampaign(idCampanha)}>Excluir</Button>
+                      <Button width='100%' type="button" onClick={() => handleDeleteCampaign(idCampanha)}>Excluir</Button>
                     }
                   </RegisterCampaign>
                 </Form>
