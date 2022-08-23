@@ -36,6 +36,7 @@ function Campaigns() {
   const {handleMyContributionsFilter, handleMyCampaignsFilter} = useContext(CampaignContext)
 
   const setup = async (filtroMeta) => {
+    setLoading(true)
     
     try {
       const {data} = await apiColabore.get(`/campanha/listarCampanhas?tipoFiltro=${filtroMeta ? filtroMeta : 'TODAS'}&minhasContribuicoes=${isMyContributions}&minhasCampanhas=${isMyCampaigns}${tags ? tags.map(tag => `&idTags=${tag.idTag}`).join('') : ''}`)
@@ -138,6 +139,7 @@ function Campaigns() {
   if(loading) {
     return (<Loading />)
   } 
+  if(userDatas) {
     return (
       <>
         <Header userName={userDatas.nome} userImg={userDatas.foto}/>
@@ -238,8 +240,8 @@ function Campaigns() {
           </Section>
         <Footer />
       </>
-      
     )
+  } 
 }
 
 export default Campaigns

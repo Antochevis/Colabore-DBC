@@ -35,7 +35,7 @@ const CardCampaignDetail = ({campanha, finishedByDate}) => {
             {campanha.descricao} 
           </p>
         </div>
-        {(campanha.statusMeta === true || finishedByDate) && <div className="finished"><div><h3>Campanha Concluída</h3></div></div>}
+        {(campanha.statusMeta === true || finishedByDate) && <div className="finished"><div><h3>{campanha.statusMeta ? 'Meta Atingida' : finishedByDate ? 'Campanha Finalizada' : ''}</h3></div></div>}
       </CardContent>
     </Card>
   )
