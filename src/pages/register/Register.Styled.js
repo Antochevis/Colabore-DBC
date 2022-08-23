@@ -110,7 +110,7 @@ export const RegisterFormStyle = styled.div`
   }
   && div:nth-child(2) > div > div > svg {
     position: absolute;
-    bottom: 30px;
+    bottom: 32px;
     right: 10px;
     color: ${colorPrimary};
   }
@@ -119,11 +119,11 @@ export const RegisterFormStyle = styled.div`
   }
   && div:nth-child(2) > div:nth-child(2) > svg {
     position: absolute;
-    bottom: 30px;
+    bottom: 32px;
     right: 10px;
     color: ${colorPrimary};
-    @media (max-width: 768px) {
-      bottom: 15px
+    @media (max-width: 1200px) {
+      bottom: 12px
     }
   }
   && svg:hover {
